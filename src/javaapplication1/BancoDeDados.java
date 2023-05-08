@@ -35,7 +35,7 @@ public class BancoDeDados {
         funcionario.put("Cargo" , cargo);
         funcionario.put("Acesso", acesso);
         
-        try(FileWriter arquivoJson = new FileWriter("Clientes.json")){
+        try(FileWriter arquivoJson = new FileWriter("Funcionarios.json")){
             arquivoJson.write(funcionario.toJSONString());
             arquivoJson.flush();
         } catch (IOException ex) {
