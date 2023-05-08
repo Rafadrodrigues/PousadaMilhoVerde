@@ -45,23 +45,23 @@ public class Agenda {
     public void setAnotacoes(String anotacoes) {
         this.anotacoes = anotacoes;
     }
- 
+    
     //Método responsável por receber data e comparar disponibilidade
-    public LocalDate verificarAgenda(LocalDate clienteData,int horario){
+    public LocalDate armazenarData(){
         
         LocalDate localDate = LocalDate.now();
         
+        //O funcionário vê a data informada pelo cliente e digita no sistema
         //Pegando a data informada pelo cliente
-        System.out.println("Dia da semana: " + localDate.getDayOfWeek().ordinal());
-        System.out.println("Mes: " + localDate.getMonthValue());
-        System.out.println("Ano: " + localDate.getYear());
-        System.out.println("A data informada é " + localDate);
-
-        /*Vai ser preciso acessar os dados armazenados no Json para verificação 
-        e após isso, uma condicional para realizar a validação das datas */
+        System.out.println("Informe dia mês e ano." );
+        System.out.print("\nDia da semana: " + localDate.getDayOfWeek().ordinal()
+        + "\nMes: " + localDate.getMonthValue()+ "\nAno:" + localDate.getYear());
 
         return localDate;
+    }
 
+    void verificarAgenda(LocalDate dataCliente, int horario) {
+        //Aqui vai ser preciso solicitar o sistema faça uma verificação no arquivo json
     }
     
 }

@@ -1,6 +1,7 @@
 package javaapplication1;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 
 import org.json.simple.JSONObject;
 
@@ -10,16 +11,20 @@ public class BancoDeDados {
         String endereco,int telefone,String conta){
         
         JSONObject cliente = new JSONObject();
-        cliente.put("Nome ", name);
-        cliente.put("CPF ", cpf);
-        cliente.put("Idade ", idade);
-        cliente.put("Endereço " ,endereco);
-        cliente.put("Telefone " , telefone);
-        cliente.put("Conta " , conta);
+        
+        cliente.put("Nome", name);
+        cliente.put("CPF", cpf);
+        cliente.put("Idade", idade);
+        cliente.put("Endereço" ,endereco);
+        cliente.put("Telefone" , telefone);
+        cliente.put("Conta" , conta);
         
         try(FileWriter arquivoJson = new FileWriter("Clientes.json")){
-            arquivoJson.write(cliente.toJSONString());
+            
+            arquivoJson.write(cliente.toJSONString()+ "\n");
             arquivoJson.flush();
+            arquivoJson.close();
+            
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(BancoDeDados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
@@ -45,5 +50,24 @@ public class BancoDeDados {
 //    public boolean procurarCliente(){
 //
 //    }
-    
+
+    //Método que é responsável por inserir a data no banco de dados
+    public void inserirData(LocalDate data,String horario){
+        
+        JSONObject reserva = new JSONObject();
+        
+        reserva.put("Data da Reserva", data);
+        reserva.put("Horário", horario);
+
+        
+        try(FileWriter arquivoJson = new FileWriter("Reserva.json")){
+            
+            arquivoJson.write(reserva.toJSONString()+ "\n");
+            arquivoJson.flush();
+            arquivoJson.close();
+            
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(BancoDeDados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
 }
