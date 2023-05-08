@@ -24,6 +24,24 @@ public class BancoDeDados {
             java.util.logging.Logger.getLogger(BancoDeDados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
+    public void inserirFuncionario(String usuario, String senha, String cargo, String nome, String cpf, String endereco, int telefone, String acesso){
+        
+        JSONObject funcionario = new JSONObject();
+        funcionario.put("Usuario", usuario);
+        funcionario.put("Senha", senha);
+        funcionario.put("CPF", cpf);
+        funcionario.put("Endereço" ,endereco);
+        funcionario.put("Telefone" , telefone);
+        funcionario.put("Cargo" , cargo);
+        funcionario.put("Acesso", acesso);
+        
+        try(FileWriter arquivoJson = new FileWriter("Clientes.json")){
+            arquivoJson.write(funcionario.toJSONString());
+            arquivoJson.flush();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(BancoDeDados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
 //    public boolean procurarCliente(){
 //
 //    }
