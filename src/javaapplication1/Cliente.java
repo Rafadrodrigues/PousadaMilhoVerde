@@ -15,26 +15,21 @@ public class Cliente extends Pessoa {
     
     //Atributos da classe Cliente
     private LocalDate dataDesejada;
-<<<<<<< HEAD
-    private String horarioDesejado;
     private String cartaoCredito;
     
     //Construtor da classe Cliente
     public Cliente(String nome, String cpf, String endereco, int telefone, 
         String email, LocalDate dataDesejada,String horarioDesejado,String cartaoCredito) {
         super(nome, cpf, endereco, telefone, email);
-=======
-    private int horarioDesejado;
     // Caracteristica da classe conta. numero cartao, cvv, data, nome.
     //Saldo talvez pode ser retirado depois
+    }
     
     //Construtor da classe Cliente
     public Cliente(String nome, String cpf, String endereco, int telefone, 
-        LocalDate dataDesejada,int horarioDesejado) {
-        super(nome, cpf, endereco, telefone);
->>>>>>> 70797bfbb22ec0028daa09ecd038c6e91cf4b1a2
+        LocalDate dataDesejada,String email) {
+        super(nome, cpf, endereco, telefone,email);
         this.dataDesejada = dataDesejada;
-        this.horarioDesejado = horarioDesejado;
         this.cartaoCredito = cartaoCredito;
     }
 
@@ -50,22 +45,12 @@ public class Cliente extends Pessoa {
     public void setDataDesejada(LocalDate dataDesejada) {
         this.dataDesejada = dataDesejada;
     }
-
-    public int getHorarioDesejado() {
-        return horarioDesejado;
-    }
-
-    public void setHorarioDesejado(int horarioDesejado) {
-        this.horarioDesejado = horarioDesejado;
-    }
     //Métodos correspondente a classe
     //Método responsável por solicitar reserva
     public LocalDate solicitarReserva(LocalDate dataDesejada){
         System.out.print("Olá,gostaria solicitar uma reserva no dia " + this.dataDesejada);
         return dataDesejada = this.dataDesejada;
     }
-<<<<<<< HEAD
-
     public String getCartaoCredito() {
         return cartaoCredito;
     }
@@ -77,10 +62,8 @@ public class Cliente extends Pessoa {
     //Fornecendo informácões como String
     @Override
     public String toString() {
-        return "Cliente{" + super.toString() + "Data desejada=" + dataDesejada + 
-            ", Horario desejado=" + horarioDesejado + ", Cartão de Crédito=" + cartaoCredito +'}';
-=======
-    
+        return "Cliente{" + super.toString() + "Data desejada=" + dataDesejada + ", Cartão de Crédito=" + cartaoCredito +'}';
+    }
     //Método que fornece os dados do cliente
     //Ou posso colocar aqui um toString para apresentar as informaçõe em formato de STR.Pode ser mais útil
     public List<String> fornecerDados(){
@@ -91,7 +74,7 @@ public class Cliente extends Pessoa {
         listaDados.add("Endereco: " + super.getEndereco());
         listaDados.add("telefone: " + super.getTelefone());
         return listaDados;
->>>>>>> 70797bfbb22ec0028daa09ecd038c6e91cf4b1a2
+
     }
     
     public LocalDate solicitarOutraData(LocalDate dataDesejada){
@@ -107,7 +90,6 @@ public class Cliente extends Pessoa {
         List<String> listaCancelamento = new ArrayList<String>();
         listaCancelamento.add("CPF: " + super.getCpf());
         listaCancelamento.add("Data: " + this.dataDesejada);
-        listaCancelamento.add("Horário: " + this.horarioDesejado);
         
         return listaCancelamento;
     }

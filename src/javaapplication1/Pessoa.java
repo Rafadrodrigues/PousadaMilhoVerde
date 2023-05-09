@@ -48,7 +48,6 @@ public class Pessoa {
     public void setTelefone(int telefone) {
         this.telefone = telefone;
     }
-<<<<<<< HEAD
 
     public String getEmail() {
         return email;
@@ -64,8 +63,5 @@ public class Pessoa {
         return "Pessoa{" + "Nome=" + nome + ", Cpf=" + cpf + ", Endereco=" + 
         endereco + ", Telefone=" + telefone + ", E-mail=" + email + '}';
     }
-=======
-    
->>>>>>> 70797bfbb22ec0028daa09ecd038c6e91cf4b1a2
 }
 
