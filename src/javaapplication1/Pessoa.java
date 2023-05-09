@@ -46,6 +46,11 @@ public class Pessoa {
     public void setTelefone(int telefone) {
         this.telefone = telefone;
     }
-    
+
+    //Fornecendo informácões como String
+    @Override
+    public String toString() {
+        return "Pessoa{" + "Nome=" + nome + ", Cpf=" + cpf + ", Endereco=" + endereco + ", Telefone=" + telefone + '}';
+    }
 }
 
