@@ -3,11 +3,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.time.LocalDate;
+import java.io.FileReader;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
 import org.json.simple.parser.ParseException;
 
+//Classe BD que vai armazenar os dadso
 public class BancoDeDados {
     
     public void lerArquivo(){
@@ -48,6 +52,12 @@ public class BancoDeDados {
         String endereco,String telefone,String conta){
         
         JSONObject cliente = new JSONObject();
+
+    public void inserirCliente(String name, String cpf,int idade,
+        String endereco,int telefone,String conta){
+        
+        JSONObject cliente = new JSONObject();
+
         cliente.put("Nome", name);
         cliente.put("CPF", cpf);
         cliente.put("Idade", idade);
@@ -56,15 +66,23 @@ public class BancoDeDados {
         cliente.put("Conta" , conta);
         
         try(FileWriter arquivoJson = new FileWriter("Clientes.json")){
+            
             arquivoJson.write(cliente.toJSONString());
             arquivoJson.flush();
+            arquivoJson.close();
+            
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(BancoDeDados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
+
     public void inserirFuncionario(String usuario, String senha, String cargo, String nome, String cpf, String endereco, String telefone, String acesso){
-        
+
+    //Métodos responsável por inserir os funcionários na base de dados
+    public void inserirFuncionario(String usuario, String senha, String cargo, String nome, String cpf, String endereco, int telefone, String acesso){
+
         JSONObject funcionario = new JSONObject();
+        
         funcionario.put("Usuario", usuario);
         funcionario.put("Senha", senha);
         funcionario.put("CPF", cpf);
@@ -81,4 +99,50 @@ public class BancoDeDados {
         }
     }
 
+    //Método que é responsável por inserir a data no banco de dados
+    public void inserirData(LocalDate data,String horario){
+        
+        //Criamos um objeto do JSON
+        JSONObject reserva = new JSONObject();
+        
+        //Inserindo os dados na base de dados
+        reserva.put("Data da Reserva", data);
+        reserva.put("Horário", horario);
+
+        //Usamos um try para caso ocorra alguma erro na inserção.
+        try(FileWriter arquivoJson = new FileWriter("Reserva.json")){
+            
+            //Dado foi escrito na base de dados.
+            //Acho que devo chamar o método conferiri data antes de inserir
+            arquivoJson.write(reserva.toJSONString());
+            arquivoJson.flush();
+            arquivoJson.close();
+            
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(BancoDeDados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
+    //Método que é responsável por conferir a data no banco de dados
+      public boolean conferirData(LocalDate data,String horario){
+        //Nesse arquivo é feito a verificaçao se tem disponibilidade
+        JSONObject jsonObject;
+        JSONParser reserva = new JSONParser();
+        //Código retirado do site da Devmidia
+        //Esse código é preciso pegar o retorno dele ou acrescentar em alguam canto
+        try{
+            jsonObject = (JSONObject) reserva.parse(new FileReader("saida.json"));
+            data = (LocalDate) jsonObject.get("Data da Reserva");
+            horario = (String) jsonObject.get("Horário");
+            return true;
+        
+        } catch (FileNotFoundException e) {
+                e.printStackTrace();
+        } catch (IOException e) {
+                e.printStackTrace();
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+        e.printStackTrace();
+        }
+        return false;
+     }
 }
