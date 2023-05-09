@@ -48,13 +48,7 @@ public class BancoDeDados {
 		}
 	}
 
-    public void inserirCliente(String name, String cpf,String idade,
-        String endereco,String telefone,String conta){
-        
-        JSONObject cliente = new JSONObject();
-
-    public void inserirCliente(String name, String cpf,int idade,
-        String endereco,int telefone,String conta){
+    public void inserirCliente(String name, String cpf,String idade, String endereco,String telefone,String conta){
         
         JSONObject cliente = new JSONObject();
 
@@ -76,11 +70,8 @@ public class BancoDeDados {
         }
     }
 
-    public void inserirFuncionario(String usuario, String senha, String cargo, String nome, String cpf, String endereco, String telefone, String acesso){
-
     //Métodos responsável por inserir os funcionários na base de dados
-    public void inserirFuncionario(String usuario, String senha, String cargo, String nome, String cpf, String endereco, int telefone, String acesso){
-
+   public void inserirFuncionario(String usuario, String senha, String cargo, String nome, String cpf, String endereco, String telefone, String acesso){
         JSONObject funcionario = new JSONObject();
         
         funcionario.put("Usuario", usuario);
