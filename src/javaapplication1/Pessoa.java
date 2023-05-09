@@ -5,14 +5,16 @@ public class Pessoa {
     private String nome;
     private String cpf;
     private String endereco;
+    private String email;
     private int telefone;
 
     //Construtor da classe Pessoa
-    public Pessoa(String nome, String cpf, String endereco, int telefone) {
+    public Pessoa(String nome, String cpf, String endereco, int telefone,String email) {
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;
         this.telefone = telefone;
+        this.email = email;
     }
     //Getters e setters correspondente aos atributos.
     public String getNome() {
@@ -46,11 +48,24 @@ public class Pessoa {
     public void setTelefone(int telefone) {
         this.telefone = telefone;
     }
+<<<<<<< HEAD
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
     //Fornecendo informácões como String
     @Override
     public String toString() {
-        return "Pessoa{" + "Nome=" + nome + ", Cpf=" + cpf + ", Endereco=" + endereco + ", Telefone=" + telefone + '}';
+        return "Pessoa{" + "Nome=" + nome + ", Cpf=" + cpf + ", Endereco=" + 
+        endereco + ", Telefone=" + telefone + ", E-mail=" + email + '}';
     }
+=======
+    
+>>>>>>> 70797bfbb22ec0028daa09ecd038c6e91cf4b1a2
 }
 

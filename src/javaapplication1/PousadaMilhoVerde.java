@@ -1,14 +1,11 @@
-
 package javaapplication1;
-
 public class PousadaMilhoVerde {
 
     public static void main(String[] args) {
-        
-        System.out.println("Eu editei!");
-        BancoDeDados bd = new BancoDeDados();
-        
-        bd.inserirCliente("Rafael", "00000", 21, "Diamantina", 39319023, "0113");
+
+        BancoDeDados BD = new BancoDeDados();
+        BD.inserirCliente("Getulio", "123456789", "21", "Diamantina", "38998", "202020");
+        BD.lerArquivo();
         
     }
 }

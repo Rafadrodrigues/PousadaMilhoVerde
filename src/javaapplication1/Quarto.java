@@ -6,14 +6,15 @@ public class Quarto {
     private int id;
     private int preco;
     private boolean ocupation;//verifica se o quarto esta ocupado ou não
+    //precisa implementar a quantidade de quartos
     
     //Construtor da classe
     public Quarto(int id, int preco, boolean ocupation) {
         this.id = id;
         this.preco = preco;
         this.ocupation = ocupation;
-    }
     
+    }
     //Getters e setters correspondente aos atributos criados nessa classe.
     public int getId() {
         return id;
@@ -32,5 +33,10 @@ public class Quarto {
     }
     public void setOcupation(boolean ocupation) {
         this.ocupation = ocupation;
+    }
+
+    @Override
+    public String toString() {
+        return "Quarto{" + "Id=" + id + ", Preco=" + preco + ", Ocupation=" + ocupation + '}';
     }
 }

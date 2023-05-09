@@ -1,5 +1,7 @@
 package javaapplication1;
 
+import java.time.LocalDate;
+
 public class Funcionario extends Cliente {
     
     //Atributos da classe Funcionario
@@ -10,14 +12,14 @@ public class Funcionario extends Cliente {
     private String cargo;
     
     //Construtor da classe Funcionario
-    public Funcionario(String usuario, String senha, float horasTrabalhadas, String cargo, String nome, String cpf, String endereco, int telefone) {
-        super(nome, cpf, endereco, telefone);
+    public Funcionario(String usuario, String senha, float horasTrabalhadas, 
+            String cargo, String nome, String cpf, String endereco, int telefone,String email) {
+        super(nome, cpf, endereco, telefone,email);
         this.usuario = usuario;
         this.senha = senha;
         this.horasTrabalhadas = horasTrabalhadas;
         this.cargo = cargo;
     }
-
     //Getters e setters correspondente aos atributos criados nessa classe.
 
     public String getUsuario() {
@@ -70,6 +72,17 @@ public class Funcionario extends Cliente {
             System.out.print("Acesso negado.");
         }
         
+    }
+    public void realizarReserva(LocalDate data,String anotacoes){
+        //Precisa verificar disponibilidade da agenda
+        Sistema sistema = new Sistema();
+        
+        sistema.verificarVaga(data);
+        
+        //Essa chamada vai vir após uma condificonal
+        //Realizando o agendamento da vaga
+        sistema.realizarReserva(data,super.getCartaoCredito());
+
     }
     public void realizarLogout(){
         //Precisa da funcao do sistema que oferece a opcao logout
