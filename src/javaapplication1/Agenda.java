@@ -3,6 +3,7 @@ package javaapplication1;
 import java.time.LocalDate;
 
 public class Agenda {
+    
     //Atributos da classe agenda, alguns podem ser retirados posteriormente.
     //Acho que o calendario deve ser tipo list,conferir
     private LocalDate data;
@@ -40,14 +41,7 @@ public class Agenda {
  
     //Método responsável por receber data e comparar disponibilidade
 
-    public void armazenarData(LocalDate dataCliente){
-        
-        //Data informada pelo cliente
-        System.out.println("Data: " + dataCliente);
-        //O funcionário vê a data informada pelo cliente e digita no sistema
-
-    }
-    public LocalDate verificarAgenda(LocalDate clienteData,int horario){
+    public LocalDate armazenarData(LocalDate clienteData){
         
         LocalDate localDate = LocalDate.now();
         
