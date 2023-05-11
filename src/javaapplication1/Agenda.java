@@ -49,7 +49,7 @@ public class Agenda {
     public LocalDate armazenarData(LocalDate clienteData){
         
         //Data informada pelo cliente
-        System.out.println("Data: " + dataCliente + "Horário: " + horario);
+        System.out.println("Data: " + clienteData);
         //O funcionário vê a data informada pelo cliente e digita no sistema
         LocalDate localDate = LocalDate.now();
         

@@ -78,10 +78,6 @@ public class BancoDeDados {
     }
 
 
-    public void inserirFuncionario(String usuario, String senha, String cargo, String nome, String cpf, String endereco, String telefone, String acesso){
-        
-  
-    }
     //Métodos responsável por inserir os funcionários na base de dados
    public void inserirFuncionario(String usuario, String senha, String cargo, String nome, String cpf, String endereco, String telefone, String acesso){
         JSONObject funcionario = new JSONObject();
