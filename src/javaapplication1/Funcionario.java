@@ -1,6 +1,7 @@
 package javaapplication1;
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
 public class Funcionario extends Cliente {
     
@@ -12,14 +13,13 @@ public class Funcionario extends Cliente {
     
     //Construtor da classe Funcionario
     public Funcionario(String usuario, String senha, String cargo, 
-        String nome, String cpf, String endereco, int telefone,String email) {
+        String nome, String cpf, String endereco, String telefone,String email) {
         super(nome, cpf, endereco, telefone,email);
         this.usuario = usuario;
         this.senha = senha;
         this.cargo = cargo;
     }
     //Getters e setters correspondente aos atributos criados nessa classe.
-
     public String getUsuario() {
         return usuario;
     }
@@ -50,6 +50,11 @@ public class Funcionario extends Cliente {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Funcionario{" + "usuario=" + usuario + ", senha=" + senha + ", cargo=" + cargo + ", salario=" + salario + '}';
     }
     
     //Métodos correspondente a classe

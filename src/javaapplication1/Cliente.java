@@ -9,26 +9,19 @@ public class Cliente extends Pessoa {
     
     //Atributos da classe Cliente
     private LocalDate dataDesejada;
-
     private String cartaoCredito;
     
     //Construtor da classe Cliente
-    public Cliente(String nome, String cpf, String endereco, int telefone, 
+    public Cliente(String nome, String cpf, String endereco, String telefone, 
         String email, LocalDate dataDesejada,String horarioDesejado,String cartaoCredito) {
         super(nome, cpf, endereco, telefone, email);
+        this.dataDesejada = dataDesejada;
+        this.cartaoCredito = cartaoCredito;
     // Caracteristica da classe conta. numero cartao, cvv, data, nome.
     //Saldo talvez pode ser retirado depois
     }
-    
-    //Construtor da classe Cliente
-    public Cliente(String nome, String cpf, String endereco, int telefone, 
-        LocalDate dataDesejada,String email,String cartaoCredito) {
-        super(nome, cpf, endereco, telefone,email);
-        this.dataDesejada = dataDesejada;
-        this.cartaoCredito = cartaoCredito;
-    }
-
-    public Cliente(String nome, String cpf, String endereco, int telefone,String email) {
+ 
+    public Cliente(String nome, String cpf, String endereco, String telefone,String email) {
         super(nome, cpf, endereco, telefone,email);
     }
  

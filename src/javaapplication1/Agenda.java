@@ -7,7 +7,6 @@ public class Agenda {
     //Atributos da classe agenda, alguns podem ser retirados posteriormente.
     //Acho que o calendario deve ser tipo list,conferir
     private LocalDate data;
-
     private String anotacoes;
     
     //Construtor para iniciar todos os estados da classe 
@@ -44,8 +43,6 @@ public class Agenda {
     }
     
     //Método responsável por receber data e comparar disponibilidade
-
-
     public LocalDate armazenarData(LocalDate clienteData){
         
         //Data informada pelo cliente

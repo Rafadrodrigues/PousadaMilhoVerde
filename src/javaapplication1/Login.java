@@ -27,10 +27,14 @@ public class Login {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Login{" + "usuario=" + usuario + ", senha=" + senha + '}';
+    }
     //Método responsável por fazer a verificação do login
     public boolean verificarLogin(String user,String pin){
-        //É preciso criar um método que realiza as verificações no Json
+        //Precisa ir no BD para conferir se os dados conferem.
         if(usuario.equals(user) && senha.equals(pin)){
             return true;
         }else{

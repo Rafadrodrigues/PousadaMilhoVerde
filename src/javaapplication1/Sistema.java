@@ -1,26 +1,42 @@
 package javaapplication1;
 
-import java.time.LocalDate;
-
 public class Sistema {
     
-    public void cadastraCliente(String nome, String cpf, String endereco, int telefone,
-    int idCliente){
-        //chamaria o construtor da classe cliente com esses dados
-    }
-    //Método responsável por verificar disponibilidade na agenda
-    
-
-    public void verificarVaga(LocalDate dataCliente){
-        //Primeiro,instânciamos a classe agenda(depois trocar o tipo)
-        Agenda agenda = new Agenda(dataCliente);
-        agenda.verificarAgenda(dataCliente);
+    //Método responsável por receber o login do adm e funcionario
+    public void logar(){
+        
+        Funcionario func = new Funcionario("@rafa919", "123023", "Atendente", 
+        "Rafael", "9830123", "Diamantina", "339989021","rafar@");
+        
+        //Precisa fazer o mesmo para a classe adm que vai ser criada
+        Administrador adm = new Administrador("@getulio123", "312083", "Adm", 
+        "Getulio", "2113123", "Diamantina", "8021983","getjose@");
+        //Funcionario insere eu login e senha 
+        
+        Login login = new Login("@rafa919","123023");
+        //User e senha do funcionario e adm vai ser verificado e validado
+        
+        if (login.verificarLogin(func.getUsuario(),func.getSenha())){
+            System.out.print("Sistema Liberado");
+        }else{
+            System.out.print("Acesso negado");
+        }
         
     }
-    
-    public void realizarReserva(LocalDate dataCliente,String cartao){
-        Agenda agenda = new Agenda(dataCliente);
-        agenda.armazenarData(dataCliente);
-        //Após armazenar a data vem a cobrança da diária 
+    //Método responsável por incluir Cliente,Funcionario ou Administrado na BD
+    public void incluir(){
+        
+    }
+    //Método responsável por editar Cliente,Funcionario ou Administrado na BD
+    public void editar(){
+        
+    }
+    //Método responsável por editar Cliente,Funcionario ou Administrado na BD
+    public void remover(){
+        
+    }
+    //Método responsável por ler Cliente,Funcionario ou Administrado na BD
+    public void ler(){
+        
     }
 }

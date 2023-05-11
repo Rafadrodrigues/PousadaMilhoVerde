@@ -6,10 +6,10 @@ public abstract class Pessoa {
     private String cpf;
     private String endereco;
     private String email;
-    private int telefone;
+    private String telefone;
 
     //Construtor da classe Pessoa
-    public Pessoa(String nome, String cpf, String endereco, int telefone,String email) {
+    public Pessoa(String nome, String cpf, String endereco, String telefone,String email) {
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;
@@ -41,11 +41,11 @@ public abstract class Pessoa {
         this.endereco = endereco;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
