@@ -48,7 +48,14 @@ public class BancoDeDados {
 		}
 	}
 
-    public void inserirCliente(String name, String cpf,String idade, String endereco,String telefone,String conta){
+
+    public void inserirCliente(String name, String cpf,String idade,
+        String endereco,String telefone,String conta){
+                JSONObject cliente = new JSONObject();
+    }
+
+    public void inserirCliente(String name, String cpf,int idade,
+        String endereco,int telefone,String conta){
         
         JSONObject cliente = new JSONObject();
 
@@ -70,6 +77,11 @@ public class BancoDeDados {
         }
     }
 
+
+    public void inserirFuncionario(String usuario, String senha, String cargo, String nome, String cpf, String endereco, String telefone, String acesso){
+        
+  
+    }
     //Métodos responsável por inserir os funcionários na base de dados
    public void inserirFuncionario(String usuario, String senha, String cargo, String nome, String cpf, String endereco, String telefone, String acesso){
         JSONObject funcionario = new JSONObject();
@@ -91,15 +103,14 @@ public class BancoDeDados {
     }
 
     //Método que é responsável por inserir a data no banco de dados
-    public void inserirData(LocalDate data,String horario){
+    public void inserirData(LocalDate data,float preco){
         
         //Criamos um objeto do JSON
         JSONObject reserva = new JSONObject();
         
         //Inserindo os dados na base de dados
         reserva.put("Data da Reserva", data);
-        reserva.put("Horário", horario);
-
+        reserva.put("Preço", preco);
         //Usamos um try para caso ocorra alguma erro na inserção.
         try(FileWriter arquivoJson = new FileWriter("Reserva.json")){
             
@@ -114,7 +125,7 @@ public class BancoDeDados {
         }
     }
     //Método que é responsável por conferir a data no banco de dados
-      public boolean conferirData(LocalDate data,String horario){
+      public boolean conferirData(LocalDate data){
         //Nesse arquivo é feito a verificaçao se tem disponibilidade
         JSONObject jsonObject;
         JSONParser reserva = new JSONParser();
@@ -123,7 +134,6 @@ public class BancoDeDados {
         try{
             jsonObject = (JSONObject) reserva.parse(new FileReader("saida.json"));
             data = (LocalDate) jsonObject.get("Data da Reserva");
-            horario = (String) jsonObject.get("Horário");
             return true;
         
         } catch (FileNotFoundException e) {

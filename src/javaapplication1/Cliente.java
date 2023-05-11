@@ -9,18 +9,27 @@ public class Cliente extends Pessoa {
     
     //Atributos da classe Cliente
     private LocalDate dataDesejada;
-    private String horarioDesejado;
+
+    private String cartaoCredito;
     
     //Construtor da classe Cliente
     public Cliente(String nome, String cpf, String endereco, int telefone, 
-        LocalDate dataDesejada,String horarioDesejado) {
-        super(nome, cpf, endereco, telefone);
+        String email, LocalDate dataDesejada,String horarioDesejado,String cartaoCredito) {
+        super(nome, cpf, endereco, telefone, email);
+    // Caracteristica da classe conta. numero cartao, cvv, data, nome.
+    //Saldo talvez pode ser retirado depois
+    }
+    
+    //Construtor da classe Cliente
+    public Cliente(String nome, String cpf, String endereco, int telefone, 
+        LocalDate dataDesejada,String email,String cartaoCredito) {
+        super(nome, cpf, endereco, telefone,email);
         this.dataDesejada = dataDesejada;
-        this.horarioDesejado = horarioDesejado;
+        this.cartaoCredito = cartaoCredito;
     }
 
-    public Cliente(String nome, String cpf, String endereco, int telefone) {
-        super(nome, cpf, endereco, telefone);
+    public Cliente(String nome, String cpf, String endereco, int telefone,String email) {
+        super(nome, cpf, endereco, telefone,email);
     }
  
     //Getters e setters correspondente aos atributos criados nessa classe.
@@ -33,29 +42,26 @@ public class Cliente extends Pessoa {
         this.dataDesejada = dataDesejada;
     }
 
-    public String getHorarioDesejado() {
-        return horarioDesejado;
+    public String getCartaoCredito() {
+        return cartaoCredito;
     }
 
-    public void setHorarioDesejado(String horarioDesejado){
-        //Acho que vou utilizar o locale para pegar horario formatado
-        this.horarioDesejado = horarioDesejado;
+    public void setCartaoCredito(String cartaoCredito) {
+        this.cartaoCredito = cartaoCredito;
     }
     
-    //Métodos correspondente a classe
+    //Fornecendo informácões como String
+    @Override
+    public String toString() {
+        return "Cliente{" + super.toString() + "Data desejada=" + dataDesejada + ", Cartão de Crédito=" + cartaoCredito +'}';
+    }
+    //Método que fornece os dados do cliente
     //Método responsável por solicitar reserva
     public LocalDate solicitarReserva(LocalDate dataDesejada){
         System.out.print("Olá,gostaria solicitar uma reserva no dia " + this.dataDesejada);
         return dataDesejada = this.dataDesejada;
     }
 
-    //Fornecendo informácões como String
-    @Override
-    public String toString() {
-        return "Cliente{" + super.toString() + "dataDesejada=" + dataDesejada + ", horarioDesejado=" + horarioDesejado + '}';
-    }
-    
-    //Método que fornece solicita outra data caso não tenha disponibilidade
     public LocalDate solicitarOutraData(LocalDate dataDesejada){
         //Vamos alterar a data
         setDataDesejada(dataDesejada);
@@ -63,7 +69,7 @@ public class Cliente extends Pessoa {
         return this.dataDesejada;
     }
     //Esse método pode ser melhorado, questão de lógica, mas informa a resposta do cliente quanto ao cancelamento
-    public List<String> solicitarCancelamento(String cpf,LocalDate dataDesejada,int horarioDesejado){
+    public List<String> solicitarCancelamento(String cpf,LocalDate dataDesejada){
         
         System.out.print("Olá, gostaria de realizar o cancelamento no dia " + this.dataDesejada);
         
@@ -71,7 +77,6 @@ public class Cliente extends Pessoa {
         List<String> listaCancelamento = new ArrayList<String>();
         listaCancelamento.add("CPF: " + super.getCpf());
         listaCancelamento.add("Data: " + this.dataDesejada);
-        listaCancelamento.add("Horário: " + this.horarioDesejado);
         
         return listaCancelamento;
     }

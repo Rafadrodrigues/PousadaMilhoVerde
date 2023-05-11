@@ -3,22 +3,26 @@ package javaapplication1;
 import java.time.LocalDate;
 
 public class Agenda {
+    
     //Atributos da classe agenda, alguns podem ser retirados posteriormente.
     //Acho que o calendario deve ser tipo list,conferir
     private LocalDate data;
-    private String horario;
+
     private String anotacoes;
     
     //Construtor para iniciar todos os estados da classe 
-    public Agenda(LocalDate data, String horario, String anotacoes) {
+
+    public Agenda(LocalDate data, String anotacoes) {
+
         this.data = data;
-        this.horario = horario;
         this.anotacoes = anotacoes;
     }
     //Construtor especifico para verificacoes
-    public Agenda(LocalDate data, String horario) {
+
+
+    public Agenda(LocalDate data) {
         this.data = data;
-        this.horario = horario;
+        //talvez eu retire um construtor
     }
     
     //Getters e setters correspondente aos atributos criados nessa classe.
@@ -30,13 +34,6 @@ public class Agenda {
         this.data = data;
     }
 
-    public String getHorario() {
-        return horario;
-    }
-
-    public void setHorario(String horario) {
-        this.horario = horario;
-    }
 
     public String getAnotacoes() {
         return anotacoes;
@@ -47,7 +44,9 @@ public class Agenda {
     }
     
     //Método responsável por receber data e comparar disponibilidade
-    public LocalDate armazenarData(LocalDate dataCliente, String horario){
+
+
+    public LocalDate armazenarData(LocalDate clienteData){
         
         //Data informada pelo cliente
         System.out.println("Data: " + dataCliente + "Horário: " + horario);
@@ -61,13 +60,16 @@ public class Agenda {
 
         return localDate;
     }
+
+
     //Métodos responsável por receber a resposta do bd sobre disponibilidade.
-    public void verificarAgenda(LocalDate dataCliente, String horario) {
-        
+    public void verificarAgenda(LocalDate dataCliente) {
+      
         //Aqui vai ser preciso solicitar o sistema faça uma verificação no arquivo json
         BancoDeDados bd = new BancoDeDados();
         //Atribuindo a resposta do bd para  uma variável 
-        boolean resposta = bd.conferirData(data, horario);
+
+        boolean resposta = bd.conferirData(dataCliente);
         
         //Condicional para apresentar a resposta
         if (!resposta){

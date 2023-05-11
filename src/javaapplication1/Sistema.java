@@ -10,12 +10,17 @@ public class Sistema {
     }
     //Método responsável por verificar disponibilidade na agenda
     
-    public void verificarVaga(LocalDate dataCliente, String horario){
-        
+
+    public void verificarVaga(LocalDate dataCliente){
         //Primeiro,instânciamos a classe agenda(depois trocar o tipo)
-        Agenda agenda = new Agenda(dataCliente,horario);
-        agenda.verificarAgenda(dataCliente, horario);
+        Agenda agenda = new Agenda(dataCliente);
+        agenda.verificarAgenda(dataCliente);
         
     }
     
+    public void realizarReserva(LocalDate dataCliente,String cartao){
+        Agenda agenda = new Agenda(dataCliente);
+        agenda.armazenarData(dataCliente);
+        //Após armazenar a data vem a cobrança da diária 
+    }
 }
