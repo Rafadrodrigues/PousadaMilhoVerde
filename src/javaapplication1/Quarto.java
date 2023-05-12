@@ -3,29 +3,29 @@ package javaapplication1;
 public class Quarto {
     
     //Atributos da classe Login
-    private int id;
-    private int preco;
+    private String id;
+    private float preco;
     private boolean ocupation;//verifica se o quarto esta ocupado ou não
     //precisa implementar a quantidade de quartos
     
     //Construtor da classe
-    public Quarto(int id, int preco, boolean ocupation) {
+    public Quarto(String id, float preco, boolean ocupation) {
         this.id = id;
         this.preco = preco;
         this.ocupation = ocupation;
     
     }
     //Getters e setters correspondente aos atributos criados nessa classe.
-    public int getId() {
+    public String getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
-      public int getPreco() {
+      public float getPreco() {
         return preco;
     }
-    public void setPreco(int preco) {
+    public void setPreco(float preco) {
         this.preco = preco;
     }
     public boolean isOcupation() {
