@@ -68,7 +68,7 @@ public class Funcionario extends Cliente {
         }
         
     }
-    public void realizarReserva(LocalDate data){
+    /*public void realizarReserva(LocalDate data){
         //Precisa verificar disponibilidade da agenda
         Sistema sistema = new Sistema();
         
@@ -78,7 +78,7 @@ public class Funcionario extends Cliente {
         //Realizando o agendamento da vaga
         sistema.realizarReserva(data,super.getCartaoCredito());
 
-    }
+    }*/
     public void realizarLogout(){
         //Precisa da funcao do sistema que oferece a opcao logout
     }
