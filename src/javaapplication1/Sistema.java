@@ -6,17 +6,17 @@ import java.util.List;
 public class Sistema {
     //Inicializando os 10 quaros da memória
 
-    private static Quarto[] Quartos = new Quarto[]{
-            new Quarto("001",50,false),
-            new Quarto("002",50,false),
-            new Quarto("003",50,false),
-            new Quarto("004",50,false),
-            new Quarto("005",50,false),
-            new Quarto("006",50,false),
-            new Quarto("007",50,false),
-            new Quarto("008",50,false),
-            new Quarto("009",50,false),
-            new Quarto("010",50,false),
+    private static final Quarto[] Quartos = new Quarto[]{
+            new Quarto("001",50,"Comun"),
+            new Quarto("002",50,"Comun"),
+            new Quarto("003",50,"Comun"),
+            new Quarto("004",50,"Comun"),
+            new Quarto("005",50,"Comun"),
+            new Quarto("006",100.60,"Luxo"),
+            new Quarto("007",100.60,"Luxo"),
+            new Quarto("008",100.60,"Luxo"),
+            new Quarto("009",100.60,"Luxo"),
+            new Quarto("010",100.60,"Luxo"),
     };
     //cria lista de funcionarios
     public static List ListaFuncionario(){
