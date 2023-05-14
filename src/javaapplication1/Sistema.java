@@ -33,15 +33,6 @@ public class Sistema {
         Colaboradores.add(adm);
         return Colaboradores;
     } 
-    //Lista que contém os clientes
-    public static List<Cliente> listaClientes(Cliente cliente){
-        
-        //Criando uma lista de Clientes que não tem nada no momento
-        List<Cliente> clientes = new ArrayList<>();
-        //Essa função vai fazer inserir clientes na lista
-        clientes.add(cliente);
-        return clientes;
-    }
     public boolean FazerLogin(String user, String pin ) {
         //Lista de funcionarios;
         List<Funcionario> Colaboradores = listaFuncionario();
@@ -121,22 +112,18 @@ public class Sistema {
                 //Considerando que já tenha o cliente na base de dados.
                 listaCliente.remove(i);
                 System.out.println("Cliente removido.");
-                break;
+                return listaCliente;
             }
         }
         return listaCliente;
     } 
 
-    //Método responsável por ler Cliente,Funcionario ou Administrado na BD
-    public static void ler() {
-
-    }
     //Métodos responsável por inserir funcionários na base de dados
     public static List<Funcionario> incluir(List<Funcionario> Colaboradores,Funcionario func){
-        //Uma lista que vai ser inserido os clientes
         //A classe vai ser instanciada no main e inserida como parametro.
         //Considerando que a lista esteja vazia,adicionamos um cliente
         if (Colaboradores.isEmpty()) {
+            Colaboradores.add(func);
             System.out.println("Cliente Adicionado.");
             return Colaboradores;
         }
@@ -157,7 +144,7 @@ public class Sistema {
 
     //Método responsável por editar Cliente,Funcionario ou Administrado na BD
     public static List<Funcionario> editar(List<Funcionario> Colaboradores,Funcionario func) {
-        //Recebendo lista de clientes
+        //Recebendo lista de funcionarios e editando
         //Essa linhja está dando erro, porque está inserindo duas vezes, mas está funcionando
         
         if (Colaboradores.isEmpty()) {
@@ -168,11 +155,9 @@ public class Sistema {
             if(Colaboradores.get(i).getCpf().equals(func.getCpf())){
                 //Considerando que já tenha o cliente na base de dados.
                 //Preciso verificar o método replace, pode ser mais adequado
-                Cliente aux  = Colaboradores.get(i);
-                Colaboradores.add(i, func);
-                
+                Colaboradores.set(i, func);
                 System.out.println("Cliente editado.");
-                break;
+                return Colaboradores;
             }
         }
         return Colaboradores;
@@ -193,9 +178,29 @@ public class Sistema {
                 //Considerando que já tenha o cliente na base de dados.
                 Colaboradores.remove(i);
                 System.out.println("Cliente removido.");
-                break;
+                return Colaboradores;
             }
         }
         return Colaboradores;
     } 
+      //Método responsável por ler Cliente
+    public static List<Agenda> ler(List<Agenda> agenda,Quarto quarto) {
+        //Eu preciso realizar a reserva primeiro para depois imprimir
+        //Conferindo na agenda o cliente desejado e apresentando informaçoes da agenda
+        if(agenda.isEmpty()){
+            System.out.println("Nenhum reserva nesse dia.");
+            return agenda;
+        }
+        //Um for para percorrer a agenda em busca do id do quarto
+        for (int i=0;i<agenda.size();i++){
+            if(agenda.get(i).equals(quarto.getId())){
+                System.out.print( agenda.get(i));
+                return agenda;
+            }
+            
+        }   
+        //De toda forma não encontrar, mostrar que o cliente não tem reserva naquele dia
+        System.out.println("Cliente sem reserva nessa data.");
+        return agenda;
+    }
 }

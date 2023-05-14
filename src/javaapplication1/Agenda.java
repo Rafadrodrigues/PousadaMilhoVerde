@@ -1,6 +1,7 @@
 package javaapplication1;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Agenda {
     
@@ -43,19 +44,10 @@ public class Agenda {
     }
     
     //Método responsável por receber data e comparar disponibilidade
-    public LocalDate armazenarData(LocalDate clienteData){
+    public static List<Agenda> armazenarReserva(List<Agenda> agenda,Quarto quarto,Cliente cliente ){
+        //Lista que vai armazenar a reserva com dados do cliente e quarto
         
-        //Data informada pelo cliente
-        System.out.println("Data: " + clienteData);
-        //O funcionário vê a data informada pelo cliente e digita no sistema
-        LocalDate localDate = LocalDate.now();
-        
-        System.out.println("Informe dia mês e ano." );
-        //Inserindo a data informada pelo cliente em uma variável
-        System.out.print("\nDia da semana: " + localDate.getDayOfWeek().ordinal()
-        + "\nMes: " + localDate.getMonthValue()+ "\nAno:" + localDate.getYear());
-
-        return localDate;
+        return agenda;
     }
 
 
