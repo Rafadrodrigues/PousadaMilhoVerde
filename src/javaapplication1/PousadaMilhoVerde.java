@@ -54,9 +54,9 @@ public class PousadaMilhoVerde {
 //    Bd.add(listaFuncionario());
 //    
 //    
-   incluir(cliente1);
-   editar(cliente2);
-   remover(cliente2);
+   incluir(listaClientes,cliente1);
+   editar(listaClientes,cliente2);
+   remover(listaClientes,cliente2);
     
     }
 }

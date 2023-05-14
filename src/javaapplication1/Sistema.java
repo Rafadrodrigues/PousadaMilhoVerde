@@ -61,15 +61,12 @@ public class Sistema {
     //Os métodos eu optei por ser estático, pelo fato que é um método que é utilizado apenas no Sistema
     //Método responsável por incluir Cliente,Funcionario ou Administrado na BD
     
-    public static List<Cliente> incluir(Cliente cliente){
+    public static List<Cliente> incluir(List<Cliente> listaCliente, Cliente cliente){
         //Uma lista que vai ser inserido os clientes
         //A classe vai ser instanciada no main e inserida como parametro.
-        List<Cliente> listaCliente = new ArrayList<>();
-        
-        listaCliente = listaClientes(cliente);
         //Considerando que a lista esteja vazia,adicionamos um cliente
         if (listaCliente.isEmpty()) {
-            
+            listaCliente.add(cliente);
             System.out.println("Cliente Adicionado.");
             return listaCliente;
         }
@@ -81,7 +78,6 @@ public class Sistema {
                 return listaCliente;
             }
         }
-       
         //Caso a lista não esteja vazia e não exista aquele cliente, insira na base de dados
         listaCliente.add(cliente);
         System.out.println("Cliente Adicionado.");
@@ -89,10 +85,9 @@ public class Sistema {
     } 
 
     //Método responsável por editar Cliente,Funcionario ou Administrado na BD
-    public static List<Cliente> editar(Cliente cliente) {
+    public static List<Cliente> editar(List<Cliente> listaCliente, Cliente cliente) {
         //Recebendo lista de clientes
         //Essa linhja está dando erro, porque está inserindo duas vezes, mas está funcionando
-        List<Cliente> listaCliente = listaClientes(cliente);
         
         if (listaCliente.isEmpty()) {
             System.out.println("Cliente inexistente.");
@@ -112,10 +107,9 @@ public class Sistema {
     }
 
     //Método responsável por editar Cliente,Funcionario ou Administrado na BD
-    public static List<Cliente> remover(Cliente cliente) {
+    public static List<Cliente> remover(List<Cliente> listaCliente, Cliente cliente) {
         
         //Eu poderia criar um método listaCliente e atribuir no lugar de incluir
-        List<Cliente> listaCliente = listaClientes(cliente);
         
         if (listaCliente.isEmpty()) {
             System.out.println("Cliente inexistente.");
@@ -138,13 +132,11 @@ public class Sistema {
 
     }
     //Métodos responsável por inserir funcionários na base de dados
-    public static List<Funcionario> incluir(Funcionario func){
+    public static List<Funcionario> incluir(List<Funcionario> Colaboradores,Funcionario func){
         //Uma lista que vai ser inserido os clientes
         //A classe vai ser instanciada no main e inserida como parametro.
-        List<Funcionario> Colaboradores = listaFuncionario();
         //Considerando que a lista esteja vazia,adicionamos um cliente
         if (Colaboradores.isEmpty()) {
-            
             System.out.println("Cliente Adicionado.");
             return Colaboradores;
         }
@@ -164,10 +156,9 @@ public class Sistema {
     } 
 
     //Método responsável por editar Cliente,Funcionario ou Administrado na BD
-    public static List<Funcionario> editar(Funcionario func) {
+    public static List<Funcionario> editar(List<Funcionario> Colaboradores,Funcionario func) {
         //Recebendo lista de clientes
         //Essa linhja está dando erro, porque está inserindo duas vezes, mas está funcionando
-        List<Funcionario> Colaboradores = listaFuncionario();
         
         if (Colaboradores.isEmpty()) {
             System.out.println("Cliente inexistente.");
@@ -188,10 +179,9 @@ public class Sistema {
     }
 
     //Método responsável por editar Cliente,Funcionario ou Administrado na BD
-    public static List<Funcionario> remover(Funcionario func) {
+    public static List<Funcionario> remover(List<Funcionario> Colaboradores,Funcionario func) {
         
         //Eu poderia criar um método listaCliente e atribuir no lugar de incluir
-        List<Funcionario> Colaboradores = listaFuncionario();
         
         if (Colaboradores.isEmpty()) {
             System.out.println("Cliente inexistente.");
