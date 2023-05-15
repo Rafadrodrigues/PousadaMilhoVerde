@@ -6,6 +6,7 @@ public class Quarto {
     private String id;
     private double preco;
     private String categoria;//podendo ser luxo ou comun
+    
     //              IMPORTANTE
     // ACHO QUE OCUPAÇÃO NÃO FAZ SENTIDO E MAIS DA AGENDA, private boolean ocupation;//verifica se o quarto esta ocupado ou não
     //precisa implementar a quantidade de quartos
@@ -16,7 +17,7 @@ public class Quarto {
         this.preco = preco;
         this.categoria = categoria;
        // this.ocupation = ocupation;
-    
+
     }
     //              IMPORTANTE
     //estou pensando que o quato não precisa dos geter e seter, agente não vai mudar ele, quando iniciar vai ser isso e pronto

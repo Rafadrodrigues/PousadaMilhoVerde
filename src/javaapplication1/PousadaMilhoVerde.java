@@ -2,7 +2,6 @@ package javaapplication1;
 
 import java.util.ArrayList;
 import java.util.List;
-import static javaapplication1.Agenda.armazenarReserva;
 import static javaapplication1.Sistema.editar;
 import static javaapplication1.Sistema.listaFuncionario;
 import static javaapplication1.Sistema.incluir;
@@ -38,9 +37,7 @@ public class PousadaMilhoVerde {
     Bd.add(listaClientes);
     Bd.add(listaFuncionario());
     
-    armazenarReserva(agenda,quarto,cliente1);
-    
-    System.out.println(agenda);
+    System.out.println(Bd);
     //Funcionando corretamente
     }
 }

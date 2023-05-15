@@ -115,6 +115,7 @@ public class Sistema {
                 return listaCliente;
             }
         }
+        System.out.println("Cliente inexistente.");
         return listaCliente;
     } 
 
@@ -135,7 +136,6 @@ public class Sistema {
                 return Colaboradores;
             }
         }
-       
         //Caso a lista não esteja vazia e não exista aquele cliente, insira na base de dados
         Colaboradores.add(func);
         System.out.println("Cliente Adicionado.");
@@ -182,22 +182,28 @@ public class Sistema {
             }
         }
         return Colaboradores;
-    } 
-      //Método responsável por ler Cliente
+    }  
+    //Método responsável por receber data e comparar disponibilidade
+    public static List armazenarReserva(List agenda,Quarto quarto){
+        //Lista que vai armazenar a reserva com dados do cliente e quarto
+        //O cliente deve se ser armazenado no quarto e o quarto inserido como reserva
+        agenda.add(quarto);
+        return agenda;
+    }
+      //Método responsável por ler dados da reserva 
     public static List<Agenda> ler(List<Agenda> agenda,Quarto quarto) {
         //Eu preciso realizar a reserva primeiro para depois imprimir
         //Conferindo na agenda o cliente desejado e apresentando informaçoes da agenda
         if(agenda.isEmpty()){
-            System.out.println("Nenhum reserva nesse dia.");
+            System.out.println("Nenhuma reserva.");
             return agenda;
         }
-        //Um for para percorrer a agenda em busca do id do quarto
+        //Um for para percorrer a agenda em busca do cpf do cliente com informações
         for (int i=0;i<agenda.size();i++){
             if(agenda.get(i).equals(quarto.getId())){
                 System.out.print( agenda.get(i));
                 return agenda;
             }
-            
         }   
         //De toda forma não encontrar, mostrar que o cliente não tem reserva naquele dia
         System.out.println("Cliente sem reserva nessa data.");

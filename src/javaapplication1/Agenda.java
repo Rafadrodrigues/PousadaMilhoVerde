@@ -42,29 +42,4 @@ public class Agenda {
     public void setAnotacoes(String anotacoes) {
         this.anotacoes = anotacoes;
     }
-    
-    //Método responsável por receber data e comparar disponibilidade
-    public static List<Agenda> armazenarReserva(List<Agenda> agenda,Quarto quarto,Cliente cliente ){
-        //Lista que vai armazenar a reserva com dados do cliente e quarto
-        
-        return agenda;
-    }
-
-
-    //Métodos responsável por receber a resposta do bd sobre disponibilidade.
-    public void verificarAgenda(LocalDate dataCliente) {
-      
-        //Aqui vai ser preciso solicitar o sistema faça uma verificação no arquivo json
-        BancoDeDados bd = new BancoDeDados();
-        //Atribuindo a resposta do bd para  uma variável 
-
-        boolean resposta = bd.conferirData(dataCliente);
-        
-        //Condicional para apresentar a resposta
-        if (!resposta){
-            System.out.print("\nNão tem disponibilidade nessa data.");
-        }else{
-            System.out.print("\nTem disponibilidade nessa data.");
-        }
-    }
 }
