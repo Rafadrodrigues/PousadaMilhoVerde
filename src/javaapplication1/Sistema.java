@@ -1,22 +1,24 @@
 package javaapplication1;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Sistema {
     //Inicializando os 10 quaros da memória
 
-    private static final Quarto[] Quartos = new Quarto[]{
-            new Quarto("001",50,"Comun"),
-            new Quarto("002",50,"Comun"),
-            new Quarto("003",50,"Comun"),
-            new Quarto("004",50,"Comun"),
-            new Quarto("005",50,"Comun"),
-            new Quarto("006",100.60,"Luxo"),
-            new Quarto("007",100.60,"Luxo"),
-            new Quarto("008",100.60,"Luxo"),
-            new Quarto("009",100.60,"Luxo"),
-            new Quarto("010",100.60,"Luxo"),
+    private static final Quarto[] quartos = new Quarto[]{
+            new Quarto("001",50,"Comun",false),
+            new Quarto("002",50,"Comun",false),
+            new Quarto("003",50,"Comun",false),
+            new Quarto("004",50,"Comun",false),
+            new Quarto("005",50,"Comun",false),
+            new Quarto("006",100.60,"Luxo",false),
+            new Quarto("007",100.60,"Luxo",false),
+            new Quarto("008",100.60,"Luxo",false),
+            new Quarto("009",100.60,"Luxo",false),
+            new Quarto("010",100.60,"Luxo",false),
     };
     //cria lista de funcionarios
     //Se a lista de cliente estiver funcionando correto, dá para fazer a de funcionário igual
@@ -125,20 +127,20 @@ public class Sistema {
         //Considerando que a lista esteja vazia,adicionamos um cliente
         if (Colaboradores.isEmpty()) {
             Colaboradores.add(func);
-            System.out.println("Cliente Adicionado.");
+            System.out.println("Funcionário Adicionado.");
             return Colaboradores;
         }
         //Verificando se o cliente já existe na bd
         for(int i=0;i<Colaboradores.size();i++){
             if(Colaboradores.get(i).getCpf().equals(func.getCpf())){
                 //Considerando que já tenha o cliente na base de dados.
-                System.out.println("Cliente já existente.");
+                System.out.println("Funcionário já existente.");
                 return Colaboradores;
             }
         }
         //Caso a lista não esteja vazia e não exista aquele cliente, insira na base de dados
         Colaboradores.add(func);
-        System.out.println("Cliente Adicionado.");
+        System.out.println("Funcionário Adicionado.");
         return Colaboradores;
     } 
 
@@ -148,7 +150,7 @@ public class Sistema {
         //Essa linhja está dando erro, porque está inserindo duas vezes, mas está funcionando
         
         if (Colaboradores.isEmpty()) {
-            System.out.println("Cliente inexistente.");
+            System.out.println("Funcionário inexistente.");
             return Colaboradores;
         }
         for(int i=0;i<Colaboradores.size();i++){
@@ -156,7 +158,7 @@ public class Sistema {
                 //Considerando que já tenha o cliente na base de dados.
                 //Preciso verificar o método replace, pode ser mais adequado
                 Colaboradores.set(i, func);
-                System.out.println("Cliente editado.");
+                System.out.println("Funcionário editado.");
                 return Colaboradores;
             }
         }
@@ -169,7 +171,7 @@ public class Sistema {
         //Eu poderia criar um método listaCliente e atribuir no lugar de incluir
         
         if (Colaboradores.isEmpty()) {
-            System.out.println("Cliente inexistente.");
+            System.out.println("Funcionário inexistente.");
             return Colaboradores;
         }
         //Verificando se o cliente já existe na bd
@@ -177,21 +179,50 @@ public class Sistema {
             if(Colaboradores.get(i).getCpf().equals(func.getCpf())){
                 //Considerando que já tenha o cliente na base de dados.
                 Colaboradores.remove(i);
-                System.out.println("Cliente removido.");
+                System.out.println("Funcionário removido.");
                 return Colaboradores;
             }
         }
         return Colaboradores;
-    }  
+    } 
+    public static List<Quarto> verificarReserva(List<Reserva> listaReserva, LocalDate data){
+        //Para verificar a data é preciso da classe reserva
+        Reserva reserva = new Reserva(data,quartos);
+        //Uma lista que vai armazenar a disponibilidade dos quartos
+        List quartosVazios = new ArrayList<>();
+        
+        //Caso a agenda esteja vazia, não tem nenhuma reserva no dia, então tem disponibilidade
+        if(listaReserva.isEmpty()){
+           System.out.println("Existe disponibilidade.\nVeja opções de quarto.");
+           //Um loop que percorre o vetor de quartos
+           for(int i=0;i<quartos.length;i++){
+               //Como a lista está vazia, todos os quartos estão vazios
+               quartosVazios.add(quartos.toString());
+               return quartosVazios;
+           }
+        }
+        //Caso a lista na esteja vazia, um loop que percorre e procura uma data igual
+        for (int i=0;i<listaReserva.size();i++) {
+            if(listaReserva.get(i).equals(data)){
+                
+            }
+        }
+         return quartosVazios;
+}
     //Método responsável por receber data e comparar disponibilidade
-    public static List armazenarReserva(List agenda,Quarto quarto){
+    public static List armazenarReserva(List listaReserva,Quarto quarto,Reserva reserva){
         //Lista que vai armazenar a reserva com dados do cliente e quarto
         //O cliente deve se ser armazenado no quarto e o quarto inserido como reserva
-        agenda.add(quarto);
-        return agenda;
+//        for(int i=0;i<quartosVerificados.size();i++){
+//            if(quartosVerificados.get(i).equals(quarto.getId())){
+//                quarto.setOcupation(true);
+//                listaReserva.add();
+//            }
+//        }
+        return listaReserva;
     }
       //Método responsável por ler dados da reserva 
-    public static List<Agenda> ler(List<Agenda> agenda,Quarto quarto) {
+    public static List<Reserva> lerAgenda(List<Reserva> agenda,Cliente cliente) {
         //Eu preciso realizar a reserva primeiro para depois imprimir
         //Conferindo na agenda o cliente desejado e apresentando informaçoes da agenda
         if(agenda.isEmpty()){
@@ -200,7 +231,7 @@ public class Sistema {
         }
         //Um for para percorrer a agenda em busca do cpf do cliente com informações
         for (int i=0;i<agenda.size();i++){
-            if(agenda.get(i).equals(quarto.getId())){
+            if(agenda.get(i).equals(cliente.getDataDesejada())){
                 System.out.print( agenda.get(i));
                 return agenda;
             }
@@ -209,4 +240,5 @@ public class Sistema {
         System.out.println("Cliente sem reserva nessa data.");
         return agenda;
     }
+    
 }
