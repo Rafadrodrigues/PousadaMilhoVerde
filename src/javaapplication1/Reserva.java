@@ -11,6 +11,7 @@ public class Reserva {
     private String anotacoes;
     private Quarto[] quarto ;
     private Cliente cliente;
+    
     //Construtor para iniciar todos os estados da classe 
 
     public Reserva(LocalDate data,Quarto[] quarto) {

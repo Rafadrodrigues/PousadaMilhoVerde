@@ -8,7 +8,7 @@ import java.util.List;
 public class Sistema {
     //Inicializando os 10 quaros da memória
 
-    private static final Quarto[] quartos = new Quarto[]{
+    private static Quarto[] quartos = new Quarto[]{
             new Quarto("001",50,"Comun",false),
             new Quarto("002",50,"Comun",false),
             new Quarto("003",50,"Comun",false),
@@ -34,6 +34,7 @@ public class Sistema {
         Colaboradores.add(func);
         Colaboradores.add(adm);
         return Colaboradores;
+        
     } 
     public boolean FazerLogin(String user, String pin ) {
         //Lista de funcionarios;
@@ -187,27 +188,24 @@ public class Sistema {
     } 
     public static List<Quarto> verificarReserva(List<Reserva> listaReserva, LocalDate data){
         //Para verificar a data é preciso da classe reserva
-        Reserva reserva = new Reserva(data,quartos);
         //Uma lista que vai armazenar a disponibilidade dos quartos
-        List quartosVazios = new ArrayList<>();
-        
-        //Caso a agenda esteja vazia, não tem nenhuma reserva no dia, então tem disponibilidade
-        if(listaReserva.isEmpty()){
-           System.out.println("Existe disponibilidade.\nVeja opções de quarto.");
-           //Um loop que percorre o vetor de quartos
-           for(int i=0;i<quartos.length;i++){
-               //Como a lista está vazia, todos os quartos estão vazios
-               quartosVazios.add(quartos.toString());
-               return quartosVazios;
-           }
-        }
-        //Caso a lista na esteja vazia, um loop que percorre e procura uma data igual
-        for (int i=0;i<listaReserva.size();i++) {
-            if(listaReserva.get(i).equals(data)){
-                
+        List<Quarto> quartoDisponivel = new ArrayList<>();
+        for(int i=0;i<listaReserva.size();i++){
+            if(listaReserva.isEmpty()){
+                System.out.println("\nExiste disponibilidade em todos os quartos.");
+                quartoDisponivel.add(quartos[i]);
+                return quartoDisponivel;
             }
         }
-         return quartosVazios;
+        //Imprimindo apenas os quartos que estão disponível
+        for(Quarto quarto:quartos){
+            if(quarto.isOcupation() != false){
+                quartoDisponivel.add(quarto);
+                System.out.print(quarto);
+            }
+        }
+            return quartoDisponivel;
+
 }
     //Método responsável por receber data e comparar disponibilidade
     public static List armazenarReserva(List listaReserva,Quarto quarto,Reserva reserva){
