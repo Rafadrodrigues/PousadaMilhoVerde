@@ -186,37 +186,45 @@ public class Sistema {
         }
         return Colaboradores;
     } 
+    //Método responsável por verificar reserva e entregar quais quartos estão disponiveis
     public static List<Quarto> verificarReserva(List<Reserva> listaReserva, LocalDate data){
         //Para verificar a data é preciso da classe reserva
-        //Uma lista que vai armazenar a disponibilidade dos quartos
-        List<Quarto> quartoDisponivel = new ArrayList<>();
-        for(int i=0;i<listaReserva.size();i++){
-            if(listaReserva.isEmpty()){
+        //Uma lista que vai armazenar a disponibilidade dos quartos e as datas
+        List quartoDisponivel = new ArrayList<>();
+        List diasReserva = new ArrayList<>();
+        
+        if(listaReserva.isEmpty()){
                 System.out.println("\nExiste disponibilidade em todos os quartos.");
-                quartoDisponivel.add(quartos[i]);
-                return quartoDisponivel;
+                quartoDisponivel.add(quartos);
+                diasReserva.add(quartoDisponivel);
+                //Como a lista está vazia todos os quartos estao livres
+                return diasReserva;
+        }else{
+        //Loop que percorre a lista 
+        for(int i=0;i<listaReserva.size();i++){
+            //Imprimindo apenas os quartos que estão disponível
+            if(listaReserva.get(i).getData().equals(data)){
+                for(Quarto quarto:quartos){
+                    //Condicão que verifica se o quarto ta livre, se for true, está ocupado
+                    if(quarto.isOcupation() != false){
+                        System.out.println("\nExiste disponibilidade no quarto: " + quartos[i]);
+                        //Quartos disponíveis estão sendo armazenados na lista quartoDisponivel
+                        quartoDisponivel.add(quartos[i]);   
+                        diasReserva.add(quartoDisponivel);
+                        //No diasReserva, está contido os quartos disponíveis para aquela data
+                        return diasReserva;
+                    }      
+                }
             }
         }
-        //Imprimindo apenas os quartos que estão disponível
-        for(Quarto quarto:quartos){
-            if(quarto.isOcupation() != false){
-                quartoDisponivel.add(quarto);
-                System.out.print(quarto);
-            }
-        }
-            return quartoDisponivel;
-
+    }
+        return diasReserva;
 }
     //Método responsável por receber data e comparar disponibilidade
     public static List armazenarReserva(List listaReserva,Quarto quarto,Reserva reserva){
         //Lista que vai armazenar a reserva com dados do cliente e quarto
         //O cliente deve se ser armazenado no quarto e o quarto inserido como reserva
-//        for(int i=0;i<quartosVerificados.size();i++){
-//            if(quartosVerificados.get(i).equals(quarto.getId())){
-//                quarto.setOcupation(true);
-//                listaReserva.add();
-//            }
-//        }
+//      // Aqui vai armazenar a reserva na lista de reserva e depois preencher os atributos da classe reserva
         return listaReserva;
     }
       //Método responsável por ler dados da reserva 
