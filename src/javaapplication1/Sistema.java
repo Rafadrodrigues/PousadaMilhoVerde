@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class Sistema {
     //Inicializando os 10 quaros da memória
@@ -20,6 +21,15 @@ public class Sistema {
             new Quarto("009",100.60,"Luxo",false),
             new Quarto("010",100.60,"Luxo",false),
     };
+    //Get e Set para manipular o atributo
+    public static Quarto[] getQuartos() {
+        return quartos;
+    }
+
+    public static void setQuartos(Quarto[] quartos) {
+        Sistema.quartos = quartos;
+    }
+    
     //cria lista de funcionarios
     //Se a lista de cliente estiver funcionando correto, dá para fazer a de funcionário igual
     public static List listaFuncionario(){
@@ -123,7 +133,7 @@ public class Sistema {
     } 
 
     //Métodos responsável por inserir funcionários na base de dados
-    public static List<Funcionario> incluir(List<Funcionario> Colaboradores,Funcionario func){
+    public static List incluir(List<Funcionario> Colaboradores,Funcionario func){
         //A classe vai ser instanciada no main e inserida como parametro.
         //Considerando que a lista esteja vazia,adicionamos um cliente
         if (Colaboradores.isEmpty()) {
@@ -146,7 +156,7 @@ public class Sistema {
     } 
 
     //Método responsável por editar Cliente,Funcionario ou Administrado na BD
-    public static List<Funcionario> editar(List<Funcionario> Colaboradores,Funcionario func) {
+    public static List editar(List<Funcionario> Colaboradores,Funcionario func) {
         //Recebendo lista de funcionarios e editando
         //Essa linhja está dando erro, porque está inserindo duas vezes, mas está funcionando
         
@@ -167,7 +177,7 @@ public class Sistema {
     }
 
     //Método responsável por editar Cliente,Funcionario ou Administrado na BD
-    public static List<Funcionario> remover(List<Funcionario> Colaboradores,Funcionario func) {
+    public static List remover(List<Funcionario> Colaboradores,Funcionario func) {
         
         //Eu poderia criar um método listaCliente e atribuir no lugar de incluir
         
@@ -187,7 +197,7 @@ public class Sistema {
         return Colaboradores;
     } 
     //Método responsável por verificar reserva e entregar quais quartos estão disponiveis
-    public static List<Quarto> verificarReserva(List<Reserva> listaReserva, LocalDate data){
+    public static List verificarReserva(List<Reserva> listaReserva, LocalDate data){
         //Para verificar a data é preciso da classe reserva
         //Uma lista que vai armazenar a disponibilidade dos quartos e as datas
         List quartoDisponivel = new ArrayList<>();
@@ -221,30 +231,44 @@ public class Sistema {
         return diasReserva;
 }
     //Método responsável por receber data e comparar disponibilidade
-    public static List armazenarReserva(List listaReserva,Quarto quarto,Reserva reserva){
-        //Lista que vai armazenar a reserva com dados do cliente e quarto
-        //O cliente deve se ser armazenado no quarto e o quarto inserido como reserva
-//      // Aqui vai armazenar a reserva na lista de reserva e depois preencher os atributos da classe reserva
+    public static List realizaReserva(List listaReserva,List diasReserva,Quarto quarto,Cliente cliente){
+        // Aqui vai armazenar a reserva na lista de reserva e depois preencher os atributos da classe reserva
+        
+        Scanner sc = new Scanner(System.in);
+        Reserva reserva = new Reserva();
+        
+        System.out.println("Informe o Id o quarto desejado Preço:Categoria: ");
+        //Preenchendo os campos da reserva e do quarto
+        quarto.setId(sc.nextLine());
+        quarto.setPreco(sc.nextFloat());
+        quarto.setCategoria(sc.nextLine());
+        quarto.setOcupation(true);
+        reserva.setQuarto(quarto);
+        reserva.setCliente(cliente);
+        reserva.setData(cliente.getDataDesejada());
+        //Agora acrescentamos tudo da lista de reserva
+        listaReserva.add(reserva);
         return listaReserva;
+        
     }
       //Método responsável por ler dados da reserva 
-    public static List<Reserva> lerAgenda(List<Reserva> agenda,Cliente cliente) {
+    public static List<Reserva> lerReserva(List<Reserva> reserva,Cliente cliente) {
         //Eu preciso realizar a reserva primeiro para depois imprimir
         //Conferindo na agenda o cliente desejado e apresentando informaçoes da agenda
-        if(agenda.isEmpty()){
+        if(reserva.isEmpty()){
             System.out.println("Nenhuma reserva.");
-            return agenda;
+            return reserva;
         }
         //Um for para percorrer a agenda em busca do cpf do cliente com informações
-        for (int i=0;i<agenda.size();i++){
-            if(agenda.get(i).equals(cliente.getDataDesejada())){
-                System.out.print( agenda.get(i));
-                return agenda;
+        for (int i=0;i<reserva.size();i++){
+            if(reserva.get(i).equals(cliente.getDataDesejada())){
+                System.out.print( reserva.get(i));
+                return reserva;
             }
         }   
         //De toda forma não encontrar, mostrar que o cliente não tem reserva naquele dia
         System.out.println("Cliente sem reserva nessa data.");
-        return agenda;
+        return reserva;
     }
     
 }
