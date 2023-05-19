@@ -200,6 +200,7 @@ public class Sistema {
     public static List verificarReserva(List<Reserva> listaReserva, LocalDate data){
         //Para verificar a data é preciso da classe reserva
         //Uma lista que vai armazenar a disponibilidade dos quartos e as datas
+  
         List quartoDisponivel = new ArrayList<>();
         List diasReserva = new ArrayList<>();
         
@@ -231,7 +232,7 @@ public class Sistema {
         return diasReserva;
 }
     //Método responsável por receber data e comparar disponibilidade
-    public static List realizaReserva(List listaReserva,List diasReserva,Quarto quarto,Cliente cliente){
+    public static List realizarReserva(List listaReserva,List diasReserva,Quarto quarto,Cliente cliente){
         // Aqui vai armazenar a reserva na lista de reserva e depois preencher os atributos da classe reserva
         
         Scanner sc = new Scanner(System.in);
@@ -251,6 +252,10 @@ public class Sistema {
         return listaReserva;
         
     }
+    //Após a reserva acontecer, esse método vai gerar um extrato.
+    public void gerarExtrato(){
+        
+    }
       //Método responsável por ler dados da reserva 
     public static List<Reserva> lerReserva(List<Reserva> reserva,Cliente cliente) {
         //Eu preciso realizar a reserva primeiro para depois imprimir
@@ -258,7 +263,7 @@ public class Sistema {
         if(reserva.isEmpty()){
             System.out.println("Nenhuma reserva.");
             return reserva;
-        }
+        }else{
         //Um for para percorrer a agenda em busca do cpf do cliente com informações
         for (int i=0;i<reserva.size();i++){
             if(reserva.get(i).equals(cliente.getDataDesejada())){
@@ -269,6 +274,6 @@ public class Sistema {
         //De toda forma não encontrar, mostrar que o cliente não tem reserva naquele dia
         System.out.println("Cliente sem reserva nessa data.");
         return reserva;
-    }
-    
+        }
+    } 
 }
