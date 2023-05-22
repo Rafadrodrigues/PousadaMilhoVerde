@@ -25,7 +25,6 @@ public class BancoDeDados {
                     //Salva no objeto JSONObject o que o parse tratou do arquivo
                     jsonObject = (JSONObject) parser.parse(new FileReader(
                                     "Clientes.json"));
-
                     //Salva nas variaveis os dados retirados do arquivo
                     Nome = (String) jsonObject.get("Nome");
                     CPF = (String) jsonObject.get("CPF");
@@ -47,7 +46,6 @@ public class BancoDeDados {
                     e.printStackTrace();
             }
 	}
-
 
     public void inserirCliente(String name, String cpf,String idade,
         String endereco,String telefone,String conta){
@@ -76,7 +74,6 @@ public class BancoDeDados {
             java.util.logging.Logger.getLogger(BancoDeDados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
-
 
     //Métodos responsável por inserir os funcionários na base de dados
    public void inserirFuncionario(String usuario, String senha, String cargo, String nome, String cpf, String endereco, String telefone, String acesso){

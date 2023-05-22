@@ -232,17 +232,15 @@ public class Sistema {
         return diasReserva;
 }
     //Método responsável por receber data e comparar disponibilidade
-    public static List realizarReserva(List listaReserva,List diasReserva,Quarto quarto,Cliente cliente){
+    public static List realizarReserva(List listaReserva,List diasReserva, Quarto quarto,Cliente cliente){
         // Aqui vai armazenar a reserva na lista de reserva e depois preencher os atributos da classe reserva
         
         Scanner sc = new Scanner(System.in);
         Reserva reserva = new Reserva();
         
-        System.out.println("Informe o Id o quarto desejado Preço:Categoria: ");
+//        System.out.println("Informe o Id o quarto desejado Preço:Categoria: ");
         //Preenchendo os campos da reserva e do quarto
         quarto.setId(sc.nextLine());
-        quarto.setPreco(sc.nextFloat());
-        quarto.setCategoria(sc.nextLine());
         quarto.setOcupation(true);
         reserva.setQuarto(quarto);
         reserva.setCliente(cliente);
@@ -250,11 +248,11 @@ public class Sistema {
         //Agora acrescentamos tudo da lista de reserva
         listaReserva.add(reserva);
         return listaReserva;
-        
     }
     //Após a reserva acontecer, esse método vai gerar um extrato.
     public void gerarExtrato(){
-        
+        //Nome do cliente, preco do quarto * quantidade de dias da reserva.
+        //Uma data final e uma data inicial.
     }
       //Método responsável por ler dados da reserva 
     public static List<Reserva> lerReserva(List<Reserva> reserva,Cliente cliente) {

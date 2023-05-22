@@ -1,11 +1,14 @@
 package javaapplication1;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import static javaapplication1.Sistema.editar;
 import static javaapplication1.Sistema.listaFuncionario;
 import static javaapplication1.Sistema.incluir;
 import static javaapplication1.Sistema.remover;
+import static javaapplication1.Sistema.verificarReserva;
+import static javaapplication1.Sistema.realizarReserva;
 
 public class PousadaMilhoVerde {
 
@@ -28,7 +31,8 @@ public class PousadaMilhoVerde {
     Cliente cliente1 = new Cliente("Rafael", "9830123", "Belo Horizonte", "339989021", "rafar@");
     Cliente cliente2 = new Cliente("Getulio", "9830123", "Diamantina", "8021983", "getjose@");
     Cliente cliente3 = new Cliente("Dudu", "123.456.789-57", "Diamantina", "389982356", "Duduvisitante@");
-
+    
+    System.out.println(Cliente.numTotalCliente);
   
     incluir(listaClientes,cliente1);
     editar(listaClientes,cliente2);
@@ -38,7 +42,11 @@ public class PousadaMilhoVerde {
     Bd.add(listaClientes);
     Bd.add(listaFuncionario());
     
-    System.out.println(Bd);
+//    System.out.println(Bd);
     //Funcionando corretamente
+    LocalDate data = LocalDate.of(2023, 5, 22);
+    
+    verificarReserva(reserva,data);
+    
     }
 }

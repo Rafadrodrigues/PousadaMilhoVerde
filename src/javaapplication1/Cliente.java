@@ -10,6 +10,7 @@ public class Cliente extends Pessoa {
     //Atributos da classe Cliente
     private LocalDate dataDesejada;
     private String cartaoCredito;
+    protected static int numTotalCliente = 0;
     
     //Construtor da classe Cliente
     public Cliente(String nome, String cpf, String endereco, String telefone, 
@@ -17,12 +18,14 @@ public class Cliente extends Pessoa {
         super(nome, cpf, endereco, telefone, email);
         this.dataDesejada = dataDesejada;
         this.cartaoCredito = cartaoCredito;
+        Cliente.numTotalCliente = Cliente.numTotalCliente + 1;
     // Caracteristica da classe conta. numero cartao, cvv, data, nome.
     //Saldo talvez pode ser retirado depois
     }
  
     public Cliente(String nome, String cpf, String endereco, String telefone,String email) {
         super(nome, cpf, endereco, telefone,email);
+        Cliente.numTotalCliente = Cliente.numTotalCliente + 1;
     }
  
     //Getters e setters correspondente aos atributos criados nessa classe.
@@ -41,6 +44,14 @@ public class Cliente extends Pessoa {
 
     public void setCartaoCredito(String cartaoCredito) {
         this.cartaoCredito = cartaoCredito;
+    }
+
+    public static int getNumTotalCliente() {
+        return Cliente.numTotalCliente;
+    }
+
+    public static void setNumTotalCliente(int numTotalCliente) {
+        Cliente.numTotalCliente = numTotalCliente;
     }
     
     //Fornecendo informácões como String
