@@ -46,7 +46,7 @@ public class PousadaMilhoVerde {
     //Funcionando corretamente
     LocalDate data = LocalDate.of(2023, 5, 22);
     
-    verificarReserva(reserva,data);
+//    verificarReserva(reserva,data);
     
     }
 }

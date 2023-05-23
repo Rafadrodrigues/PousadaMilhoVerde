@@ -11,12 +11,12 @@ public class Reserva {
     //Data,quarto e cliente vão ser armazenados no calendario
     private LocalDate data;
     private List calendario;
-    private Quarto quarto ;
+    private Quarto[] quarto ;
     private Cliente cliente;
     
     //Construtor para iniciar todos os estados da classe 
 
-    public Reserva(LocalDate data,Quarto quarto) {
+    public Reserva(LocalDate data,Quarto[] quarto) {
         this.data = data;
         this.quarto = quarto;
     }
@@ -39,11 +39,11 @@ public class Reserva {
 //        this.ocupation = ocupation;
 //    }  
 
-    public Quarto getQuarto() {
+    public Quarto[] getQuarto() {
         return quarto;
     }
 
-    public void setQuarto(Quarto quarto) {
+    public void setQuarto(Quarto[] quarto) {
         this.quarto = quarto;
     }
 
