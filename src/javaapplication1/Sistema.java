@@ -2,6 +2,7 @@ package javaapplication1;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -61,9 +62,9 @@ public class Sistema {
         //assim o sistema retorna falso
         return false;
     }
-    //Os métodos eu optei por ser estático, pelo fato que é um método que é utilizado apenas no Sistema
-    //Método responsável por incluir Cliente,Funcionario ou Administrado na BD
     
+    //Os métodos eu optei por ser estático, pelo fato que é um método que é utilizado apenas no Sistema
+    //Método responsável por incluir Cliente BD
     public static List<Cliente> incluir(List<Cliente> listaCliente, Cliente cliente){
         //Uma lista que vai ser inserido os clientes
         //A classe vai ser instanciada no main e inserida como parametro.
@@ -72,7 +73,7 @@ public class Sistema {
             listaCliente.add(cliente);
             System.out.println("Cliente Adicionado.");
             return listaCliente;
-        }
+        }else{
         //Verificando se o cliente já existe na bd
         for(int i=0;i<listaCliente.size();i++){
             if(listaCliente.get(i).getCpf().equals(cliente.getCpf())){
@@ -86,8 +87,8 @@ public class Sistema {
         System.out.println("Cliente Adicionado.");
         return listaCliente;
     } 
-
-    //Método responsável por editar Cliente,Funcionario ou Administrado na BD
+}
+    //Método responsável por editar Cliente na BD
     public static List<Cliente> editar(List<Cliente> listaCliente, Cliente cliente) {
         //Recebendo lista de clientes
         //Essa linhja está dando erro, porque está inserindo duas vezes, mas está funcionando
@@ -95,7 +96,7 @@ public class Sistema {
         if (listaCliente.isEmpty()) {
             System.out.println("Cliente inexistente.");
             return listaCliente;
-        }
+        }else{
         for (int i = 0; i < listaCliente.size(); i++) {
             if (listaCliente.get(i).getCpf().equals(cliente.getCpf())) {
                 //Considerando que já tenha o cliente na base de dados.
@@ -108,8 +109,9 @@ public class Sistema {
         System.out.println("Cliente não encontrado.");
         return listaCliente;
     }
-
-    //Método responsável por editar Cliente,Funcionario ou Administrado na BD
+}
+    
+    //Método responsável por editar Cliente na BD
     public static List<Cliente> remover(List<Cliente> listaCliente, Cliente cliente) {
         
         //Eu poderia criar um método listaCliente e atribuir no lugar de incluir
@@ -117,7 +119,7 @@ public class Sistema {
         if (listaCliente.isEmpty()) {
             System.out.println("Cliente inexistente.");
             return listaCliente;
-        }
+        }else{
         //Verificando se o cliente já existe na bd
         for(int i=0;i<listaCliente.size();i++){
             if(listaCliente.get(i).getCpf().equals(cliente.getCpf())){
@@ -130,7 +132,7 @@ public class Sistema {
         System.out.println("Cliente inexistente.");
         return listaCliente;
     } 
-
+}
     //Métodos responsável por inserir funcionários na base de dados
     public static List incluir(List<Funcionario> Colaboradores,Funcionario func){
         //A classe vai ser instanciada no main e inserida como parametro.
@@ -139,7 +141,7 @@ public class Sistema {
             Colaboradores.add(func);
             System.out.println("Funcionário Adicionado.");
             return Colaboradores;
-        }
+        }else{
         //Verificando se o cliente já existe na bd
         for(int i=0;i<Colaboradores.size();i++){
             if(Colaboradores.get(i).getCpf().equals(func.getCpf())){
@@ -153,7 +155,8 @@ public class Sistema {
         System.out.println("Funcionário Adicionado.");
         return Colaboradores;
     } 
-
+}
+    
     //Método responsável por editar Cliente,Funcionario ou Administrado na BD
     public static List editar(List<Funcionario> Colaboradores,Funcionario func) {
         //Recebendo lista de funcionarios e editando
@@ -162,7 +165,7 @@ public class Sistema {
         if (Colaboradores.isEmpty()) {
             System.out.println("Funcionário inexistente.");
             return Colaboradores;
-        }
+        }else{
         for(int i=0;i<Colaboradores.size();i++){
             if(Colaboradores.get(i).getCpf().equals(func.getCpf())){
                 //Considerando que já tenha o cliente na base de dados.
@@ -172,8 +175,9 @@ public class Sistema {
                 return Colaboradores;
             }
         }
-        return Colaboradores;
     }
+        return Colaboradores;
+}
 
     //Método responsável por editar Cliente,Funcionario ou Administrado na BD
     public static List remover(List<Funcionario> Colaboradores,Funcionario func) {
@@ -183,7 +187,7 @@ public class Sistema {
         if (Colaboradores.isEmpty()) {
             System.out.println("Funcionário inexistente.");
             return Colaboradores;
-        }
+        }else{
         //Verificando se o cliente já existe na bd
         for(int i=0;i<Colaboradores.size();i++){
             if(Colaboradores.get(i).getCpf().equals(func.getCpf())){
@@ -193,41 +197,39 @@ public class Sistema {
                 return Colaboradores;
             }
         }
+    }
         return Colaboradores;
-    } 
+} 
     //Método responsável por verificar reserva e entregar quais quartos estão disponiveis
     public static boolean verificarReserva(List<Reserva> listaReserva, LocalDate data, String idQuarto){
-        //Para verificar a data é preciso da classe reserva
-        //Uma lista que vai armazenar a disponibilidade dos quartos e as datas
-        //Fazer verificacao da data e quarto na reserva
-        Reserva reserva1 = new Reserva();
-        
+        //Fazer verificacao da data e quarto na reserva.Para verificar a data é preciso da classe reserva
         if(listaReserva.isEmpty()){
                 System.out.println("\nExiste disponibilidade em todos os quartos.");
                 //Como a lista está vazia todos os quartos estao livres
                 return true;
         }else{
         //Loop que percorre a lista 
-        for(int i=0;i<listaReserva.size();i++){
-            //Verificando na lista de reserva se o quarto está disponível naquela data
-            if(listaReserva.get(i).getData().equals(reserva1.getData()) && listaReserva.get(i).equals(reserva1.getQuarto())){
-                System.out.println("O quarto " + reserva1.getQuarto() + " esta disponível na data " + reserva1.getData());
-                return true;
+        for(Reserva reserva : listaReserva){
+            //Verificando na lista de reserva se o quarto está disponível naquela data. As duas condicoes devem ser satisfeitas
+            if(reserva.getData().equals(reserva.getData()) && reserva.equals(reserva.getQuarto())){
+                System.out.println("O quarto " + reserva.getQuarto() + " não esta disponível na data " + reserva.getData());
+                return false;
             }else{
-                System.out.println("Por favor, tente outra data ou outro quarto. ");
+                System.out.println("O quarto tem disponibilidade nessa data ");
+                return true;
             }
         }
     }
         return true;
 }
     //Método responsável por receber data e comparar disponibilidade
-    public static List realizarReserva(List listaReserva,List diasReserva, Quarto quarto,Cliente cliente){
+    public static List realizarReserva(List<Reserva> listaReserva, Quarto quarto,Cliente cliente){
         // Aqui vai armazenar a reserva na lista de reserva e depois preencher os atributos da classe reserva
         
         Scanner sc = new Scanner(System.in);
         Reserva reserva = new Reserva();
 
-//        System.out.println("Informe o Id o quarto desejado Preço:Categoria: ");
+       //System.out.println("Informe o Id o quarto desejado Preço:Categoria: ");
         //Preenchendo os campos da reserva e do quarto
         quarto.setId(sc.nextLine());
         quarto.setOcupation(true);
@@ -238,10 +240,18 @@ public class Sistema {
         listaReserva.add(reserva);
         return listaReserva;
     }
+    
     //Após a reserva acontecer, esse método vai gerar um extrato.
+    //Preciso verificar se esse método está totalmente correto.
     public void gerarExtrato(){
+        Reserva reserva = new Reserva();
         //Nome do cliente, preco do quarto * quantidade de dias da reserva.
         //Uma data final e uma data inicial.
+        System.out.print("Reserva realizada com sucesso. ");
+        System.out.println("Nome: " + reserva.getCliente().getNome());
+        System.out.println("Data: " + reserva.getData());
+        System.out.println("Info Quarto: " + reserva.getQuarto().toString());
+
     }
       //Método responsável por ler dados da reserva 
     public static List<Reserva> lerReserva(List<Reserva> reserva,Cliente cliente) {
@@ -252,14 +262,15 @@ public class Sistema {
             return reserva;
         }else{
         //Um for para percorrer a agenda em busca do cpf do cliente com informações
+        //Posso está errado, mas dessa forma eu vejo que vai ser impresso todas as reserva do cliente
         for (int i=0;i<reserva.size();i++){
-            if(reserva.get(i).equals(cliente.getDataDesejada())){
+            if(reserva.get(i).equals(cliente.getCpf())){
                 System.out.print( reserva.get(i));
                 return reserva;
             }
         }   
         //De toda forma não encontrar, mostrar que o cliente não tem reserva naquele dia
-        System.out.println("Cliente sem reserva nessa data.");
+        System.out.println("Cliente sem reserva.");
         return reserva;
         }
     } 

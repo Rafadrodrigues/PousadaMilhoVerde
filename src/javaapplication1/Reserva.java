@@ -10,12 +10,10 @@ public class Reserva {
     //Occupation inicialmente recebe false para sinalizar que o quarto não esta ocupado
     //Data,quarto e cliente vão ser armazenados no calendario
     private LocalDate data;
-    private List calendario;
     private Quarto[] quarto ;
     private Cliente cliente;
     
     //Construtor para iniciar todos os estados da classe 
-
     public Reserva(LocalDate data,Quarto[] quarto) {
         this.data = data;
         this.quarto = quarto;
@@ -31,14 +29,6 @@ public class Reserva {
     public void setData(LocalDate data) {
         this.data = data;
     }
-//    public boolean isOcupation() {
-//        return ocupation;
-//    }
-//
-//    public void setOcupation(boolean ocupation) {
-//        this.ocupation = ocupation;
-//    }  
-
     public Quarto[] getQuarto() {
         return quarto;
     }
@@ -54,14 +44,6 @@ public class Reserva {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
-    public List getCalendario() {
-        return calendario;
-    }
-
-    public void setCalendario(List calendario) {
-        this.calendario = calendario;
-    }
     
     //Método que salva a data no calendario
     public void armazenaReserva(List listaReserva){
@@ -69,4 +51,9 @@ public class Reserva {
         List diasReserva = new ArrayList<>();
         
     }
+    @Override
+    public String toString() {
+        return "Reserva{" + "data=" + data + ", quarto=" + quarto + ", cliente=" + cliente + '}';
+    }
+    
 }

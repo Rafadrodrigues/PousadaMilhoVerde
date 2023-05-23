@@ -19,8 +19,6 @@ public class Cliente extends Pessoa {
         this.dataDesejada = dataDesejada;
         this.cartaoCredito = cartaoCredito;
         Cliente.numTotalCliente = Cliente.numTotalCliente + 1;
-    // Caracteristica da classe conta. numero cartao, cvv, data, nome.
-    //Saldo talvez pode ser retirado depois
     }
  
     public Cliente(String nome, String cpf, String endereco, String telefone,String email) {
