@@ -8,7 +8,7 @@ import java.util.List;
 public class Sistema {
     //Inicializando os 10 quaros da memória
 
-    private static final Quarto[] quartos = new Quarto[]{
+    private static  Quarto[] quartos = new Quarto[]{
             new Quarto("001",50,"Comun",false),
             new Quarto("002",50,"Comun",false),
             new Quarto("003",50,"Comun",false),
