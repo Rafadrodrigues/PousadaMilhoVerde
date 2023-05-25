@@ -27,6 +27,7 @@ public class PousadaMilhoVerde {
     List<Reserva> reserva = new ArrayList<>();
     
     //Pelo enunciado, talvez criar uma para os quartos
+<<<<<<< Updated upstream
     Quarto quarto = new Quarto("001", 50, "Comum",false);
     Cliente cliente1 = new Cliente("Rafael", "9830123", "Belo Horizonte", "339989021", "rafar@");
     Cliente cliente2 = new Cliente("Getulio", "9830123", "Diamantina", "8021983", "getjose@");
@@ -43,6 +44,23 @@ public class PousadaMilhoVerde {
     Bd.add(listaFuncionario());
     
 //    System.out.println(Bd);
+=======
+    
+    //Cliente cliente1 = new Cliente("Rafael", "9830123", "Belo Horizonte", "339989021", "rafar@");
+    //Cliente cliente2 = new Cliente("Getulio", "9830123", "Diamantina", "8021983", "getjose@");
+    //Cliente cliente3 = new Cliente("Dudu", "123.456.789-57", "Diamantina", "389982356", "Duduvisitante@");
+    Funcionario func = new Funcionario("@rafa919", "123023","atendente","Rafael","123456789","Diamantina","3399833","RafaDias@");
+    incluir(funcioario,func);
+    //incluir(listaClientes,cliente1);
+    //editar(listaClientes,cliente2);
+    //remover(listaClientes,cliente2);
+    
+     //Adicinando lista de clientes na base de dados
+    //Bd.add(listaClientes);
+    Bd.add(funcioario);
+     
+    System.out.println(Bd);
+>>>>>>> Stashed changes
     //Funcionando corretamente
     LocalDate data = LocalDate.of(2023, 5, 22);
     

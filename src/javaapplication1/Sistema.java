@@ -67,9 +67,13 @@ public class Sistema {
         return false;
     }
     
+<<<<<<< Updated upstream
     //Os métodos eu optei por ser estático, pelo fato que é um método que é utilizado apenas no Sistema
     //Método responsável por incluir Cliente BD
     public static List<Cliente> incluir(List<Cliente> listaCliente, Cliente cliente){
+=======
+    public static List incluir(List<Cliente> listaCliente, Cliente cliente){
+>>>>>>> Stashed changes
         //Uma lista que vai ser inserido os clientes
         //A classe vai ser instanciada no main e inserida como parametro.
         //Considerando que a lista esteja vazia,adicionamos um cliente
@@ -91,9 +95,15 @@ public class Sistema {
         System.out.println("Cliente Adicionado.");
         return listaCliente;
     } 
+<<<<<<< Updated upstream
 }
     //Método responsável por editar Cliente na BD
     public static List<Cliente> editar(List<Cliente> listaCliente, Cliente cliente) {
+=======
+
+    //Método responsável por editar Cliente,Funcionario ou Administrado na BD
+    public static List editar(List<Cliente> listaCliente, Cliente cliente) {
+>>>>>>> Stashed changes
         //Recebendo lista de clientes
         //Essa linhja está dando erro, porque está inserindo duas vezes, mas está funcionando
         
@@ -113,10 +123,16 @@ public class Sistema {
         System.out.println("Cliente não encontrado.");
         return listaCliente;
     }
+<<<<<<< Updated upstream
 }
     
     //Método responsável por editar Cliente na BD
     public static List<Cliente> remover(List<Cliente> listaCliente, Cliente cliente) {
+=======
+
+    //Método responsável por editar Cliente,Funcionario ou Administrado na BD
+    public static List remover(List<Cliente> listaCliente, Cliente cliente) {
+>>>>>>> Stashed changes
         
         //Eu poderia criar um método listaCliente e atribuir no lugar de incluir
         
