@@ -10,7 +10,8 @@ public class Cliente extends Pessoa {
     //Atributos da classe Cliente
     private LocalDate dataDesejada;
     private String cartaoCredito;
-    protected static int numTotalCliente = 0;
+    protected static int totalClienteProtec = 0;
+    private static int totalClientePrivate = 0;
     
     //Construtor da classe Cliente
     public Cliente(String nome, String cpf, String endereco, String telefone, 
@@ -18,12 +19,16 @@ public class Cliente extends Pessoa {
         super(nome, cpf, endereco, telefone, email);
         this.dataDesejada = dataDesejada;
         this.cartaoCredito = cartaoCredito;
-        Cliente.numTotalCliente = Cliente.numTotalCliente + 1;
+        //variáveis de classe (static) que irão armazenar quantas instâncias foram criadas dos tipos Cliente
+        Cliente.totalClienteProtec = Cliente.totalClienteProtec + 1;
+        Cliente.totalClientePrivate = Cliente.totalClientePrivate + 1;
     }
  
     public Cliente(String nome, String cpf, String endereco, String telefone,String email) {
         super(nome, cpf, endereco, telefone,email);
-        Cliente.numTotalCliente = Cliente.numTotalCliente + 1;
+//        variáveis de classe (static) que irão armazenar quantas instâncias foram criadas dos tipos Cliente
+        Cliente.totalClienteProtec = Cliente.totalClienteProtec + 1;
+        Cliente.totalClientePrivate = Cliente.totalClientePrivate + 1;
     }
  
     //Getters e setters correspondente aos atributos criados nessa classe.
@@ -44,12 +49,12 @@ public class Cliente extends Pessoa {
         this.cartaoCredito = cartaoCredito;
     }
 
-    public static int getNumTotalCliente() {
-        return Cliente.numTotalCliente;
+    public static int gettotalClientePrivate() {
+        return Cliente.totalClientePrivate;
     }
 
-    public static void setNumTotalCliente(int numTotalCliente) {
-        Cliente.numTotalCliente = numTotalCliente;
+    public static void setTotalClientePrivate(int totalClientePrivate) {
+        Cliente.totalClientePrivate = totalClientePrivate;
     }
     
     //Fornecendo informácões como String
