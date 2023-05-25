@@ -25,3 +25,4 @@ replay_pid*
 /build/
 src/javaapplication1/Agenda.java
 src/javaapplication1/Pessoa.java
+/dist/
