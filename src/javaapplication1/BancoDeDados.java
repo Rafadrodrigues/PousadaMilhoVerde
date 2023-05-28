@@ -8,7 +8,6 @@ import java.io.FileReader;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
 import org.json.simple.parser.ParseException;
 
 //Classe BD que vai armazenar os dadso
@@ -46,12 +45,6 @@ public class BancoDeDados {
                     e.printStackTrace();
             }
 	}
-
-    public void inserirCliente(String name, String cpf,String idade,
-        String endereco,String telefone,String conta){
-                JSONObject cliente = new JSONObject();
-    }
-
     public void inserirCliente(String name, String cpf,int idade,
         String endereco,int telefone,String conta){
         

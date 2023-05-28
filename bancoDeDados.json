@@ -1,0 +1,21 @@
+[ [ {
+  "nome" : "Dudu",
+  "cpf" : "123.456.789-57",
+  "endereco" : "Diamantina",
+  "email" : "Duduvisitante@",
+  "telefone" : "389982356",
+  "dataDesejada" : null,
+  "cartaoCredito" : null
+} ], [ {
+  "nome" : "Rafael",
+  "cpf" : "123456789",
+  "endereco" : "Diamantina",
+  "email" : "RafaDias@",
+  "telefone" : "3399833",
+  "dataDesejada" : null,
+  "cartaoCredito" : null,
+  "usuario" : "@rafa919",
+  "senha" : "123023",
+  "cargo" : "atendente",
+  "salario" : 0.0
+} ] ]

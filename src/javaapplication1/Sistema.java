@@ -1,5 +1,10 @@
 package javaapplication1;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,7 +53,7 @@ public class Sistema {
 
     }
 
-    public boolean FazerLogin(String user, String pin) {
+    public static void FazerLogin(String user, String pin) {
         //Lista de funcionarios;
         List<Funcionario> Colaboradores = listaFuncionario();
         //o for percorre a lista dos funcionarios
@@ -56,13 +61,10 @@ public class Sistema {
             if (user.equals(Colaboradores.get(i).getUsuario()) && pin.equals(Colaboradores.get(i).getSenha())) {
                 //se a senha e usuario bater com algum o login é feito
                 System.out.print("Sistema Liberado\n");
-                return true;
             }
         }
         //Se ao percorrer o for e não encontrar quer dizer que algum dos campos esta incorreto
         System.out.print("Acesso negado\n");
-        //assim o sistema retorna falso
-        return false;
     }
 
     public static List incluir(List<Cliente> listaCliente, Cliente cliente) {
@@ -278,7 +280,39 @@ public class Sistema {
             return reserva;
         }
     }
-    
+    //função responsavel por salvar os dados no arquivo json 
+    //recebe como parametro uma lista de Objetos contendo todas as dados de cliente, funcionario e reservas
+    public static void salvarDados(List<Object> dados){
+        // Criar um ObjectMapper do Jackson
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        try {
+            // Serializar a lista de objetos em um arquivo JSON
+            objectMapper.writeValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\bancoDeDados.json"), dados);
+            System.out.println("Arquivo JSON criado com sucesso.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    //
+    public static List carregarDados(){
+     ObjectMapper objectMapper = new ObjectMapper();
+     
+        try {
+            // Ler o arquivo JSON e converter para uma lista de objetos
+            List<Object> listaObjetos = objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\bancoDeDados.json"),
+                    new TypeReference<List<Object>>() {});
+            
+            //retorna uma lista com os dados do arquivo
+            return listaObjetos;
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //caso não consiga ler não retorna nada
+        return null;
+    }
     //Metodo responsavel por retornar o numero de Instancias das classes Cliente e reserva
     public static void numInstancias(){
         int numClienteProtec = Cliente.totalClienteProtec;
