@@ -1,6 +1,7 @@
 package javaapplication1;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class Funcionario extends Cliente {
@@ -12,6 +13,9 @@ public class Funcionario extends Cliente {
     private float salario;
     
     //Construtor da classe Funcionario
+    public Funcionario(){
+        super();
+    }
     public Funcionario(String usuario, String senha, String cargo, 
         String nome, String cpf, String endereco, String telefone,String email) {
         super(nome, cpf, endereco, telefone,email);
@@ -51,7 +55,27 @@ public class Funcionario extends Cliente {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
-
+    public static Funcionario criarFuncionario(){
+        Scanner cin = new Scanner(System.in);
+        Funcionario funcionario = new Funcionario();
+                System.out.println("Nome");
+                funcionario.setNome(cin.nextLine());
+                System.out.println("CPF");
+                funcionario.setCpf(cin.nextLine());
+                System.out.println("endereco");
+                funcionario.setEndereco(cin.nextLine());
+                System.out.println("Telefone");
+                funcionario.setTelefone(cin.nextLine());
+                System.out.println("E-mail");
+                funcionario.setEmail(cin.nextLine());
+                System.out.println("Usuario");
+                funcionario.setUsuario(cin.nextLine());
+                System.out.println("Senha");
+                funcionario.setSenha(cin.nextLine());
+                System.out.println("Cargo");
+                funcionario.setCargo(cin.nextLine());
+        return funcionario;
+    }
     @Override
     public String toString() {
         return super.toString() + "Funcionario{" + "usuario=" + usuario + ", senha=" + senha + ", cargo=" + cargo + ", salario=" + salario + '}';

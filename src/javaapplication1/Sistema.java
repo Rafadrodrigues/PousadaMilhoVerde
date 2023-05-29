@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -36,21 +35,11 @@ public class Sistema {
         Sistema.quartos = quartos;
     }
 
-    //cria lista de funcionarios
-    //Se a lista de cliente estiver funcionando correto, dá para fazer a de funcionário igual
-    public static List listaFuncionario() {
+    //Lê a lista de funcionarios do Json para pegar as senhas
+    private static List listaFuncionario() {
         List<Funcionario> Colaboradores = new ArrayList<>();
-//        Funcionario func = new Funcionario("@rafa919", "123023", "Atendente",
-//                "Rafael", "9830123", "Diamantina", "339989021", "rafar@");
-//        //Precisa fazer o mesmo para a classe adm que vai ser criada
-//        Administrador adm = new Administrador("@getulio123", "312083", "Adm",
-//                "Getulio", "2113123", "Diamantina", "8021983", "getjose@");
-//
-//        //salvar os objetos na lista;
-//        Colaboradores.add(func);
-//        Colaboradores.add(adm);
+        Colaboradores = Sistema.carregarDadosFuncionarios("Funcionarios.json");
         return Colaboradores;
-
     }
 
     public static void FazerLogin(String user, String pin) {
@@ -61,10 +50,11 @@ public class Sistema {
             if (user.equals(Colaboradores.get(i).getUsuario()) && pin.equals(Colaboradores.get(i).getSenha())) {
                 //se a senha e usuario bater com algum o login é feito
                 System.out.print("Sistema Liberado\n");
+                Sistema.executar(Colaboradores.get(i));
             }
         }
         //Se ao percorrer o for e não encontrar quer dizer que algum dos campos esta incorreto
-        System.out.print("Acesso negado\n");
+        System.out.print("Seção incerrada\n");
     }
 
     public static List incluir(List<Cliente> listaCliente, Cliente cliente) {
@@ -280,44 +270,192 @@ public class Sistema {
             return reserva;
         }
     }
-    //função responsavel por salvar os dados no arquivo json 
-    //recebe como parametro uma lista de Objetos contendo todas as dados de cliente, funcionario e reservas
-    public static void salvarDados(List<Object> dados){
+    //FUNÇÃO QUE SALVA OS DADOS DE UMA LISTA EM ARQUIVO JASON
+
+    public static void salvarDados(List<?> dados, String nomeArquivo) {
         // Criar um ObjectMapper do Jackson
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
         try {
             // Serializar a lista de objetos em um arquivo JSON
-            objectMapper.writeValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\bancoDeDados.json"), dados);
+            objectMapper.writeValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo), dados);
             System.out.println("Arquivo JSON criado com sucesso.");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    //
-    public static List carregarDados(){
-     ObjectMapper objectMapper = new ObjectMapper();
-     
+
+    //FUNÇÃO RESPONSAVEL POR LER O ARQUIVO JSON E RETORNA UMA LISTA COM OS VALORES CONTIDOS NELE
+    public static List<Cliente> carregarDadosClientes(String nomeArquivo) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
         try {
-            // Ler o arquivo JSON e converter para uma lista de objetos
-            List<Object> listaObjetos = objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\bancoDeDados.json"),
-                    new TypeReference<List<Object>>() {});
-            
-            //retorna uma lista com os dados do arquivo
-            return listaObjetos;
-            
+            // Ler o arquivo JSON e converter para uma lista de objetos da classe Cliente
+            List<Cliente> listaClientes = objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
+                    new TypeReference<List<Cliente>>() {
+            });
+
+            // Retorna a lista com os dados do arquivo
+            return listaClientes;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //caso não consiga ler não retorna nada
+        // Caso não consiga ler, retorna null
         return null;
     }
+
+    //FUNÇÃO RESPONSAVEL POR LER O ARQUIVO JSON E RETORNA UMA LISTA COM OS VALORES CONTIDOS NELE
+    public static List<Funcionario> carregarDadosFuncionarios(String nomeArquivo) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            // Ler o arquivo JSON e converter para uma lista de objetos da classe Cliente
+            List<Funcionario> listaFuncionario = objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
+                    new TypeReference<List<Funcionario>>() {
+            });
+
+            // Retorna a lista com os dados do arquivo
+            return listaFuncionario;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Caso não consiga ler, retorna null
+        return null;
+    }
+    //FUNÇÃO RESPONSAVEL POR LER O ARQUIVO JSON E RETORNA UMA LISTA COM OS VALORES CONTIDOS NELE
+
+    public static List<Reserva> carregarDadosReserva(String nomeArquivo) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            // Ler o arquivo JSON e converter para uma lista de objetos da classe Cliente
+            List<Reserva> listaReserva = objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
+                    new TypeReference<List<Reserva>>() {
+            });
+
+            // Retorna a lista com os dados do arquivo
+            return listaReserva;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Caso não consiga ler, retorna null
+        return null;
+    }
+
     //Metodo responsavel por retornar o numero de Instancias das classes Cliente e reserva
-    public static void numInstancias(){
+    public static void numInstancias() {
         int numClienteProtec = Cliente.totalClienteProtec;
         int numClientePrivate = Cliente.gettotalClientePrivate();
         int numReserva = Reserva.getTotalReservas();
-        System.out.print("Numeros de instancias da classe pessoa "+numClientePrivate+" ,e da classe reserva sao "+numReserva+"\n");
+        System.out.print("Numeros de instancias da classe pessoa " + numClientePrivate + " ,e da classe reserva sao " + numReserva + "\n");
+    }
+
+    //uma função privada para ser chamada apenas se o login for certo;
+    private static void executar(Object usuarioAtual) {
+        Scanner cin = new Scanner(System.in);
+        int opcao;
+        System.out.println("Seja bem vindo ao sistema da pousada Milho Verde.\n Oque deseja fazer?");
+        do {
+            System.out.println("1)CRUD Cliente\t 2)Gerenciar Funcionarios\t 3)Agenda\t 4)Reserva \t 5)Despesas \t -1 para sair");
+            opcao = cin.nextInt();
+            switch (opcao) {
+                case 1:
+                    System.out.println("Opção 1 selecionada.");
+                    Sistema.crudCliente();
+                    break;
+                case 2:
+                    System.out.println("Opção 2 selecionada.");
+                   // if(usuarioAtual instanceof Administrador){
+                         Sistema.gerenciarFuncionarios();
+                   // }else{ System.out.println("voce não tem acesso para essa opção");}
+                    break;
+                case 3:
+                    System.out.println("Opção 3 selecionada.");
+                    // Ação para a opção 3
+                    break;
+                case 4:
+                    System.out.println("Opção 4 selecionada.");
+                    // Ação para a opção 3
+                    break;
+                case 5:
+                    System.out.println("Opção 5 selecionada.");
+                    System.out.println("Ainda nao fiz nada aqui :(");
+                    break;
+                case -1:
+                    System.out.println("Opção de sair selecionada.");
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    // Ação para opções inválidas
+                    break;
+
+            }
+            System.out.println("-------------Oque deseja fazer agora?-----------------------");
+        } while (opcao != -1);
+    }
+
+    private static void crudCliente() {
+        Scanner cin = new Scanner(System.in);
+        //Lista de clientes para receber os dados do arquivo e poder mexer
+        ArrayList<Cliente> listaClientes = new ArrayList<>();
+        listaClientes = (ArrayList<Cliente>) Sistema.carregarDadosClientes("Clientes.json");
+        System.out.println("Opção CRUD Cliente.\n Oque deseja fazer?");
+        System.out.println("1)Adicionar Cliente\t 2)Remover Cliente \t 3)Editar Cliente");
+        int opcao = cin.nextInt();
+        switch (opcao) {
+            case 1:
+                System.out.println("Opção 1 selecionada.");
+                Cliente cliente = Cliente.criarCliente();
+                Sistema.incluir(listaClientes, cliente);
+                break;
+            case 2:
+                System.out.println("Opção 2 selecionada.");
+                System.out.println("Informa o CPF do cliente");
+                String cpf = cin.next();
+                Cliente cliente2 = new Cliente();
+                cliente2.setCpf(cpf);
+                listaClientes = (ArrayList<Cliente>) Sistema.remover(listaClientes, cliente2);
+                break;
+            case 3:
+                System.out.println("Opção 3 selecionada.");
+                System.out.println("Informe os novos dados do cliente(por favor preencha todos os campos corretamente)");
+                Cliente cliente3 = Cliente.criarCliente();
+                Sistema.editar(listaClientes, cliente3);
+                break;
+        }
+        Sistema.salvarDados(listaClientes, "Clientes.json");
+    }
+    private static void gerenciarFuncionarios() {
+        Scanner cin = new Scanner(System.in);
+        //Lista de clientes para receber os dados do arquivo e poder mexer
+        ArrayList<Funcionario> listaFuncionarios= new ArrayList<>();
+        listaFuncionarios = (ArrayList<Funcionario>) Sistema.carregarDadosFuncionarios("Funcionarios.json");
+        System.out.println("Opção GERENCIAR FUNCIONARIO .\n Oque deseja fazer?");
+        System.out.println("1)Adicionar funcionario\t 2)Remover funcionario \t 3)Editar funcionario");
+        int opcao = cin.nextInt();
+        switch (opcao) {
+            case 1:
+                System.out.println("Opção 1 selecionada.");
+                Funcionario func = Funcionario.criarFuncionario();
+                Sistema.incluir(listaFuncionarios, func);
+                break;
+            case 2:
+                System.out.println("Opção 2 selecionada.");
+                System.out.println("Informa o CPF do Funcionario");
+                String cpf = cin.next();
+                Funcionario func2 = new Funcionario();
+                func2.setCpf(cpf);
+                listaFuncionarios = (ArrayList<Funcionario>) Sistema.remover(listaFuncionarios, func2);
+                break;
+            case 3:
+                System.out.println("Opção 3 selecionada.");
+                System.out.println("Informe os novos dados do Funcionario(por favor preencha todos os campos corretamente)");
+                Funcionario func3 = Funcionario.criarFuncionario();
+                Sistema.editar(listaFuncionarios, func3);
+                break;
+        }
+        Sistema.salvarDados(listaFuncionarios, "Funcionarios.json");
+        
     }
 }

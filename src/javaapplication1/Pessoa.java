@@ -9,6 +9,9 @@ public abstract class Pessoa {
     private String telefone;
 
     //Construtor da classe Pessoa
+    public Pessoa(){
+        
+    }
     public Pessoa(String nome, String cpf, String endereco, String telefone,String email) {
         this.nome = nome;
         this.cpf = cpf;

@@ -12,7 +12,9 @@ public class Cliente extends Pessoa {
     private String cartaoCredito;
     protected static int totalClienteProtec = 0;
     private static int totalClientePrivate = 0;
-    
+    public Cliente(){
+        super ();
+    }
     //Construtor da classe Cliente
     public Cliente(String nome, String cpf, String endereco, String telefone, 
         String email, LocalDate dataDesejada,String horarioDesejado,String cartaoCredito) {
@@ -86,6 +88,21 @@ public class Cliente extends Pessoa {
         listaCancelamento.add("Data: " + this.dataDesejada);
         
         return listaCancelamento;
+    }
+    public static Cliente criarCliente(){
+        Scanner cin = new Scanner(System.in);
+        Cliente cliente = new Cliente();
+                System.out.println("Nome");
+                cliente.setNome(cin.nextLine());
+                System.out.println("CPF");
+                cliente.setCpf(cin.nextLine());
+                System.out.println("endereco");
+                cliente.setEndereco(cin.nextLine());
+                System.out.println("Telefone");
+                cliente.setTelefone(cin.nextLine());
+                System.out.println("E-mail");
+                cliente.setEmail(cin.nextLine());
+        return cliente;
     }
     //Método responsável por confirmar o cancelamento, talvez, trocar o tipo
     public boolean aceitarCancelamento(boolean proposta){
