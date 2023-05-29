@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe Reserva, nela estão contidas informações sobre a reservas da Pousada
+ * Milho Verde
+ * @author rafar
+ */
 public class Reserva {
     
     //Atributos da classe agenda, alguns podem ser retirados posteriormente.

@@ -2,13 +2,20 @@ package javaapplication1;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import org.json.simple.JSONArray;
-import org.json.simple.parser.ParseException;
 
+//import org.json.simple.JSONArray;;
+//import org.json.simple.parser.ParseException;;
+
+/**
+ * Classe Pousada Milho Verde e vai ser responsável por executar nossos arquivos,
+ * ela é o arquivo main do nosso programa.
+ * @author rafar
+ */
 public class PousadaMilhoVerde {
 
     public static void main(String[] args) throws IOException, ParseException {
@@ -17,11 +24,19 @@ public class PousadaMilhoVerde {
 //        List<Administrador> Colaboradores = new ArrayList<>();
 //        Colaboradores.add(adm);
 //        Sistema.salvarDados(Colaboradores, "Funcionarios.json");
-         Scanner cin = new Scanner(System.in);
-          System.out.println("Informe o seu usuario e senha");
-          String user = cin.next();
-          String pin = cin.next();
+          Funcionario func = new Funcionario();
+          
+        Scanner cin = new Scanner(System.in);
+        System.out.println("Informe o seu usuario e senha");
+        System.out.print("Usuario: ");
+        String user = cin.next();
+        System.out.print("Senha: ");
+        String pin = cin.next();
 
-        Sistema.FazerLogin(user, pin);
+        boolean login = Sistema.FazerLogin(user, pin);
+        
+        if(login){
+            Sistema.executar(func);
+        }
     }
 }

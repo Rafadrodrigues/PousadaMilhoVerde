@@ -1,5 +1,8 @@
 package javaapplication1;
-
+/**
+ * Classe login é uma classe responsável por logar o usuário ao sistema.
+ * @author rafar
+ */
 public class Login {
     
     //Atributos da classe Login
@@ -41,6 +44,7 @@ public class Login {
             return false;
      }
   }
+    //Método acionado para o usuário desconectar do sistema
     public boolean logout(){
         return false;
     }

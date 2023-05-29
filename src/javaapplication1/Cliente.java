@@ -4,7 +4,13 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
+import javaapplication1.Pessoa;
 
+/**
+ * Classe Cliente é uma subclasse da superclasse Pessoa.Tem o papel de representar
+ * um cliente da Pousada Milho verde.
+ * @author rafar
+ */
 public class Cliente extends Pessoa {
 
     //Atributos da classe Cliente
@@ -26,6 +32,15 @@ public class Cliente extends Pessoa {
         Cliente.totalClientePrivate = Cliente.totalClientePrivate + 1;
     }
  
+    /**
+     * Esse construtor foi criado com o intuito de fornecer apenas alguns atributos 
+     * específicos para a classe
+     * @param nome
+     * @param cpf
+     * @param endereco
+     * @param telefone
+     * @param email 
+     */
     public Cliente(String nome, String cpf, String endereco, String telefone,String email) {
         super(nome, cpf, endereco, telefone,email);
 //        variáveis de classe (static) que irão armazenar quantas instâncias foram criadas dos tipos Cliente
@@ -66,6 +81,11 @@ public class Cliente extends Pessoa {
     }
     //Método que fornece os dados do cliente
     //Método responsável por solicitar reserva
+    /**
+     * Método representa o cliente solicitando uma reserva 
+     * @param dataDesejada
+     * @return 
+     */
     public LocalDate solicitarReserva(LocalDate dataDesejada){
         System.out.print("Olá,gostaria solicitar uma reserva no dia " + this.dataDesejada);
         return dataDesejada = this.dataDesejada;
@@ -89,6 +109,10 @@ public class Cliente extends Pessoa {
         
         return listaCancelamento;
     }
+    /**
+     * Esse método preenche as informções solicitadas do cliente e retorna 
+     * @return 
+     */
     public static Cliente criarCliente(){
         Scanner cin = new Scanner(System.in);
         Cliente cliente = new Cliente();

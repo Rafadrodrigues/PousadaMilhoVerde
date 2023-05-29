@@ -1,6 +1,11 @@
 
 package javaapplication1;
 
+/**
+ * Classe conta, é uma classe que corresponde as conta bancária do cliente, ela 
+ * tem o papel de preencher informações bancárias do Cliente.
+ * @author rafar
+ */
 public class Conta {
 
     private int agencia;

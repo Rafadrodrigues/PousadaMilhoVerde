@@ -1,5 +1,10 @@
 package javaapplication1;
 
+/**
+ * Classe Quarto, nessa estão contida algumas características do quarto e suas
+ * opções.
+ * @author rafar
+ */
 public class Quarto {
     
     private String id;

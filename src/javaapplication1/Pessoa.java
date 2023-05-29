@@ -1,6 +1,9 @@
 package javaapplication1;
 
-//Classe abstrata responsável por pela geração de futuras heranças
+/**
+ * Classe abstrata e super classe da classe Cliente,Funcionário e Administrador
+ * @author rafar
+ */
 public abstract class Pessoa {
     private String nome;
     private String cpf;

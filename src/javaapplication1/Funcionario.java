@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+/**
+ * Classe Funcionário é uma subclasse da Classe Cliente. Ela é responsável por 
+ * representar o funcionário da Pousada Milho Verde com suas funcionalidades e características
+ * @author rafar
+ */
 public class Funcionario extends Cliente {
     
     //Atributos da classe Funcionario
@@ -93,4 +98,16 @@ public class Funcionario extends Cliente {
         sistema.realizarReserva(data,super.getCartaoCredito());
 
     }*/
+    //Métodos que constituem um funcionário da pousada e serão incremetandos na segunda parte do TP
+    public void solicitarCancelamento(LocalDate data, String idQuarto){
+    }
+    public void realizarReserva(LocalDate data, String idQuarto){
+    }
+    public void lancarDiaria(){
+    }
+    public void crudCliente(){
+    }
+    
+
+
 }
