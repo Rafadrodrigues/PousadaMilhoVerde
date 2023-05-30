@@ -350,7 +350,7 @@ public class Sistema {
 
         try {
             // Serializar a lista de objetos em um arquivo JSON
-            objectMapper.writeValue(new File("C:\\Users\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo), dados);
+            objectMapper.writeValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo), dados);
             System.out.println("Arquivo JSON criado com sucesso.");
         } catch (IOException e) {
             e.printStackTrace();
@@ -367,7 +367,7 @@ public class Sistema {
 
         try {
             // Ler o arquivo JSON e converter para uma lista de objetos da classe Cliente
-            List<Cliente> listaClientes = objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
+            List<Cliente> listaClientes = objectMapper.readValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
                     new TypeReference<List<Cliente>>() {
             });
 
@@ -391,7 +391,7 @@ public class Sistema {
 
         try {
             // Ler o arquivo JSON e converter para uma lista de objetos da classe Cliente
-            List<Funcionario> listaFuncionario = objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
+            List<Funcionario> listaFuncionario = objectMapper.readValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
                     new TypeReference<List<Funcionario>>() {
             });
 
@@ -415,7 +415,7 @@ public class Sistema {
 
         try {
             // Ler o arquivo JSON e converter para uma lista de objetos da classe Cliente
-            List<Reserva> listaReserva = objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
+            List<Reserva> listaReserva = objectMapper.readValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
                     new TypeReference<List<Reserva>>() {
             });
 
@@ -446,7 +446,7 @@ public class Sistema {
      */
     //uma função privada para ser chamada apenas se o login for certo;
     public static void executar(Object usuarioAtual) {
-        Scanner cin = new Scanner(System.in);
+        Scanner cin = new Scanner(System.in,"ISO-8859-1");
         int opcao;
         System.out.println("Seja bem vindo ao sistema da pousada Milho Verde.\n Oque deseja fazer?");
         do {
@@ -493,7 +493,7 @@ public class Sistema {
      * e te por finalidade, realizar o crud do cliente na base de dados(arquivo JSON)
      */
     private static void crudCliente() {
-        Scanner cin = new Scanner(System.in);
+        Scanner cin = new Scanner(System.in,"ISO-8859-1");
         //Lista de clientes para receber os dados do arquivo e poder mexer
         ArrayList<Cliente> listaClientes = new ArrayList<>();
         listaClientes = (ArrayList<Cliente>) Sistema.carregarDadosClientes("Clientes.json");
@@ -528,7 +528,7 @@ public class Sistema {
      * funcionários, ou seja, adicionar, remover ou editar funcionário
      */
     private static void gerenciarFuncionarios() {
-        Scanner cin = new Scanner(System.in);
+        Scanner cin = new Scanner(System.in,"ISO-8859-1");
         //Lista de clientes para receber os dados do arquivo e poder mexer
         ArrayList<Funcionario> listaFuncionarios= new ArrayList<>();
         listaFuncionarios = (ArrayList<Funcionario>) Sistema.carregarDadosFuncionarios("Funcionarios.json");

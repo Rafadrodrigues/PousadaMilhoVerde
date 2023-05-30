@@ -22,4 +22,16 @@
   "senha" : "123023",
   "cargo" : "recepcionista",
   "salario" : 0.0
+}, {
+  "nome" : "lknkln",
+  "cpf" : "jklj",
+  "endereco" : "nlknl]",
+  "email" : "nklnkn",
+  "telefone" : "klnkln",
+  "dataDesejada" : null,
+  "cartaoCredito" : null,
+  "usuario" : "knlnkl",
+  "senha" : "lknlknl",
+  "cargo" : "klnklnlk",
+  "salario" : 0.0
 } ]
