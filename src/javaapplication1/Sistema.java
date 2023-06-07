@@ -367,7 +367,8 @@ public class Sistema {
 
         try {
             // Ler o arquivo JSON e converter para uma lista de objetos da classe Cliente
-            List<Cliente> listaClientes = objectMapper.readValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
+            //List<Cliente> listaClientes = objectMapper.readValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
+            List<Cliente> listaClientes = objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
                     new TypeReference<List<Cliente>>() {
             });
 
@@ -391,8 +392,9 @@ public class Sistema {
 
         try {
             // Ler o arquivo JSON e converter para uma lista de objetos da classe Cliente
-            List<Funcionario> listaFuncionario = objectMapper.readValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
-                    new TypeReference<List<Funcionario>>() {
+           // List<Funcionario> listaFuncionario = objectMapper.readValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
+           List<Funcionario> listaFuncionario = objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
+           new TypeReference<List<Funcionario>>() {
             });
 
             // Retorna a lista com os dados do arquivo
@@ -415,7 +417,8 @@ public class Sistema {
 
         try {
             // Ler o arquivo JSON e converter para uma lista de objetos da classe Cliente
-            List<Reserva> listaReserva = objectMapper.readValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
+            //List<Reserva> listaReserva = objectMapper.readValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
+            List<Reserva> listaReserva = objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
                     new TypeReference<List<Reserva>>() {
             });
 
@@ -520,6 +523,10 @@ public class Sistema {
                 Cliente cliente3 = Cliente.criarCliente();
                 Sistema.editar(listaClientes, cliente3);
                 break;
+            default:
+                    System.out.println("Opção inválida.");
+                    // Ação para opções inválidas
+                    break;
         }
         Sistema.salvarDados(listaClientes, "Clientes.json");
     }
@@ -555,6 +562,10 @@ public class Sistema {
                 Funcionario func3 = Funcionario.criarFuncionario();
                 Sistema.editar(listaFuncionarios, func3);
                 break;
+            default:
+                    System.out.println("Opção inválida.");
+                    // Ação para opções inválidas
+                    break;
         }
         Sistema.salvarDados(listaFuncionarios, "Funcionarios.json");
         
