@@ -7,15 +7,11 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-<<<<<<< Updated upstream
-=======
 import java.util.Arrays;
 import java.util.Collections;
->>>>>>> Stashed changes
 import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
 import java.util.Comparator;
+import java.util.Scanner;
 
 /**
  * Clase Sistema, classe responsável por gerenciar as informações entre o Banco de
@@ -77,7 +73,6 @@ public class Sistema {
         return true;
     }
 
-<<<<<<< Updated upstream
     /**
      * Esse método inseri informações dos clientes na base de dados da pousada
      * @param listaCliente
@@ -85,13 +80,9 @@ public class Sistema {
      * @return 
      */
      //Método que inclui um cliente na base de dados
-    public static List incluir(List<Cliente> listaCliente, Cliente cliente) {
-        //Uma lista que vai ser inserido os clientes
-=======
     public static <T> List<T> incluir(List<T> lista, T usuario, Comparator<T> comparator) {
         //Uma lista que vai ser inserido os usuarios
         //A classe vai ser instanciada no main e inserida como parametro.
->>>>>>> Stashed changes
         
         //Considerando que a lista esteja vazia,adicionamos um cliente
         if (lista.isEmpty()) {
@@ -115,14 +106,12 @@ public class Sistema {
             return lista;
         }
     }
-<<<<<<< Updated upstream
     /**
      * Esse método editar as informações contida dos clientes na base de dados
      * @param listaCliente
      * @param cliente
      * @return 
      */
-=======
     
     //IMPORTANTE OLHAR 
 //    Tem esse exemplo que o Chatgpt forneceu e eu achei interessante também
@@ -137,7 +126,6 @@ public class Sistema {
 //}
     
     //Deixa eu pensar, funcionario, cliente e adm, ambos tem CPF e todos são pessoa
->>>>>>> Stashed changes
     //Método responsável por editar Cliente,Funcionario ou Administrado na BD
     public static <T> List<T> editar(List<T> lista, T usuario, Comparator<T> comparator) {
         //Recebendo lista de clientes
@@ -185,97 +173,12 @@ public class Sistema {
             return lista;
         }
     }
-<<<<<<< Updated upstream
     /**
      * Esse método inseri funcionários na base de dados
      * @param Colaboradores
      * @param func
      * @return 
      */
-    //Métodos responsável por inserir funcionários na base de dados
-    public static List incluir(List<Funcionario> Colaboradores, Funcionario func) {
-        //A classe vai ser instanciada no main e inserida como parametro.
-        //Considerando que a lista esteja vazia,adicionamos um cliente
-        if (Colaboradores.isEmpty()) {
-            Colaboradores.add(func);
-            System.out.println("Funcionário Adicionado.");
-            return Colaboradores;
-        } else {
-            //Verificando se o cliente já existe na bd
-            for (int i = 0; i < Colaboradores.size(); i++) {
-                if (Colaboradores.get(i).getCpf().equals(func.getCpf())) {
-                    //Considerando que já tenha o cliente na base de dados.
-                    System.out.println("Funcionário já existente.");
-                    return Colaboradores;
-                }
-            }
-            //Caso a lista não esteja vazia e não exista aquele cliente, insira na base de dados
-            Colaboradores.add(func);
-            System.out.println("Funcionário Adicionado.");
-            return Colaboradores;
-        }
-    }
-    //Método que vai editar dado de algum funcionáro na base de dados
-    //Método responsável por editar Cliente,Funcionario ou Administrado na BD
-    public static List editar(List<Funcionario> Colaboradores, Funcionario func) {
-        //Recebendo lista de funcionarios e editando
-        //Essa linhja está dando erro, porque está inserindo duas vezes, mas está funcionando
-
-        if (Colaboradores.isEmpty()) {
-            System.out.println("Funcionário inexistente.");
-            return Colaboradores;
-        } else {
-            for (int i = 0; i < Colaboradores.size(); i++) {
-                if (Colaboradores.get(i).getCpf().equals(func.getCpf())) {
-                    //Considerando que já tenha o cliente na base de dados.
-                    //Preciso verificar o método replace, pode ser mais adequado
-                    Colaboradores.set(i, func);
-                    System.out.println("Funcionário editado.");
-                    return Colaboradores;
-                }
-            }
-        }
-        return Colaboradores;
-    }
-    
-    /**
-     * Esse método remove algum funcionário na base de dados de acordo o identificador
-     * fornecido
-     * @param Colaboradores
-     * @param func
-     * @return 
-     */
-    //Método responsável por editar Cliente,Funcionario ou Administrado na BD
-    public static List remover(List<Funcionario> Colaboradores, Funcionario func) {
-
-        //Eu poderia criar um método listaCliente e atribuir no lugar de incluir
-        if (Colaboradores.isEmpty()) {
-            System.out.println("Funcionário inexistente.");
-            return Colaboradores;
-        } else {
-            //Verificando se o cliente já existe na bd
-            for (int i = 0; i < Colaboradores.size(); i++) {
-                if (Colaboradores.get(i).getCpf().equals(func.getCpf())) {
-                    //Considerando que já tenha o cliente na base de dados.
-                    Colaboradores.remove(i);
-                    System.out.println("Funcionário removido.");
-                    return Colaboradores;
-                }
-            }
-        }
-        return Colaboradores;
-    }
-    /**
-     * Método que vai realizar a verificação da reserva na base de dados, ela antecede
-     * a realização de alguma reserva que vai ser realizada
-     * @param listaReserva
-     * @param data
-     * @param idQuarto
-     * @return 
-     */
-=======
-
->>>>>>> Stashed changes
     //Método responsável por verificar reserva e entregar quais quartos estão disponiveis
     public static boolean verificarReserva(List<Reserva> listaReserva, LocalDate data, String idQuarto) {
         //Fazer verificacao da data e quarto na reserva.Para verificar a data é preciso da classe reserva
