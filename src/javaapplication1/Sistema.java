@@ -7,9 +7,15 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+<<<<<<< Updated upstream
+=======
+import java.util.Arrays;
+import java.util.Collections;
+>>>>>>> Stashed changes
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.Comparator;
 
 /**
  * Clase Sistema, classe responsável por gerenciar as informações entre o Banco de
@@ -19,7 +25,6 @@ import java.util.Scanner;
  */
 public class Sistema {
     //Inicializando os 10 quaros da memória
-
     private static Quarto[] quartos = new Quarto[]{
         new Quarto("001", 50, "Comun", false),
         new Quarto("002", 50, "Comun", false),
@@ -72,6 +77,7 @@ public class Sistema {
         return true;
     }
 
+<<<<<<< Updated upstream
     /**
      * Esse método inseri informações dos clientes na base de dados da pousada
      * @param listaCliente
@@ -81,55 +87,76 @@ public class Sistema {
      //Método que inclui um cliente na base de dados
     public static List incluir(List<Cliente> listaCliente, Cliente cliente) {
         //Uma lista que vai ser inserido os clientes
+=======
+    public static <T> List<T> incluir(List<T> lista, T usuario, Comparator<T> comparator) {
+        //Uma lista que vai ser inserido os usuarios
+        //A classe vai ser instanciada no main e inserida como parametro.
+>>>>>>> Stashed changes
         
         //Considerando que a lista esteja vazia,adicionamos um cliente
-        if (listaCliente.isEmpty()) {
-            listaCliente.add(cliente);
-            System.out.println("Cliente Adicionado.");
-            return listaCliente;
+        if (lista.isEmpty()) {
+            lista.add(usuario);
+            System.out.println("Usuario adicionado.");
+            return lista;
         } else {
-            //Verificando se o cliente já existe na bd
-            for (int i = 0; i < listaCliente.size(); i++) {
-                if (listaCliente.get(i).getCpf().equals(cliente.getCpf())) {
+            //Verificando se o usuario já existe na bd
+            //Tem uma forma melhor de fazer esse código que é utilizando o comparator, tenho que olhar como
+            for (T item : lista) {
+        //Caso os elementos que estão sendo comparados sejam iguais ele será igual a 0, assim usuario existente
+                if (comparator.compare(item, usuario) == 0) {
                     //Considerando que já tenha o cliente na base de dados.
-                    System.out.println("Cliente já existente.");
-                    return listaCliente;
+                    System.out.println("Usuario já existente.");
+                    return lista;
                 }
             }
             //Caso a lista não esteja vazia e não exista aquele cliente, insira na base de dados
-            listaCliente.add(cliente);
-            System.out.println("Cliente Adicionado.");
-            return listaCliente;
+            lista.add(usuario);
+            System.out.println("Usuario adicionado.");
+            return lista;
         }
     }
+<<<<<<< Updated upstream
     /**
      * Esse método editar as informações contida dos clientes na base de dados
      * @param listaCliente
      * @param cliente
      * @return 
      */
+=======
+    
+    //IMPORTANTE OLHAR 
+//    Tem esse exemplo que o Chatgpt forneceu e eu achei interessante também
+//    public static <T> List<T> incluir(List<T> lista, T usuario) {
+//    if (lista.contains(usuario)) {
+//        System.out.println("Usuário já existente.");
+//    } else {
+//        lista.add(usuario);
+//        System.out.println("Usuário adicionado.");
+//    }
+//    return lista;
+//}
+    
+    //Deixa eu pensar, funcionario, cliente e adm, ambos tem CPF e todos são pessoa
+>>>>>>> Stashed changes
     //Método responsável por editar Cliente,Funcionario ou Administrado na BD
-    public static List editar(List<Cliente> listaCliente, Cliente cliente) {
+    public static <T> List<T> editar(List<T> lista, T usuario, Comparator<T> comparator) {
         //Recebendo lista de clientes
-        //Essa linhja está dando erro, porque está inserindo duas vezes, mas está funcionando
-
-        if (listaCliente.isEmpty()) {
-            System.out.println("Cliente inexistente.");
-            return listaCliente;
+        if (lista.isEmpty()) {
+            System.out.println("Usuario inexistente.");
+            return lista;
         } else {
-            for (int i = 0; i < listaCliente.size(); i++) {
-                if (listaCliente.get(i).getCpf().equals(cliente.getCpf())) {
+            for (T item : lista) {
+                if (comparator.compare(item, usuario) == 0) {
                     //Considerando que já tenha o cliente na base de dados.
-                    //Preciso verificar o método replace, pode ser mais adequado
-                    listaCliente.set(i, cliente);
-                    System.out.println("Cliente editado.");
-                    return listaCliente;
+                    //Para reposicionar itens, é preciso que o indice seja inteiro
+                    lista.set(lista.indexOf(item), usuario);
+                    System.out.println("Usuario editado.");
+                    return lista;
                 }
             }
-            System.out.println("Cliente não encontrado.");
-            return listaCliente;
+            System.out.println("Usuario não encontrado.");
+            return lista;
         }
-
     }
 /**
  * Esse método remove o cliente da base de dados de acordo o identificador fornecido
@@ -138,26 +165,27 @@ public class Sistema {
  * @return 
  */
     //Método responsável por editar Cliente,Funcionario ou Administrado na BD
-    public static List remover(List<Cliente> listaCliente, Cliente cliente) {
+    public static <T> List<T> remover(List<T> lista, T usuario, Comparator<T> comparator) {
 
         //Eu poderia criar um método listaCliente e atribuir no lugar de incluir
-        if (listaCliente.isEmpty()) {
-            System.out.println("Cliente inexistente.");
-            return listaCliente;
+        if (lista.isEmpty()) {
+            System.out.println("Usuario inexistente.");
+            return lista;
         } else {
             //Verificando se o cliente já existe na bd
-            for (int i = 0; i < listaCliente.size(); i++) {
-                if (listaCliente.get(i).getCpf().equals(cliente.getCpf())) {
+            for (T item : lista) {
+                if (comparator.compare(item, usuario) == 0) {
                     //Considerando que já tenha o cliente na base de dados.
-                    listaCliente.remove(i);
-                    System.out.println("Cliente removido.");
-                    return listaCliente;
+                    lista.remove(item);
+                    System.out.println("Usuario removido.");
+                    return lista;
                 }
             }
-            System.out.println("Cliente inexistente.");
-            return listaCliente;
+            System.out.println("Usuario inexistente.");
+            return lista;
         }
     }
+<<<<<<< Updated upstream
     /**
      * Esse método inseri funcionários na base de dados
      * @param Colaboradores
@@ -245,6 +273,9 @@ public class Sistema {
      * @param idQuarto
      * @return 
      */
+=======
+
+>>>>>>> Stashed changes
     //Método responsável por verificar reserva e entregar quais quartos estão disponiveis
     public static boolean verificarReserva(List<Reserva> listaReserva, LocalDate data, String idQuarto) {
         //Fazer verificacao da data e quarto na reserva.Para verificar a data é preciso da classe reserva
