@@ -25,7 +25,7 @@ public class PousadaMilhoVerde {
 //        Colaboradores.add(adm);
 //        Sistema.salvarDados(Colaboradores, "Funcionarios.json");
         
-        Funcionario func = new Funcionario();
+       // Funcionario func = new Funcionario();
         Scanner cin = new Scanner(System.in,"ISO-8859-1");
         System.out.println("Informe o seu usuario e senha");
         System.out.print("Usuario: ");
@@ -35,7 +35,6 @@ public class PousadaMilhoVerde {
 
         boolean login = Sistema.FazerLogin(user, pin);
         
-        Sistema.executar(func);
         
     }
 }

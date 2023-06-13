@@ -20,8 +20,11 @@ public class clienteComparator implements Comparator<Cliente>{
      */
     @Override
     public int compare(Cliente cliente1,Cliente cliente2){
-        int nameCompare = cliente1.getNome().compareTo(cliente2.getNome());
-        return nameCompare;
-        //É nescessario colocar mais comparações
+        int nameCompare = cliente1.getNome().compareToIgnoreCase(cliente2.getNome());
+        if (nameCompare != 0)
+            return nameCompare;
+        //se for igual a zero tem que comparar um novo atributo
+        int cpfCompare = cliente1.getCpf().compareTo(cliente2.getCpf());
+        return cpfCompare;
     }
 }

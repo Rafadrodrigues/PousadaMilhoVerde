@@ -64,6 +64,7 @@ public class Sistema {
                 return true;
             }
             else{
+                System.out.print("Sistema negado\n");
                 return false;
             }
         }
