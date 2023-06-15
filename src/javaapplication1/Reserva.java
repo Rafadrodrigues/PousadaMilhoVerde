@@ -15,11 +15,11 @@ public class Reserva {
     //Occupation inicialmente recebe false para sinalizar que o quarto não esta ocupado
     //Data,quarto e cliente vão ser armazenados no calendario
     private LocalDate data;
-    private Quarto[] quarto ;
+    private Quarto quarto ;
     private Cliente cliente;
     private static int totalReservas = 0;
     //Construtor para iniciar todos os estados da classe 
-    public Reserva(LocalDate data,Quarto[] quarto) {
+    public Reserva(LocalDate data,Quarto quarto) {
         this.data = data;
         this.quarto = quarto;
         Reserva.totalReservas = Reserva.totalReservas+1;
@@ -35,11 +35,11 @@ public class Reserva {
     public void setData(LocalDate data) {
         this.data = data;
     }
-    public Quarto[] getQuarto() {
+    public Quarto getQuarto() {
         return quarto;
     }
 
-    public void setQuarto(Quarto[] quarto) {
+    public void setQuarto(Quarto quarto) {
         this.quarto = quarto;
     }
 

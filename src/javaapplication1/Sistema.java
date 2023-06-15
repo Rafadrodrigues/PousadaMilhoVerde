@@ -81,32 +81,32 @@ public class Sistema {
      * @return 
      */
      //Método que inclui um cliente na base de dados
-    public static <T> List<T> incluir(List<T> lista, T usuario, Comparator<T> comparator) {
-        //Uma lista que vai ser inserido os usuarios
-        //A classe vai ser instanciada no main e inserida como parametro.
-        
-        //Considerando que a lista esteja vazia,adicionamos um cliente
-        if (lista.isEmpty()) {
-            lista.add(usuario);
-            System.out.println("Usuario adicionado.");
-            return lista;
-        } else {
-            //Verificando se o usuario já existe na bd
-            //Tem uma forma melhor de fazer esse código que é utilizando o comparator, tenho que olhar como
-            for (T item : lista) {
-        //Caso os elementos que estão sendo comparados sejam iguais ele será igual a 0, assim usuario existente
-                if (comparator.compare(item, usuario) == 0) {
-                    //Considerando que já tenha o cliente na base de dados.
-                    System.out.println("Usuario já existente.");
-                    return lista;
-                }
-            }
-            //Caso a lista não esteja vazia e não exista aquele cliente, insira na base de dados
-            lista.add(usuario);
-            System.out.println("Usuario adicionado.");
-            return lista;
-        }
-    }
+//    public static <T> List<T> incluir(List<T> lista, T usuario, Comparator<T> comparator) {
+//        //Uma lista que vai ser inserido os usuarios
+//        //A classe vai ser instanciada no main e inserida como parametro.
+//        
+//        //Considerando que a lista esteja vazia,adicionamos um cliente
+//        if (lista.isEmpty()) {
+//            lista.add(usuario);
+//            System.out.println("Usuario adicionado.");
+//            return lista;
+//        } else {
+//            //Verificando se o usuario já existe na bd
+//            //Tem uma forma melhor de fazer esse código que é utilizando o comparator, tenho que olhar como
+//            for (T item : lista) {
+//        //Caso os elementos que estão sendo comparados sejam iguais ele será igual a 0, assim usuario existente
+//                if (comparator.compare(item, usuario) == 0) {
+//                    //Considerando que já tenha o cliente na base de dados.
+//                    System.out.println("Usuario já existente.");
+//                    return lista;
+//                }
+//            }
+//            //Caso a lista não esteja vazia e não exista aquele cliente, insira na base de dados
+//            lista.add(usuario);
+//            System.out.println("Usuario adicionado.");
+//            return lista;
+//        }
+//    }
     /**
      * Esse método editar as informações contida dos clientes na base de dados
      * @param listaCliente
@@ -116,15 +116,15 @@ public class Sistema {
     
     //IMPORTANTE OLHAR 
 //    Tem esse exemplo que o Chatgpt forneceu e eu achei interessante também
-//    public static <T> List<T> incluir(List<T> lista, T usuario) {
-//    if (lista.contains(usuario)) {
-//        System.out.println("Usuário já existente.");
-//    } else {
-//        lista.add(usuario);
-//        System.out.println("Usuário adicionado.");
-//    }
-//    return lista;
-//}
+    public static <T> List<T> incluir(List<T> lista, T usuario) {
+    if (lista.contains(usuario)) {
+        System.out.println("Usuário já existente.");
+    } else {
+        lista.add(usuario);
+        System.out.println("Usuário adicionado.");
+    }
+    return lista;
+}
     
     //Deixa eu pensar, funcionario, cliente e adm, ambos tem CPF e todos são pessoa
     //Método responsável por editar Cliente,Funcionario ou Administrado na BD

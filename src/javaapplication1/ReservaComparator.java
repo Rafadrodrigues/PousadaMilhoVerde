@@ -7,7 +7,7 @@ package javaapplication1;
 import java.util.Comparator;
 
 /**
- *
+ *  Essa classe vai realizar comparações entre as reservas da pousada.
  * @author Getúlio
  */
 public class ReservaComparator implements Comparator<Reserva>{
@@ -26,6 +26,6 @@ public class ReservaComparator implements Comparator<Reserva>{
         //if(dayCompare !=0)
             return dayCompare;
         //Caso a data seja igual, compara o quarto (Poderia ser o cliente olhar essa opção]
-//        int quartoCompare = reserva1.getQuarto();
+      
     }
 }

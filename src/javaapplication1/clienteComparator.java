@@ -26,5 +26,6 @@ public class clienteComparator implements Comparator<Cliente>{
         //se for igual a zero tem que comparar um novo atributo
         int cpfCompare = cliente1.getCpf().compareTo(cliente2.getCpf());
         return cpfCompare;
+        
     }
 }

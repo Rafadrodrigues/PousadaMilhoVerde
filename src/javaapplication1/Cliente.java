@@ -136,4 +136,8 @@ public class Cliente extends Pessoa {
        proposta = aceitar.toLowerCase().equals("sim");
        return proposta; 
     }
+
+    int compareTo(Cliente cliente) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
