@@ -45,7 +45,7 @@ public class Sistema {
     //Lê a lista de funcionarios do Json para pegar as senhas
     private static List listaFuncionario() {
         List<Funcionario> Colaboradores = new ArrayList<>();
-        Colaboradores = Sistema.carregarDadosFuncionarios("Funcionarios.json");
+        Colaboradores = Sistema.carregarDados("Funcionarios.json");
         return Colaboradores;
     }
     /**
@@ -73,42 +73,11 @@ public class Sistema {
         System.out.print("Seção incerrada\n");
         return true;
     }
-
-    /**
-     * Esse método inseri informações dos clientes na base de dados da pousada
-     * @param listaCliente
-     * @param cliente
-     * @return 
-     */
-     //Método que inclui um cliente na base de dados
-//    public static <T> List<T> incluir(List<T> lista, T usuario, Comparator<T> comparator) {
-//        //Uma lista que vai ser inserido os usuarios
-//        //A classe vai ser instanciada no main e inserida como parametro.
-//        
-//        //Considerando que a lista esteja vazia,adicionamos um cliente
-//        if (lista.isEmpty()) {
-//            lista.add(usuario);
-//            System.out.println("Usuario adicionado.");
-//            return lista;
-//        } else {
-//            //Verificando se o usuario já existe na bd
-//            //Tem uma forma melhor de fazer esse código que é utilizando o comparator, tenho que olhar como
-//            for (T item : lista) {
-//        //Caso os elementos que estão sendo comparados sejam iguais ele será igual a 0, assim usuario existente
-//                if (comparator.compare(item, usuario) == 0) {
-//                    //Considerando que já tenha o cliente na base de dados.
-//                    System.out.println("Usuario já existente.");
-//                    return lista;
-//                }
-//            }
-//            //Caso a lista não esteja vazia e não exista aquele cliente, insira na base de dados
-//            lista.add(usuario);
-//            System.out.println("Usuario adicionado.");
-//            return lista;
-//        }
-//    }
     /**
      * Esse método editar as informações contida dos clientes na base de dados
+     * @param <T>
+     * @param lista
+     * @param usuario
      * @param listaCliente
      * @param cliente
      * @return 
@@ -126,7 +95,6 @@ public class Sistema {
     return lista;
 }
     
-    //Deixa eu pensar, funcionario, cliente e adm, ambos tem CPF e todos são pessoa
     //Método responsável por editar Cliente,Funcionario ou Administrado na BD
     public static <T> List<T> editar(List<T> lista, T usuario, Comparator<T> comparator) {
         //Recebendo lista de clientes
@@ -147,39 +115,13 @@ public class Sistema {
             return lista;
         }
     }
+   
 /**
- * Esse método remove o cliente da base de dados de acordo o identificador fornecido
- * @param listaCliente
- * @param cliente
+ * Esse método inseri funcionários na base de dados
+ * @param Colaboradores
+ * @param func
  * @return 
  */
-    //Método responsável por editar Cliente,Funcionario ou Administrado na BD
-    public static <T> List<T> remover(List<T> lista, T usuario, Comparator<T> comparator) {
-
-        //Eu poderia criar um método listaCliente e atribuir no lugar de incluir
-        if (lista.isEmpty()) {
-            System.out.println("Usuario inexistente.");
-            return lista;
-        } else {
-            //Verificando se o cliente já existe na bd
-            for (T item : lista) {
-                if (comparator.compare(item, usuario) == 0) {
-                    //Considerando que já tenha o cliente na base de dados.
-                    lista.remove(item);
-                    System.out.println("Usuario removido.");
-                    return lista;
-                }
-            }
-            System.out.println("Usuario inexistente.");
-            return lista;
-        }
-    }
-    /**
-     * Esse método inseri funcionários na base de dados
-     * @param Colaboradores
-     * @param func
-     * @return 
-     */
     //Método responsável por verificar reserva e entregar quais quartos estão disponiveis
     public static boolean verificarReserva(List<Reserva> listaReserva, LocalDate data, String idQuarto) {
         //Fazer verificacao da data e quarto na reserva.Para verificar a data é preciso da classe reserva
@@ -297,13 +239,14 @@ public class Sistema {
      * @return 
      */
     //FUNÇÃO RESPONSAVEL POR LER O ARQUIVO JSON E RETORNA UMA LISTA COM OS VALORES CONTIDOS NELE
-    public static List<Cliente> carregarDadosClientes(String nomeArquivo) {
+    // OS DADOS QUE VAO SER COLETADOS SERÃO OS DO FUNCIONARIO, CLIENTE E RESERVA
+    public static <T> List<T> carregarDados(String nomeArquivo) {
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
             // Ler o arquivo JSON e converter para uma lista de objetos da classe Cliente
             //List<Cliente> listaClientes = objectMapper.readValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
-            List<Cliente> listaClientes = objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
+            List<T> listaClientes = (List<T>) objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
                     new TypeReference<List<Cliente>>() {
             });
 
@@ -315,57 +258,6 @@ public class Sistema {
         // Caso não consiga ler, retorna null
         return null;
     }
-    /**
-     * Método que vai ser a base de dados(arquivo JSON) e retorna uma lista de funcionários
-     * que estão presentes na base de dados
-     * @param nomeArquivo
-     * @return 
-     */
-    //FUNÇÃO RESPONSAVEL POR LER O ARQUIVO JSON E RETORNA UMA LISTA COM OS VALORES CONTIDOS NELE
-    public static List<Funcionario> carregarDadosFuncionarios(String nomeArquivo) {
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        try {
-            // Ler o arquivo JSON e converter para uma lista de objetos da classe Cliente
-           // List<Funcionario> listaFuncionario = objectMapper.readValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
-           List<Funcionario> listaFuncionario = objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
-           new TypeReference<List<Funcionario>>() {
-            });
-
-            // Retorna a lista com os dados do arquivo
-            return listaFuncionario;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // Caso não consiga ler, retorna null
-        return null;
-    }
-    /**
-     * Esse método vai ler a base de dados(arquivo JSON) e retorna uma lista com os 
-     * dados da reserva contidos nele
-     * @param nomeArquivo
-     * @return 
-     */
-    //FUNÇÃO RESPONSAVEL POR LER O ARQUIVO JSON E RETORNA UMA LISTA COM OS VALORES CONTIDOS NELE
-    public static List<Reserva> carregarDadosReserva(String nomeArquivo) {
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        try {
-            // Ler o arquivo JSON e converter para uma lista de objetos da classe Cliente
-            //List<Reserva> listaReserva = objectMapper.readValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
-            List<Reserva> listaReserva = objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
-                    new TypeReference<List<Reserva>>() {
-            });
-
-            // Retorna a lista com os dados do arquivo
-            return listaReserva;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // Caso não consiga ler, retorna null
-        return null;
-    }
-
     /**
      * Esse métoddo vai servir como um contador para saber quantas vezes as classe 
      * Reserva e a classe Cliente foram instanciadas em nosso código.
@@ -382,50 +274,7 @@ public class Sistema {
      * Função que vai ser utilizada apenas caso o login do usuário esteja correto
      * @param usuarioAtual 
      */
-    //uma função privada para ser chamada apenas se o login for certo;
-    public static void executar(Object usuarioAtual) {
-        Scanner cin = new Scanner(System.in,"ISO-8859-1");
-        int opcao;
-        System.out.println("Seja bem vindo ao sistema da pousada Milho Verde.\n Oque deseja fazer?");
-        do {
-            System.out.println("1)CRUD Cliente\t 2)Gerenciar Funcionarios\t 3)Agenda\t 4)Reserva \t 5)Despesas \t -1 para sair");
-            opcao = cin.nextInt();
-            switch (opcao) {
-                case 1:
-                    System.out.println("Opção 1 selecionada.");
-                    Sistema.crudCliente();
-                    break;
-                case 2:
-                    System.out.println("Opção 2 selecionada.");
-                   // if(usuarioAtual instanceof Administrador){
-                         Sistema.gerenciarFuncionarios();
-                   // }else{ System.out.println("voce não tem acesso para essa opção");}
-                    break;
-                case 3:
-                    System.out.println("Opção 3 selecionada.");
-                    // Ação para a opção 3
-                    break;
-                case 4:
-                    System.out.println("Opção 4 selecionada.");
-                    // Ação para a opção 3
-                    break;
-                case 5:
-                    System.out.println("Opção 5 selecionada.");
-                    System.out.println("Ainda nao fiz nada aqui :(");
-                    break;
-                case -1:
-                    System.out.println("Opção de sair selecionada.");
-                    break;
-                default:
-                    System.out.println("Opção inválida.");
-                    // Ação para opções inválidas
-                    break;
-
-            }
-            System.out.println("-------------Oque deseja fazer agora?-----------------------");
-        } while (opcao != -1);
-    }
-
+    
     /**
      * Método que pode ser utilizado tanto pelo Funcionário quanto pelo Administrador,
      * e te por finalidade, realizar o crud do cliente na base de dados(arquivo JSON)
