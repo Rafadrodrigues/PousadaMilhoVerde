@@ -96,14 +96,14 @@ public class Sistema {
 }
     
     //Método responsável por editar Cliente,Funcionario ou Administrado na BD
-    public static <T> List<T> editar(List<T> lista, T usuario, Comparator<T> comparator) {
+    public static <T> List<T> editar(List<T> lista, T usuario) {
         //Recebendo lista de clientes
         if (lista.isEmpty()) {
             System.out.println("Usuario inexistente.");
             return lista;
         } else {
             for (T item : lista) {
-                if (comparator.compare(item, usuario) == 0) {
+                if (item.equals(usuario)) {
                     //Considerando que já tenha o cliente na base de dados.
                     //Para reposicionar itens, é preciso que o indice seja inteiro
                     lista.set(lista.indexOf(item), usuario);
@@ -115,7 +115,7 @@ public class Sistema {
             return lista;
         }
     }
-   
+    
 /**
  * Esse método inseri funcionários na base de dados
  * @param Colaboradores
@@ -168,6 +168,23 @@ public class Sistema {
         reserva.setData(cliente.getDataDesejada());
         //Agora acrescentamos tudo da lista de reserva
         listaReserva.add(reserva);
+        return listaReserva;
+    }
+
+    //Método responsável por realizar o cancelamento de Reserva
+    public static List<Reserva> cancelarReserva(List<Reserva> listaReserva, Reserva reserva){
+        
+       //Verificar se esta  correto
+        for (Reserva item : listaReserva) {
+            if (item.equals(reserva)) {
+                //Considerando que já tenha um quarto na base de dados.
+                //Para reposicionar itens, é preciso que o indice seja inteiro
+                listaReserva.remove(item);
+                System.out.println("Reserva cancelada.");
+                return listaReserva;
+            }
+        }
+        System.out.println("Reserva não encontrada.");
         return listaReserva;
     }
 
@@ -268,90 +285,5 @@ public class Sistema {
         int numClientePrivate = Cliente.gettotalClientePrivate();
         int numReserva = Reserva.getTotalReservas();
         System.out.print("Numeros de instancias da classe pessoa " + numClientePrivate + " ,e da classe reserva sao " + numReserva + "\n");
-    }
-
-    /**
-     * Função que vai ser utilizada apenas caso o login do usuário esteja correto
-     * @param usuarioAtual 
-     */
-    
-    /**
-     * Método que pode ser utilizado tanto pelo Funcionário quanto pelo Administrador,
-     * e te por finalidade, realizar o crud do cliente na base de dados(arquivo JSON)
-     */
-    private static void crudCliente() {
-        Scanner cin = new Scanner(System.in,"ISO-8859-1");
-        //Lista de clientes para receber os dados do arquivo e poder mexer
-        ArrayList<Cliente> listaClientes = new ArrayList<>();
-        listaClientes = (ArrayList<Cliente>) Sistema.carregarDadosClientes("Clientes.json");
-        System.out.println("Opção CRUD Cliente.\n Oque deseja fazer?");
-        System.out.println("1)Adicionar Cliente\t 2)Remover Cliente \t 3)Editar Cliente");
-        int opcao = cin.nextInt();
-        switch (opcao) {
-            case 1:
-                System.out.println("Opção 1 selecionada.");
-                Cliente cliente = Cliente.criarCliente();
-                Sistema.incluir(listaClientes, cliente);
-                break;
-            case 2:
-                System.out.println("Opção 2 selecionada.");
-                System.out.println("Informa o CPF do cliente");
-                String cpf = cin.next();
-                Cliente cliente2 = new Cliente();
-                cliente2.setCpf(cpf);
-                listaClientes = (ArrayList<Cliente>) Sistema.remover(listaClientes, cliente2);
-                break;
-            case 3:
-                System.out.println("Opção 3 selecionada.");
-                System.out.println("Informe os novos dados do cliente(por favor preencha todos os campos corretamente)");
-                Cliente cliente3 = Cliente.criarCliente();
-                Sistema.editar(listaClientes, cliente3);
-                break;
-            default:
-                    System.out.println("Opção inválida.");
-                    // Ação para opções inválidas
-                    break;
-        }
-        Sistema.salvarDados(listaClientes, "Clientes.json");
-    }
-    /**
-     * Esse é um método exclusivo do Administrador e tem por finalidade gerenciar
-     * funcionários, ou seja, adicionar, remover ou editar funcionário
-     */
-    private static void gerenciarFuncionarios() {
-        Scanner cin = new Scanner(System.in,"ISO-8859-1");
-        //Lista de clientes para receber os dados do arquivo e poder mexer
-        ArrayList<Funcionario> listaFuncionarios= new ArrayList<>();
-        listaFuncionarios = (ArrayList<Funcionario>) Sistema.carregarDadosFuncionarios("Funcionarios.json");
-        System.out.println("Opção GERENCIAR FUNCIONARIO .\n Oque deseja fazer?");
-        System.out.println("1)Adicionar funcionario\t 2)Remover funcionario \t 3)Editar funcionario");
-        int opcao = cin.nextInt();
-        switch (opcao) {
-            case 1:
-                System.out.println("Opção 1 selecionada.");
-                Funcionario func = Funcionario.criarFuncionario();
-                Sistema.incluir(listaFuncionarios, func);
-                break;
-            case 2:
-                System.out.println("Opção 2 selecionada.");
-                System.out.println("Informa o CPF do Funcionario");
-                String cpf = cin.next();
-                Funcionario func2 = new Funcionario();
-                func2.setCpf(cpf);
-                listaFuncionarios = (ArrayList<Funcionario>) Sistema.remover(listaFuncionarios, func2);
-                break;
-            case 3:
-                System.out.println("Opção 3 selecionada.");
-                System.out.println("Informe os novos dados do Funcionario(por favor preencha todos os campos corretamente)");
-                Funcionario func3 = Funcionario.criarFuncionario();
-                Sistema.editar(listaFuncionarios, func3);
-                break;
-            default:
-                    System.out.println("Opção inválida.");
-                    // Ação para opções inválidas
-                    break;
-        }
-        Sistema.salvarDados(listaFuncionarios, "Funcionarios.json");
-        
     }
 }

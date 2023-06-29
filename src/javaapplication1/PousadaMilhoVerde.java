@@ -30,22 +30,11 @@ public class PousadaMilhoVerde {
 //        Sistema.salvarDados(Colaboradores, "Funcionarios.json");
         
        // Funcionario func = new Funcionario();
-//        Scanner cin = new Scanner(System.in,"ISO-8859-1");
-//        System.out.println("Informe o seu usuario e senha");
-//        System.out.print("Usuario: ");
-//        String user = cin.next();
-//        System.out.print("Senha: ");
-//        String pin = cin.next();
 
-//        boolean login = Sistema.FazerLogin(user, pin);
-        
-//        Comparator <Cliente> maria = Collections.c;
-
-        
         //testa inicialmente pra mostrar que os valores estão zerados
 //        Sistema.numInstancias();
 //        Sistema sis = new Sistema();
-//        sis.FazerLogin("@rafa919", "123023");
+
 
         //Lista encadeada para o banco de dados onde vai ser inserida listas
         ArrayList<Object> Bd = new ArrayList<>();
@@ -55,7 +44,7 @@ public class PousadaMilhoVerde {
         List<Funcionario> funcionarios = new ArrayList<>();
         //Lista de Reserva
         List<Reserva> reserva = new ArrayList<>();
-
+        
         //Cliente cliente1 = new Cliente("Rafael", "9830123", "Belo Horizonte", "339989021", "rafar@");
         Cliente cliente2 = new Cliente("Getulio", "123.456.789-57", "Diamantina", "8021983", "getjose@");
         Cliente cliente3 = new Cliente("Dudu", "123.456.789-57", "Diamantina", "389982356", "Duduvisitante@");
@@ -67,6 +56,8 @@ public class PousadaMilhoVerde {
         incluir(listaClientes,cliente2);
         
         System.out.println(clienteAux);
+        
+        realizarReserva(reserva,);
 //        Sistema.incluir(funcionarios, func);
 //        Sistema.incluir(listaClientes,cliente2);
 //        //LEMBRAR QUE PRA EDITAR O CPF TEM QUE ESTAR CORRETO
