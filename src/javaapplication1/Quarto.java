@@ -19,6 +19,10 @@ public class Quarto {
         this.categoria = categoria;
         this.ocupation = ocupation;
     }
+
+    Quarto() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
    
     //Getters e setters correspondente aos atributos criados nessa classe.
     public String getCategoria() {

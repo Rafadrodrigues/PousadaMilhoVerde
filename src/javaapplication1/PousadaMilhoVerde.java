@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import static javaapplication1.Sistema.incluir;
+import static javaapplication1.Sistema.realizarReserva;
 
 //import org.json.simple.JSONArray;;
 //import org.json.simple.parser.ParseException;;
@@ -50,14 +51,15 @@ public class PousadaMilhoVerde {
         Cliente cliente3 = new Cliente("Dudu", "123.456.789-57", "Diamantina", "389982356", "Duduvisitante@");
         Funcionario func = new Funcionario("@rafa919", "123023","atendente","Rafael","123456789","Diamantina","3399833","RafaDias@");
         
+        
         listaClientes.add(cliente2);
         listaClientes.add(cliente3);
-        boolean clienteAux = listaClientes.contains(cliente2);
         incluir(listaClientes,cliente2);
         
-        System.out.println(clienteAux);
+        realizarReserva(reserva,cliente2);
         
-        realizarReserva(reserva,);
+        System.out.println(reserva);
+        
 //        Sistema.incluir(funcionarios, func);
 //        Sistema.incluir(listaClientes,cliente2);
 //        //LEMBRAR QUE PRA EDITAR O CPF TEM QUE ESTAR CORRETO

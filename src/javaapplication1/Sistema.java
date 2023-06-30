@@ -153,12 +153,12 @@ public class Sistema {
      * @return 
      */
     //Método responsável por receber data e comparar disponibilidade
-    public static List realizarReserva(List<Reserva> listaReserva, Quarto quarto, Cliente cliente) {
+    public static List realizarReserva(List<Reserva> listaReserva, Cliente cliente) {
         // Aqui vai armazenar a reserva na lista de reserva e depois preencher os atributos da classe reserva
 
         Scanner sc = new Scanner(System.in);
         Reserva reserva = new Reserva();
-
+        Quarto quarto = new Quarto();
         //System.out.println("Informe o Id o quarto desejado Preço:Categoria: ");
         //Preenchendo os campos da reserva e do quarto
         quarto.setId(sc.nextLine());
