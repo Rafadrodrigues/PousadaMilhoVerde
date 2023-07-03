@@ -61,7 +61,7 @@ public class Sistema {
             if (user.equals(Colaboradores.get(i).getUsuario()) && pin.equals(Colaboradores.get(i).getSenha())) {
                 //se a senha e usuario bater com algum o login é feito
                 System.out.print("Sistema Liberado\n");
-                Sistema.executar(Colaboradores.get(i));
+//                Sistema.executar(Colaboradores.get(i));
                 return true;
             }
             else{
@@ -84,7 +84,7 @@ public class Sistema {
      */
     
     //IMPORTANTE OLHAR 
-//    Tem esse exemplo que o Chatgpt forneceu e eu achei interessante também
+    //Esse método vai incluir Cliente,Funcionário,Administrador e Reserva em uma lista
     public static <T> List<T> incluir(List<T> lista, T usuario) {
     if (lista.contains(usuario)) {
         System.out.println("Usuário já existente.");
@@ -116,11 +116,24 @@ public class Sistema {
         }
     }
     
+     //Esse método vai remover Cliente,Funcionário e Administrador em uma lista
+    public static <T> List<T> remover(List<T> lista, T usuario) {
+    if (lista.contains(usuario)) {
+        lista.remove(usuario);
+        System.out.println("Usuário removido.");
+    } else {
+        System.out.println("Usuário adicionado.");
+    }
+    return lista;
+}
+    
 /**
  * Esse método inseri funcionários na base de dados
- * @param Colaboradores
- * @param func
- * @return 
+     * @param listaReserva
+     * @param data
+     * @param idQuarto
+    * @param Colaboradores
+    * @return 
  */
     //Método responsável por verificar reserva e entregar quais quartos estão disponiveis
     public static boolean verificarReserva(List<Reserva> listaReserva, LocalDate data, String idQuarto) {
@@ -129,17 +142,16 @@ public class Sistema {
             System.out.println("\nExiste disponibilidade em todos os quartos.");
             //Como a lista está vazia todos os quartos estao livres
             return true;
-        } else {
-            //Loop que percorre a lista 
-            for (Reserva reserva : listaReserva) {
-                //Verificando na lista de reserva se o quarto está disponível naquela data. As duas condicoes devem ser satisfeitas
-                if (reserva.getData().equals(reserva.getData()) && reserva.equals(reserva.getQuarto())) {
-                    System.out.println("O quarto " + reserva.getQuarto() + " não esta disponível na data " + reserva.getData());
-                    return false;
-                } else {
-                    System.out.println("O quarto tem disponibilidade nessa data ");
-                    return true;
-                }
+        }
+        //Loop que percorre a lista 
+        for (Reserva reserva : listaReserva) {
+            //Verificando na lista de reserva se o quarto está disponível naquela data. As duas condicoes devem ser satisfeitas
+            if (reserva.getData().equals(reserva.getData()) && reserva.equals(reserva.getQuarto())) {
+                System.out.println("O quarto " + reserva.getQuarto() + " não esta disponível na data " + reserva.getData());
+                return false;
+            } else {
+                System.out.println("O quarto tem disponibilidade nessa data ");
+                return true;
             }
         }
         return true;
@@ -148,23 +160,32 @@ public class Sistema {
      * Método que inclui alguma reserva realizada na base de dados, para que seja realizada
      * corretamente, é preciso que seja feita alguma verificação de disponibilidade.
      * @param listaReserva
-     * @param quarto
      * @param cliente
      * @return 
      */
+    
     //Método responsável por receber data e comparar disponibilidade
     public static List realizarReserva(List<Reserva> listaReserva, Cliente cliente) {
         // Aqui vai armazenar a reserva na lista de reserva e depois preencher os atributos da classe reserva
 
         Scanner sc = new Scanner(System.in);
+        
         Reserva reserva = new Reserva();
         Quarto quarto = new Quarto();
-        //System.out.println("Informe o Id o quarto desejado Preço:Categoria: ");
+        
         //Preenchendo os campos da reserva e do quarto
         quarto.setId(sc.nextLine());
         quarto.setOcupation(true);
         reserva.setCliente(cliente);
-        reserva.setQuarto(quartos);
+        String idSelecionado = sc.nextLine(); // ID a ser procurado
+        //Essa estrutura é para identificar qual quarto que foi selecionado
+        for(int i=0;i<quartos.length;i++) {
+            if (quarto.getId().equals(idSelecionado)) {
+                reserva.setQuarto(quartos[i]);
+                // Saia do loop após encontrar o quarto desejado
+                break; 
+            }
+        }
         reserva.setData(cliente.getDataDesejada());
         //Agora acrescentamos tudo da lista de reserva
         listaReserva.add(reserva);
@@ -172,11 +193,10 @@ public class Sistema {
     }
 
     //Método responsável por realizar o cancelamento de Reserva
-    public static List<Reserva> cancelarReserva(List<Reserva> listaReserva, Reserva reserva){
-        
-       //Verificar se esta  correto
+    public static List<Reserva> cancelarReserva(List<Reserva> listaReserva, Reserva reserva){  
+       //Verificar se esta correto
         for (Reserva item : listaReserva) {
-            if (item.equals(reserva)) {
+            if (item.getQuarto().equals(reserva.getQuarto())&&(item.getCliente().equals(reserva.getCliente()))) {
                 //Considerando que já tenha um quarto na base de dados.
                 //Para reposicionar itens, é preciso que o indice seja inteiro
                 listaReserva.remove(item);
@@ -197,12 +217,12 @@ public class Sistema {
         Reserva reserva = new Reserva();
         //Nome do cliente, preco do quarto * quantidade de dias da reserva.
         //Uma data final e uma data inicial.
-        System.out.print("Reserva realizada com sucesso. ");
+        System.out.println("Reserva realizada com sucesso. ");
         System.out.println("Nome: " + reserva.getCliente().getNome());
         System.out.println("Data: " + reserva.getData());
-        System.out.println("Info Quarto: " + reserva.getQuarto().toString());
-
+        System.out.println("Info Quarto: " + reserva.getQuarto());
     }
+    
     /**
      * Esse método vai buscar informações na base de dados de alguma reserva realizada
      * e apresentada ao usuário
@@ -210,7 +230,7 @@ public class Sistema {
      * @param cliente
      * @return 
      */
-    //Método responsável por ler dados da reserva 
+    //Método responsável por ler dados da(s) reserva(s) de determinado cliente 
     public static List<Reserva> lerReserva(List<Reserva> reserva, Cliente cliente) {
         //Eu preciso realizar a reserva primeiro para depois imprimir
         //Conferindo na agenda o cliente desejado e apresentando informaçoes da agenda
@@ -220,9 +240,10 @@ public class Sistema {
         } else {
             //Um for para percorrer a agenda em busca do cpf do cliente com informações
             //Posso está errado, mas dessa forma eu vejo que vai ser impresso todas as reserva do cliente
-            for (int i = 0; i < reserva.size(); i++) {
-                if (reserva.get(i).equals(cliente.getCpf())) {
-                    System.out.print(reserva.get(i));
+            for (Reserva reservas : reserva) {
+                if (reservas.getCliente().equals(cliente)) {
+                    System.out.print(reservas);
+                    System.out.println("Dados da reserva do cliente.");
                     return reserva;
                 }
             }
