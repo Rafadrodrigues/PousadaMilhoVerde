@@ -17,6 +17,7 @@ public class Reserva {
     private LocalDate data;
     private Quarto quarto ;
     private Cliente cliente;
+    //QUESTÃO 11
     private static int totalReservas = 0;
     //Construtor para iniciar todos os estados da classe 
 

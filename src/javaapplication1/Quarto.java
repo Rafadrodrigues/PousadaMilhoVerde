@@ -5,8 +5,8 @@ package javaapplication1;
  * opções.
  * @author rafar
  */
+
 public class Quarto {
-    
     private String id;
     private double preco;
     private String categoria;//podendo ser luxo ou comun
@@ -20,8 +20,8 @@ public class Quarto {
         this.ocupation = ocupation;
     }
 
-    Quarto() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Quarto() {
+        
     }
    
     //Getters e setters correspondente aos atributos criados nessa classe.

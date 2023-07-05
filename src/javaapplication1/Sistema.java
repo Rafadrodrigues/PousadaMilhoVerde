@@ -20,6 +20,7 @@ import java.util.Scanner;
  * @author rafar
  */
 public class Sistema {
+    //QUESTAO 05
     //Inicializando os 10 quaros da memória
     private static Quarto[] quartos = new Quarto[]{
         new Quarto("001", 50, "Comun", false),
@@ -94,7 +95,8 @@ public class Sistema {
     }
     return lista;
 }
-    
+    //QUESTÃO 09
+    //TUDO PARA ABAIXO TEM A 9
     //Método responsável por editar Cliente,Funcionario ou Administrado na BD
     public static <T> List<T> editar(List<T> lista, T usuario) {
         //Recebendo lista de clientes
@@ -143,6 +145,7 @@ public class Sistema {
             //Como a lista está vazia todos os quartos estao livres
             return true;
         }
+        //ALTERAR SÓ PARA TOSTRING(TALVEZ)
         //Loop que percorre a lista 
         for (Reserva reserva : listaReserva) {
             //Verificando na lista de reserva se o quarto está disponível naquela data. As duas condicoes devem ser satisfeitas
@@ -211,16 +214,15 @@ public class Sistema {
     /**
      * Método que será utilizada para fornecer informações do extrato após a realização
      * da reserva
+     * @param reserva
      */
     //Após a reserva acontecer, esse método vai gerar um extrato.
-    public void gerarExtrato() {
-        Reserva reserva = new Reserva();
+    //Método está errado ou incompleto
+    public static void gerarExtrato(Reserva reserva) {
         //Nome do cliente, preco do quarto * quantidade de dias da reserva.
         //Uma data final e uma data inicial.
         System.out.println("Reserva realizada com sucesso. ");
-        System.out.println("Nome: " + reserva.getCliente().getNome());
-        System.out.println("Data: " + reserva.getData());
-        System.out.println("Info Quarto: " + reserva.getQuarto());
+        System.out.println(reserva.toString());
     }
     
     /**
@@ -257,6 +259,7 @@ public class Sistema {
      * @param dados
      * @param nomeArquivo 
      */
+    
     //FUNÇÃO QUE SALVA OS DADOS DE UMA LISTA EM ARQUIVO JSON
     public static void salvarDados(List<?> dados, String nomeArquivo) {
         // Criar um ObjectMapper do Jackson

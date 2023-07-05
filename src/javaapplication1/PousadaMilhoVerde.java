@@ -10,8 +10,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import static javaapplication1.Sistema.editar;
+import static javaapplication1.Sistema.gerarExtrato;
 import static javaapplication1.Sistema.incluir;
 import static javaapplication1.Sistema.realizarReserva;
+import static javaapplication1.Sistema.remover;
+import static javaapplication1.Sistema.salvarDados;
 
 //import org.json.simple.JSONArray;;
 //import org.json.simple.parser.ParseException;;
@@ -32,11 +36,6 @@ public class PousadaMilhoVerde {
         
        // Funcionario func = new Funcionario();
 
-        //testa inicialmente pra mostrar que os valores estão zerados
-//        Sistema.numInstancias();
-//        Sistema sis = new Sistema();
-
-
         //Lista encadeada para o banco de dados onde vai ser inserida listas
         ArrayList<Object> Bd = new ArrayList<>();
         //Lista de clientes
@@ -50,30 +49,46 @@ public class PousadaMilhoVerde {
         Cliente cliente2 = new Cliente("Getulio", "123.456.789-57", "Diamantina", "8021983", "getjose@");
         Cliente cliente3 = new Cliente("Dudu", "123.456.789-57", "Diamantina", "389982356", "Duduvisitante@");
         Funcionario func = new Funcionario("@rafa919", "123023","atendente","Rafael","123456789","Diamantina","3399833","RafaDias@");
+        Reserva reserva1 = new Reserva();
+        Reserva reserva2 = new Reserva();
         
-        
+        clienteComparator comparator = new clienteComparator();
+        ReservaComparator comparatorReserva = new ReservaComparator();
         listaClientes.add(cliente2);
         listaClientes.add(cliente3);
+        
+        //QUESTÃO 06
+        incluir(funcionarios,func);
+        editar(funcionarios,func);
+        remover(funcionarios,func);
+        
+        //QUESTÃO 07
         incluir(listaClientes,cliente2);
+        editar(listaClientes,cliente3);
+        remover(listaClientes,cliente2);
+        
+        //QUESTÃO 08
+        reserva1.toString();
         
         realizarReserva(reserva,cliente2);
         
         System.out.println(reserva);
+
+        //QUESTÃO 10
+        gerarExtrato(reserva1);
+
+        //QUESTÃO 12
+        Sistema.numInstancias();
         
-//        Sistema.incluir(funcionarios, func);
-//        Sistema.incluir(listaClientes,cliente2);
-//        //LEMBRAR QUE PRA EDITAR O CPF TEM QUE ESTAR CORRETO
-//        Sistema.editar(listaClientes, cliente3);
-//         //Adicinando lista de clientes na base de dados
-//
-//        Bd.add(listaClientes);
-//        Bd.add(funcionarios);
-//
-//        System.out.println(Bd);
-//        //Funcionando corretamente
-//        LocalDate data = LocalDate.of(2023, 5, 22);
-//        //Mostra o numero das instancias ao fim da execução
-//        Sistema.numInstancias();
-//    
+        //QUESTÃO 13
+        comparator.compare(cliente2,cliente3);
+        comparatorReserva.compare(reserva1, reserva2);
+    
+       //QUESTÃO 14
+       salvarDados(funcionarios,"Funcionarios.json");
+       
+       //QUESTÃO 15
+       //Está em todas as classes.
+       
     }
 }

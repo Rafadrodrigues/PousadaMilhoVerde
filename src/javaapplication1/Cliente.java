@@ -16,14 +16,17 @@ public class Cliente extends Pessoa {
     //Atributos da classe Cliente
     private LocalDate dataDesejada;
     private String cartaoCredito;
+    //QUESTÃO 11
     protected static int totalClienteProtec = 0;
     private static int totalClientePrivate = 0;
+    
     public Cliente(){
         super ();
     }
     //Construtor da classe Cliente
     public Cliente(String nome, String cpf, String endereco, String telefone, 
         String email, LocalDate dataDesejada,String horarioDesejado,String cartaoCredito) {
+        //Questao 04
         super(nome, cpf, endereco, telefone, email);
         this.dataDesejada = dataDesejada;
         this.cartaoCredito = cartaoCredito;
