@@ -22,7 +22,7 @@ import java.util.Scanner;
 public class Sistema {
     //QUESTAO 05
     //Inicializando os 10 quaros da memória
-    private static Quarto[] quartos = new Quarto[]{
+    public static Quarto[] quartos = new Quarto[]{
         new Quarto("001", 50, "Comun", false),
         new Quarto("002", 50, "Comun", false),
         new Quarto("003", 50, "Comun", false),
@@ -46,7 +46,7 @@ public class Sistema {
     //Lê a lista de funcionarios do Json para pegar as senhas
     private static List listaFuncionario() {
         List<Funcionario> Colaboradores = new ArrayList<>();
-        Colaboradores = Sistema.carregarDados("Funcionarios.json");
+        Colaboradores = Sistema.carregarDados("Funcionarios.json", Funcionario.class);
         return Colaboradores;
     }
     /**
@@ -268,7 +268,8 @@ public class Sistema {
 
         try {
             // Serializar a lista de objetos em um arquivo JSON
-            objectMapper.writeValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo), dados);
+            objectMapper.writeValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo), dados);
+            //objectMapper.writeValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo), dados);
             System.out.println("Arquivo JSON criado com sucesso.");
         } catch (IOException e) {
             e.printStackTrace();
@@ -281,24 +282,36 @@ public class Sistema {
      */
     //FUNÇÃO RESPONSAVEL POR LER O ARQUIVO JSON E RETORNA UMA LISTA COM OS VALORES CONTIDOS NELE
     // OS DADOS QUE VAO SER COLETADOS SERÃO OS DO FUNCIONARIO, CLIENTE E RESERVA
-    public static <T> List<T> carregarDados(String nomeArquivo) {
-        ObjectMapper objectMapper = new ObjectMapper();
+//    public static <T> List<T> carregarDados(String nomeArquivo, List<T> lista) {
+//        ObjectMapper objectMapper = new ObjectMapper();
+//
+//        try {
+//            // Ler o arquivo JSON e converter para uma lista de objetos da classe Cliente
+//            //List<Cliente> listaClientes = objectMapper.readValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
+//             lista= (List<T>) objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
+//                    new TypeReference<List<T>>() {
+//            });
+//
+//            // Retorna a lista com os dados do arquivo
+//            return lista;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        // Caso não consiga ler, retorna null
+//        return null;
+//    }
+    public static <T> List<T> carregarDados(String nomeArquivo, Class<T> tipoClasse) {
+    ObjectMapper objectMapper = new ObjectMapper();
 
-        try {
-            // Ler o arquivo JSON e converter para uma lista de objetos da classe Cliente
-            //List<Cliente> listaClientes = objectMapper.readValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
-            List<T> listaClientes = (List<T>) objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
-                    new TypeReference<List<Cliente>>() {
-            });
-
-            // Retorna a lista com os dados do arquivo
-            return listaClientes;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // Caso não consiga ler, retorna null
-        return null;
+    try {
+        return objectMapper.readValue(new File(nomeArquivo), objectMapper.getTypeFactory().constructCollectionType(List.class, tipoClasse));
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+
+    return null;
+}
+
     /**
      * Esse métoddo vai servir como um contador para saber quantas vezes as classe 
      * Reserva e a classe Cliente foram instanciadas em nosso código.
