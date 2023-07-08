@@ -84,16 +84,20 @@ public class PousadaMilhoVerde {
         List<Reserva> listaReserva = new ArrayList<>();
         List<Cliente> listaClientes = new ArrayList<>();
         Cliente cliente1 = new Cliente("Getulio Santos","123.456.789-10","Diamantina","3899910234","getulio.santos@email");
-       listaClientes.add(cliente1);
+        Cliente cliente3 = new Cliente("Dudu", "123.456.789-57", "Diamantina", "389982356", "Duduvisitante@");
+       listaClientes = incluir(listaClientes,cliente1);
+       listaClientes = incluir(listaClientes,cliente3);
         List<Funcionario> funcionarios = new ArrayList<>();
         funcionarios=carregarDados("Funcionarios.json", Funcionario.class);
-        LocalDate data = LocalDate.of(2023, 7, 15);
-
+        LocalDate data = LocalDate.of(2023, 7, 13);
+         LocalDate data2 = LocalDate.of(2023, 7, 22);
         Reserva reserva1= new Reserva(data,quartos[0]);
-        System.out.println(reserva1);
-        cliente1.setDataDesejada(data);
-        realizarReserva(listaReserva,cliente1);
-        realizarReserva(listaReserva,cliente1);
+        Reserva reserva2= new Reserva(data2,quartos[1]);
+        listaReserva.add(reserva2);
+        listaReserva.add(reserva1);
+        
+         listaReserva=Sistema.excluirReserva(listaReserva,reserva1);
+          listaReserva= Sistema.excluirReserva(listaReserva,reserva2);
         for (Reserva item : listaReserva) {
        System.out.println(item);}
 }

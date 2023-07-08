@@ -6,6 +6,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Comparator;
+import java.util.Scanner;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -210,6 +222,39 @@ public class Sistema {
         System.out.println("Reserva não encontrada.");
         return listaReserva;
     }
+     //Método responsável por realizar o cancelamento de Reserva
+    public static List<Reserva> excluirReserva(List<Reserva> listaReserva, Reserva reserva){  
+       //Verificar se esta correto
+        for (Reserva item : listaReserva) {
+           if(item.equals(reserva))
+                listaReserva.remove(reserva);
+                System.out.println("valor a combrar do cartão " + (calcularMulta(reserva.getData(), reserva.getQuarto().getPreco())));   
+                return listaReserva;
+            }
+        
+        System.out.println("Reserva não encontrada.");
+        return listaReserva;
+    }
+    
+    //metodo responsalvel por calular o valor da multa ao cancelar uma reserva
+    //entre como paramentro a data para poder comparar com a atual e também o valor de uma diraria 
+    public static double calcularMulta( LocalDate data, double diaria){
+        
+        //pega a data atual do sistema
+        LocalDate dataAtual = LocalDate.now();
+        //Calcula a diferença entre as datas 
+        long diferenca = ChronoUnit.DAYS.between(dataAtual, data);
+        double multa=0;
+        //se a diferença for mais do que uma semana 
+        if(diferenca >= 7){
+            //Retorna o valor de medade de uma diaria pra multa
+            return multa=diaria*0.5;
+        }else{
+            //Caso contrario retorn o preço de uma diaria completa 
+            return multa=diaria;
+        }
+        
+    }
 
     /**
      * Método que será utilizada para fornecer informações do extrato após a realização
@@ -304,11 +349,13 @@ public class Sistema {
     ObjectMapper objectMapper = new ObjectMapper();
 
     try {
+         // Ler o arquivo JSON e converter para uma lista de objetos da classe
+          //E retorna a lista com os dados do arquivo
         return objectMapper.readValue(new File(nomeArquivo), objectMapper.getTypeFactory().constructCollectionType(List.class, tipoClasse));
     } catch (IOException e) {
         e.printStackTrace();
     }
-
+     // Caso não consiga ler, retorna null
     return null;
 }
 
