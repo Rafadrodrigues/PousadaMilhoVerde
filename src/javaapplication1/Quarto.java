@@ -10,14 +10,12 @@ public class Quarto {
     private String id;
     private double preco;
     private String categoria;//podendo ser luxo ou comun
-    private boolean ocupation;
     
     //Construtor da classe
-    public Quarto(String id, double preco, String categoria,boolean ocupation) {
+    public Quarto(String id, double preco, String categoria) {
         this.id = id;
         this.preco = preco;
         this.categoria = categoria;
-        this.ocupation = ocupation;
     }
 
     public Quarto() {
@@ -45,15 +43,9 @@ public class Quarto {
     public void setPreco(float preco) {
         this.preco = preco;
     }
-    public boolean isOcupation() {
-        return ocupation;
-    }
-    public void setOcupation(boolean ocupation) {
-        this.ocupation = ocupation;
-    }
 
     @Override
     public String toString() {
-        return "Quarto{" + "Id= " + id + ", Preco= " + preco + ", Categoria= " + categoria + ", Ocupation= " + ocupation + "}";
+        return "Quarto{" + "Id= " + id + ", Preco= " + preco + ", Categoria= " + categoria + "}";
     }
 }

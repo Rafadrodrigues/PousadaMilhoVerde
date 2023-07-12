@@ -12,19 +12,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Comparator;
-import java.util.Scanner;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Comparator;
-import java.util.Scanner;
-
 /**
  * Clase Sistema, classe responsável por gerenciar as informações entre o Banco de
  * dados e a Interface que é acessada pelo funcionário.Nela está contida as principais
@@ -35,16 +22,16 @@ public class Sistema {
     //QUESTAO 05
     //Inicializando os 10 quaros da memória
     public static Quarto[] quartos = new Quarto[]{
-        new Quarto("001", 50, "Comun", false),
-        new Quarto("002", 50, "Comun", false),
-        new Quarto("003", 50, "Comun", false),
-        new Quarto("004", 50, "Comun", false),
-        new Quarto("005", 50, "Comun", false),
-        new Quarto("006", 100.60, "Luxo", false),
-        new Quarto("007", 100.60, "Luxo", false),
-        new Quarto("008", 100.60, "Luxo", false),
-        new Quarto("009", 100.60, "Luxo", false),
-        new Quarto("010", 100.60, "Luxo", false),};
+        new Quarto("001", 50, "Comun"),
+        new Quarto("002", 50, "Comun" ),
+        new Quarto("003", 50, "Comun"),
+        new Quarto("004", 50, "Comun"),
+        new Quarto("005", 50, "Comun"),
+        new Quarto("006", 100.60, "Luxo"),
+        new Quarto("007", 100.60, "Luxo"),
+        new Quarto("008", 100.60, "Luxo"),
+        new Quarto("009", 100.60, "Luxo"),
+        new Quarto("010", 100.60, "Luxo"),};
 
     //Get e Set para manipular o atributo
     public static Quarto[] getQuartos() {
@@ -144,74 +131,83 @@ public class Sistema {
 /**
  * Esse método inseri funcionários na base de dados
      * @param listaReserva
-     * @param data
+     * @param cliente
+     * @param dataDesejada
      * @param idQuarto
-    * @param Colaboradores
     * @return 
  */
     //Método responsável por verificar reserva e entregar quais quartos estão disponiveis
-    public static boolean verificarReserva(List<Reserva> listaReserva, LocalDate data, String idQuarto) {
+    public static List criarReserva(List<Reserva> listaReserva, Cliente cliente, String idQuarto,LocalDate dataDesejada) {
         //Fazer verificacao da data e quarto na reserva.Para verificar a data é preciso da classe reserva
         if (listaReserva.isEmpty()) {
             System.out.println("\nExiste disponibilidade em todos os quartos.");
             //Como a lista está vazia todos os quartos estao livres
-            return true;
-        }
-        //ALTERAR SÓ PARA TOSTRING(TALVEZ)
+            Reserva reserva = new Reserva();
+            Quarto quarto = new Quarto();
+            //String idSelecionado = sc.nextLine(); // ID a ser procurado
+            //Preenchendo os campos da reserva e do quarto
+            quarto.setId(idQuarto);
+            reserva.setCliente(cliente);
+            //Essa estrutura é para identificar qual quarto que foi selecionado
+            for (Quarto quarto1 : quartos) {
+                if (quarto1.getId().equals(idQuarto)) {
+                    reserva.setQuarto(quarto1);
+                    // Sai do loop após encontrar o quarto desejado
+                    break; 
+                }
+            }
+            reserva.setData(dataDesejada);
+            //Agora acrescentamos tudo da lista de reserva
+            listaReserva.add(reserva);
+            System.out.println("Reserva realizada com sucesso.");
+            return listaReserva;
+        }else{
         //Loop que percorre a lista 
         for (Reserva reserva : listaReserva) {
             //Verificando na lista de reserva se o quarto está disponível naquela data. As duas condicoes devem ser satisfeitas
-            if (reserva.getData().equals(reserva.getData()) && reserva.equals(reserva.getQuarto())) {
-                System.out.println("O quarto " + reserva.getQuarto() + " não esta disponível na data " + reserva.getData());
-                return false;
+            if(reserva.getData().equals(dataDesejada) && reserva.getQuarto().getId().equals(idQuarto)) {
+                System.out.println("\nNão possível realizar reserva, data indisponível.");
+                return listaReserva;
             } else {
-                System.out.println("O quarto tem disponibilidade nessa data ");
-                return true;
+                Reserva reserva1 = new Reserva();
+                Quarto quarto = new Quarto();
+                //String idSelecionado = sc.nextLine(); // ID a ser procurado
+                //Preenchendo os campos da reserva e do quarto
+                quarto.setId(idQuarto);
+                reserva1.setCliente(cliente);
+                //Essa estrutura é para identificar qual quarto que foi selecionado
+                for (Quarto quarto1 : quartos) {
+                    if (quarto1.getId().equals(idQuarto)) {
+                        reserva1.setQuarto(quarto1);
+                        // Sai do loop após encontrar o quarto desejado
+                        break; 
+                    }
+                }
+                reserva1.setData(dataDesejada);
+                //Agora acrescentamos tudo da lista de reserva
+                listaReserva.add(reserva1);
+                System.out.println("\nReserva realizada com sucesso.");
+                return listaReserva;
             }
         }
-        return true;
+        return listaReserva;
     }
+   }
     /**
      * Método que inclui alguma reserva realizada na base de dados, para que seja realizada
      * corretamente, é preciso que seja feita alguma verificação de disponibilidade.
      * @param listaReserva
      * @param cliente
+     * @param idQuarto
+     * @param dataDesejada
      * @return 
      */
     
-    //Método responsável por receber data e comparar disponibilidade
-    public static List realizarReserva(List<Reserva> listaReserva, Cliente cliente) {
-        // Aqui vai armazenar a reserva na lista de reserva e depois preencher os atributos da classe reserva
-
-        Scanner sc = new Scanner(System.in);
-        
-        Reserva reserva = new Reserva();
-        Quarto quarto = new Quarto();
-        
-        //Preenchendo os campos da reserva e do quarto
-        quarto.setId(sc.nextLine());
-        quarto.setOcupation(true);
-        reserva.setCliente(cliente);
-        String idSelecionado = sc.nextLine(); // ID a ser procurado
-        //Essa estrutura é para identificar qual quarto que foi selecionado
-        for(int i=0;i<quartos.length;i++) {
-            if (quarto.getId().equals(idSelecionado)) {
-                reserva.setQuarto(quartos[i]);
-                // Saia do loop após encontrar o quarto desejado
-                break; 
-            }
-        }
-        reserva.setData(cliente.getDataDesejada());
-        //Agora acrescentamos tudo da lista de reserva
-        listaReserva.add(reserva);
-        return listaReserva;
-    }
-
     //Método responsável por realizar o cancelamento de Reserva
-    public static List<Reserva> cancelarReserva(List<Reserva> listaReserva, Reserva reserva){  
+    public static List cancelarReserva(List<Reserva> listaReserva, Cliente cliente, String idQuarto){  
        //Verificar se esta correto
         for (Reserva item : listaReserva) {
-            if (item.getQuarto().equals(reserva.getQuarto())&&(item.getCliente().equals(reserva.getCliente()))) {
+            if (item.getQuarto().getId().equals(idQuarto) && (item.getCliente().equals(cliente))) {
                 //Considerando que já tenha um quarto na base de dados.
                 //Para reposicionar itens, é preciso que o indice seja inteiro
                 listaReserva.remove(item);
@@ -222,20 +218,6 @@ public class Sistema {
         System.out.println("Reserva não encontrada.");
         return listaReserva;
     }
-     //Método responsável por realizar o cancelamento de Reserva
-    public static List<Reserva> excluirReserva(List<Reserva> listaReserva, Reserva reserva){  
-       //Verificar se esta correto
-        for (Reserva item : listaReserva) {
-           if(item.equals(reserva))
-                listaReserva.remove(reserva);
-                System.out.println("valor a combrar do cartão " + (calcularMulta(reserva.getData(), reserva.getQuarto().getPreco())));   
-                return listaReserva;
-            }
-        
-        System.out.println("Reserva não encontrada.");
-        return listaReserva;
-    }
-    
     //metodo responsalvel por calular o valor da multa ao cancelar uma reserva
     //entre como paramentro a data para poder comparar com a atual e também o valor de uma diraria 
     public static double calcularMulta( LocalDate data, double diaria){
