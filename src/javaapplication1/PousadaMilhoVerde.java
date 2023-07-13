@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import static javaapplication1.Sistema.cancelarReserva;
@@ -78,8 +79,7 @@ public class PousadaMilhoVerde {
 //       //QUESTÃO 14
 //       salvarDados(funcionarios,"Funcionarios.json");
 //       
-//       //QUESTÃO 15
-//       //Está em todas as classes.
+
         Quarto[] quartos = Sistema.quartos;
         List<Reserva> listaReserva = new ArrayList<>();
         List<Cliente> listaClientes = new ArrayList<>();
@@ -99,6 +99,27 @@ public class PousadaMilhoVerde {
         
         Sistema.FazerLogin("Getulio", "123456");
         
+        //QUESTÃO 15
+        //ESTOU FAZENDO TESTES AINDA, DEPOIS DEVO APAGAR ALGUMAS LINHAS 
+
+        clienteComparator compareCliente = new clienteComparator();
+        compareCliente.compare(cliente1, cliente3);
+        
+        Iterator<Cliente> iterator1 = listaClientes.iterator();
+        
+        Collections.sort(listaClientes, compareCliente);
+        
+        while(iterator1.hasNext()){
+            Cliente usuario = iterator1.next();
+            System.out.println(usuario);
+        }
+        
+        /*Ele se assemelha com um for-each na questão que ele percorre a
+        lista em busca de obejto do mesmo tipo enquanto houver um elemento após
+        o atual(acho que é isso)*/
+        
+        
+        // O HASNEXT VERIFICA SE TEM OUTROS ELEMENTOS APÓS O ATUAL
 //        listaClientes = incluir(listaClientes,cliente1);
 //        listaClientes = incluir(listaClientes,cliente3);
 //        List<Funcionario> funcionarios = new ArrayList<>();
