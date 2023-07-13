@@ -12,6 +12,90 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Comparator;
+import java.util.TreeSet;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Comparator;
+import java.util.HashMap;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Comparator;
+import java.util.TreeSet;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Comparator;
+import java.util.Map;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Comparator;
+import java.util.TreeSet;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Comparator;
+import java.util.HashMap;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Comparator;
+import java.util.TreeSet;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Comparator;
 /**
  * Clase Sistema, classe responsável por gerenciar as informações entre o Banco de
  * dados e a Interface que é acessada pelo funcionário.Nela está contida as principais
@@ -43,10 +127,14 @@ public class Sistema {
     }
 
     //Lê a lista de funcionarios do Json para pegar as senhas
-    private static List listaFuncionario() {
+    private static TreeSet listaFuncionario() {
+        TreeSet<Funcionario> arvoreFuncionarios = new TreeSet<>(Comparator.comparing(Funcionario::getNome));
         List<Funcionario> Colaboradores = new ArrayList<>();
-        Colaboradores = Sistema.carregarDados("Funcionarios.json", Funcionario.class);
-        return Colaboradores;
+        Colaboradores =Sistema.carregarDados("Funcionarios.json", Funcionario.class);
+         for (Funcionario elemento : Colaboradores) {
+            arvoreFuncionarios.add(elemento);
+        }
+        return arvoreFuncionarios;
     }
     /**
      * Este método realiza o login do usuário no Sistema, ele valida e libera o acesso
@@ -55,14 +143,16 @@ public class Sistema {
      */
     public static boolean FazerLogin(String user, String pin) {
         //Lista de funcionarios;
-        List<Funcionario> Colaboradores = listaFuncionario();
+        TreeSet<Funcionario> arvoreFuncionarios = listaFuncionario();
         //o for percorre a lista dos funcionarios
-        for (int i = 0; i < Colaboradores.size(); i++) {
-            if (user.equals(Colaboradores.get(i).getUsuario()) && pin.equals(Colaboradores.get(i).getSenha())) {
+        for (Funcionario aux : arvoreFuncionarios) { 
+            if (user.equals(aux.getUsuario()) && pin.equals(aux.getSenha())) {
                 //se a senha e usuario bater com algum o login é feito
                 System.out.print("Sistema Liberado\n");
 //                Sistema.executar(Colaboradores.get(i));
                 return true;
+                //TALVEZ MUDAR O TIPO DA FUNÇÃO E RETORNAR O FUNCIONARIO DAQUELA
+                //SENHA PARA OLHAR PELO CARGO, DEIXAR UMA  LISTA SALVA DOS POSSIVEIS CARGOS E AI LIBERAR DE ACORDO
             }
             else{
                 System.out.print("Sistema negado\n");
@@ -351,5 +441,22 @@ public class Sistema {
         int numClientePrivate = Cliente.gettotalClientePrivate();
         int numReserva = Reserva.getTotalReservas();
         System.out.print("Numeros de instancias da classe pessoa " + numClientePrivate + " ,e da classe reserva sao " + numReserva + "\n");
+    }
+    
+    public static double calcularFaturamento(int mes){
+        double Faturamento=0;
+//        List<Reserva> listaReserva = Sistema.carregarDados("Reserva.json", Reserva.class);
+//        
+//        Map<Integer, Reserva> datasPorMes = new HashMap<>();
+//        for (Reserva aux : listaReserva) {
+//            int mes = aux.getData().getMonthValue();
+//            if (!datasPorMes.containsKey(mes)) {
+//                datasPorMes.put(mes, new ArrayList<>());
+//            }
+//            datasPorMes.get(mes).add(data);
+//        }
+// A IDEIA E BUSCAR AS RESERVAS DAQUELE MÊS QUE SERIA A RECEITA E O CUSTO COM OS FUNCIONARIOS SERIA A DESPESA, AI FAXER R-D PRA ACHAR O FATURAMENTO
+        
+        return Faturamento;
     }
 }

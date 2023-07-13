@@ -1,0 +1,37 @@
+[ {
+  "nome" : "Getulio Santos",
+  "cpf" : "123.456.789-57",
+  "endereco" : "Diamantina",
+  "email" : "getuliosantos@email",
+  "telefone" : "389985756",
+  "dataDesejada" : null,
+  "cartaoCredito" : null,
+  "usuario" : "Getulio",
+  "senha" : "123456",
+  "cargo" : "gerente",
+  "salario" : 0.0
+}, {
+  "nome" : "Rafael",
+  "cpf" : "12345678",
+  "endereco" : "Belo Horizonte",
+  "email" : "rafadias@email.com",
+  "telefone" : "339986743",
+  "dataDesejada" : null,
+  "cartaoCredito" : null,
+  "usuario" : "@rafa919",
+  "senha" : "123023",
+  "cargo" : "recepcionista",
+  "salario" : 0.0
+}, {
+  "nome" : "lknkln",
+  "cpf" : "jklj",
+  "endereco" : "nlknl]",
+  "email" : "nklnkn",
+  "telefone" : "klnkln",
+  "dataDesejada" : null,
+  "cartaoCredito" : null,
+  "usuario" : "knlnkl",
+  "senha" : "lknlknl",
+  "cargo" : "klnklnlk",
+  "salario" : 0.0
+} ]

@@ -97,6 +97,8 @@ public class PousadaMilhoVerde {
         
         System.out.println(listaReserva);
         
+        Sistema.FazerLogin("Getulio", "123456");
+        
 //        listaClientes = incluir(listaClientes,cliente1);
 //        listaClientes = incluir(listaClientes,cliente3);
 //        List<Funcionario> funcionarios = new ArrayList<>();
