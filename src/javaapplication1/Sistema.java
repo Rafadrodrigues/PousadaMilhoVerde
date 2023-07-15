@@ -315,7 +315,8 @@ public class Sistema {
 
         try {
             // Serializar a lista de objetos em um arquivo JSON
-            objectMapper.writeValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo), dados);
+             objectMapper.writeValue(new File(nomeArquivo), dados);
+//            objectMapper.writeValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo), dados);
             //objectMapper.writeValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo), dados);
             System.out.println("Arquivo JSON criado com sucesso.");
         } catch (IOException e) {
@@ -372,22 +373,23 @@ public class Sistema {
         int numReserva = Reserva.getTotalReservas();
         System.out.print("Numeros de instancias da classe pessoa " + numClientePrivate + " ,e da classe reserva sao " + numReserva + "\n");
     }
-    
-    public static double calcularFaturamento(int mes){
-        double Faturamento=0;
-//        List<Reserva> listaReserva = Sistema.carregarDados("Reserva.json", Reserva.class);
-//        
-//        Map<Integer, Reserva> datasPorMes = new HashMap<>();
-//        for (Reserva aux : listaReserva) {
-//            int mes = aux.getData().getMonthValue();
-//            if (!datasPorMes.containsKey(mes)) {
-//                datasPorMes.put(mes, new ArrayList<>());
-//            }
-//            datasPorMes.get(mes).add(data);
-//        }
+    //da pra melhorar esse código com um parametro de periodo para retornar o valor apenas daquele mês por exemplo
+    public static double calcularFaturamento(){
+        double faturamento=0, receita=0, despesa=0;
+        List<Reserva> listaReserva = Sistema.carregarDados("Reserva.json", Reserva.class);
+        List<Funcionario> listaFuncionario = Sistema.carregarDados("Funcionario.json", Funcionario.class);
+        for( Reserva aux : listaReserva){
+            //receita recebe o valor dos quartos na reserva
+            receita += aux.getQuarto().getPreco();
+        }
+        
+        for( Funcionario aux : listaFuncionario){
+            //despesa recebe o gasto com os salarios do funcionarios
+            despesa += aux.getSalario();
+        }
 // A IDEIA E BUSCAR AS RESERVAS DAQUELE MÊS QUE SERIA A RECEITA E O CUSTO COM OS FUNCIONARIOS SERIA A DESPESA, AI FAXER R-D PRA ACHAR O FATURAMENTO
         
-        return Faturamento;
+        return faturamento= receita - despesa;
     }
     
     public static <T> List<T> find(List<T> lista, T usuario){

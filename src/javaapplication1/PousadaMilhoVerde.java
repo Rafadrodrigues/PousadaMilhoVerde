@@ -86,19 +86,19 @@ public class PousadaMilhoVerde {
         
         Cliente cliente1 = new Cliente("Getulio Santos","123.456.789-10","Diamantina","3899910234","getulio.santos@email");
         Cliente cliente3 = new Cliente("Dudu", "123.456.789-57", "Diamantina", "389982356", "Duduvisitante@");
-        
-        LocalDate data = LocalDate.of(2023, 7, 13);
+        listaClientes.add(cliente1);
+        listaClientes.add(cliente3);
+        LocalDate data = LocalDate.of(2023, 7, 20);
         
         criarReserva(listaReserva,cliente1,"002",data);
-        criarReserva(listaReserva,cliente1,"002",data);
+        criarReserva(listaReserva,cliente3,"002",data);
         criarReserva(listaReserva,cliente1,"009",data);
         
-        cancelarReserva(listaReserva,cliente1, "002");
+        //cancelarReserva(listaReserva,cliente1, "002");
         
         System.out.println(listaReserva);
-        
-        Sistema.FazerLogin("Getulio", "123456");
-        
+        salvarDados(listaClientes,"Clientes.json");
+        salvarDados(listaReserva,"Reserva.json");
         //QUESTÃO 15
         //ESTOU FAZENDO TESTES AINDA, DEPOIS DEVO APAGAR ALGUMAS LINHAS 
 

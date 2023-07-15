@@ -6,4 +6,12 @@
   "telefone" : "3899910234",
   "dataDesejada" : null,
   "cartaoCredito" : null
+}, {
+  "nome" : "Dudu",
+  "cpf" : "123.456.789-57",
+  "endereco" : "Diamantina",
+  "email" : "Duduvisitante@",
+  "telefone" : "389982356",
+  "dataDesejada" : null,
+  "cartaoCredito" : null
 } ]
