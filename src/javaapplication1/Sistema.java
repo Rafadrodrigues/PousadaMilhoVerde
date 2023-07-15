@@ -152,17 +152,18 @@ public class Sistema {
  * Esse método inseri funcionários na base de dados
      * @param listaReserva
      * @param cliente
-     * @param dataDesejada
+     * @param dataInicio
+     * @param dataFim
      * @param idQuarto
     * @return 
  */
     //Método responsável por verificar reserva e entregar quais quartos estão disponiveis
-    public static List criarReserva(List<Reserva> listaReserva, Cliente cliente, String idQuarto,LocalDate dataDesejada) {
+    public static List criarReserva(List<Reserva> listaReserva, Cliente cliente, String idQuarto,LocalDate dataInicio,LocalDate dataFim) {
         //Fazer verificacao da data e quarto na reserva.Para verificar a data é preciso da classe reserva
         if (listaReserva.isEmpty()) {
             System.out.println("\nExiste disponibilidade em todos os quartos.");
             //Como a lista está vazia todos os quartos estao livres
-            Reserva reserva = new Reserva();
+            Reserva reserva = new Reserva( dataInicio, dataFim);
             Quarto quarto = new Quarto();
             //String idSelecionado = sc.nextLine(); // ID a ser procurado
             //Preenchendo os campos da reserva e do quarto
@@ -176,7 +177,7 @@ public class Sistema {
                     break; 
                 }
             }
-            reserva.setData(dataDesejada);
+            reserva.setPeriodo(gerarPeriodo(dataInicio,dataFim));
             //Agora acrescentamos tudo da lista de reserva
             listaReserva.add(reserva);
             System.out.println("Reserva realizada com sucesso.");
@@ -184,12 +185,13 @@ public class Sistema {
         }else{
         //Loop que percorre a lista 
         for (Reserva reserva : listaReserva) {
+            Reserva reserva1 = new Reserva(dataInicio,dataFim);
+            
             //Verificando na lista de reserva se o quarto está disponível naquela data. As duas condicoes devem ser satisfeitas
-            if(reserva.getData().equals(dataDesejada) && reserva.getQuarto().getId().equals(idQuarto)) {
+            if(verificarPeriodo(reserva,reserva1) && reserva.getQuarto().getId().equals(idQuarto)) {
                 System.out.println("\nNão possível realizar reserva, data indisponível.");
                 return listaReserva;
             } else {
-                Reserva reserva1 = new Reserva();
                 Quarto quarto = new Quarto();
                 //String idSelecionado = sc.nextLine(); // ID a ser procurado
                 //Preenchendo os campos da reserva e do quarto
@@ -203,7 +205,7 @@ public class Sistema {
                         break; 
                     }
                 }
-                reserva1.setData(dataDesejada);
+                reserva1.setPeriodo(gerarPeriodo(dataInicio,dataFim));
                 //Agora acrescentamos tudo da lista de reserva
                 listaReserva.add(reserva1);
                 System.out.println("\nReserva realizada com sucesso.");
@@ -402,5 +404,28 @@ public class Sistema {
             System.out.println(usuario);
         }
         return null;
+    }
+    public static boolean verificarPeriodo(Reserva reserva1, Reserva reserva2) {
+    LocalDate inicio1 = reserva1.getDataInicio();
+    LocalDate fim1 = reserva1.getDataFim();
+    LocalDate inicio2 = reserva2.getDataInicio();
+    LocalDate fim2 = reserva2.getDataFim();
+        // Verificar se há sobreposição nas datas
+        // Não há sobreposição de datas
+
+    return (inicio1.isBefore(inicio2) && fim1.isAfter(inicio2)) ||
+            (inicio1.isAfter(inicio2) && inicio1.isBefore(fim2)) ||
+            (inicio1.isEqual(inicio2) && fim1.isEqual(fim2));
+
+}
+     public static  List<LocalDate> gerarPeriodo(LocalDate dataInicio, LocalDate dataFim) {
+        List<LocalDate> periodo = new ArrayList<>();
+        LocalDate dataAtual = dataInicio;
+        while (!dataAtual.isAfter(dataFim)) {
+            periodo.add(dataAtual);
+            dataAtual = dataAtual.plusDays(1);
+        }
+
+        return periodo;
     }
 }

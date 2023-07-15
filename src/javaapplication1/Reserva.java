@@ -7,15 +7,18 @@ import java.util.List;
 /**
  * Classe Reserva, nela estão contidas informações sobre a reservas da Pousada
  * Milho Verde
+ *
  * @author rafar
  */
 public class Reserva {
-    
+
     //Atributos da classe agenda, alguns podem ser retirados posteriormente.
     //Occupation inicialmente recebe false para sinalizar que o quarto não esta ocupado
     //Data,quarto e cliente vão ser armazenados no calendario
-    private LocalDate data;
-    private Quarto quarto ;
+    private List<LocalDate> periodo;
+    private LocalDate dataInicio;
+    private LocalDate dataFim;
+    private Quarto quarto;
     private Cliente cliente;
     //QUESTÃO 11
     private static int totalReservas = 0;
@@ -23,25 +26,50 @@ public class Reserva {
 
     /**
      *
-     * @param data
+     * @param dataInicio
+     * @param dataFim
      * @param quarto
      */
-    public Reserva(LocalDate data,Quarto quarto) {
-        this.data = data;
+    public Reserva(LocalDate dataInicio, LocalDate dataFim, Quarto quarto) {
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
         this.quarto = quarto;
-        Reserva.totalReservas = Reserva.totalReservas+1;
+        this.periodo = Sistema.gerarPeriodo(dataInicio, dataFim);
+        Reserva.totalReservas = Reserva.totalReservas + 1;
     }
+     public Reserva(LocalDate dataInicio, LocalDate dataFim){
+         this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+     }
     public Reserva() {
-      Reserva.totalReservas = Reserva.totalReservas+1;
-    }
-    //Getters e setters correspondente aos atributos criados nessa classe.
-    public LocalDate getData() {
-        return data;
+        Reserva.totalReservas = Reserva.totalReservas + 1;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
+    //Getters e setters correspondente aos atributos criados nessa classe.
+    public LocalDate getDataInicio() {
+        return dataInicio;
     }
+
+    public void setDataInicio(LocalDate dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public LocalDate getDataFim() {
+        return dataFim;
+    }
+
+    public List<LocalDate> getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(List<LocalDate> periodo) {
+        this.periodo = periodo;
+    }
+
+    public void setDataFim(LocalDate dataFim) {
+        this.dataFim = dataFim;
+    }
+
     public Quarto getQuarto() {
         return quarto;
     }
@@ -65,16 +93,17 @@ public class Reserva {
     public static void setTotalReservas(int totalReservas) {
         Reserva.totalReservas = totalReservas;
     }
-    
+
     //Método que salva a data no calendario
-    public void armazenaReserva(List listaReserva){
+    public void armazenaReserva(List listaReserva) {
         //Sera passado como paramentro o método do sistema que realizaReserva
         List diasReserva = new ArrayList<>();
-        
+
     }
+
     @Override
     public String toString() {
-        return "Reserva{" + "data=" + data + ", quarto=" + quarto + ", cliente=" + cliente + '}';
+        return "Reserva{" + "data inicio=" + dataInicio + ", data fim=" + dataFim + ", quarto=" + quarto + ", cliente=" + cliente + '}';
     }
-    
+
 }

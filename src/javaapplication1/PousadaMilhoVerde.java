@@ -89,16 +89,17 @@ public class PousadaMilhoVerde {
         listaClientes.add(cliente1);
         listaClientes.add(cliente3);
         LocalDate data = LocalDate.of(2023, 7, 20);
-        
-        criarReserva(listaReserva,cliente1,"002",data);
-        criarReserva(listaReserva,cliente3,"002",data);
-        criarReserva(listaReserva,cliente1,"009",data);
+         LocalDate datafim = LocalDate.of(2023, 7, 22);
+        criarReserva(listaReserva,cliente1,"002",data,datafim);
+        System.out.println(listaReserva);
+        criarReserva(listaReserva,cliente3,"002",data,datafim);
+        criarReserva(listaReserva,cliente1,"009",data,datafim);
         
         //cancelarReserva(listaReserva,cliente1, "002");
         
         System.out.println(listaReserva);
-        salvarDados(listaClientes,"Clientes.json");
-        salvarDados(listaReserva,"Reserva.json");
+//        salvarDados(listaClientes,"Clientes.json");
+//        salvarDados(listaReserva,"Reserva.json");
         //QUESTÃO 15
         //ESTOU FAZENDO TESTES AINDA, DEPOIS DEVO APAGAR ALGUMAS LINHAS 
 
@@ -109,10 +110,10 @@ public class PousadaMilhoVerde {
         
         Collections.sort(listaClientes, compareCliente);
         
-        while(iterator1.hasNext()){
-            Cliente usuario = iterator1.next();
-            System.out.println(usuario);
-        }
+//        while(iterator1.hasNext()){
+//            Cliente usuario = iterator1.next();
+//            System.out.println(usuario);
+//        }
         
         /*Ele se assemelha com um for-each na questão que ele percorre a
         lista em busca de obejto do mesmo tipo enquanto houver um elemento após

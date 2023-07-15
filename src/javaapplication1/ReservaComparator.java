@@ -36,5 +36,6 @@ public class ReservaComparator implements Comparator<Reserva>{
         //Caso a data seja igual, compara o quarto (Poderia ser o cliente olhar essa opção]
         return reserva1.getData().getDayOfMonth() - reserva2.getData().getDayOfMonth();
 
+
     }
 }
