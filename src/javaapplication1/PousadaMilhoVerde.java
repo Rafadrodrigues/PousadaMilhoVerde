@@ -1,11 +1,9 @@
 package javaapplication1;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -14,7 +12,6 @@ import java.util.Scanner;
 import static javaapplication1.Sistema.cancelarReserva;
 import static javaapplication1.Sistema.carregarDados;
 import static javaapplication1.Sistema.editar;
-import static javaapplication1.Sistema.gerarExtrato;
 import static javaapplication1.Sistema.incluir;
 import static javaapplication1.Sistema.remover;
 import static javaapplication1.Sistema.salvarDados;
@@ -23,8 +20,9 @@ import static javaapplication1.Sistema.criarReserva;
 //import org.json.simple.parser.ParseException;;
 
 /**
- * Classe Pousada Milho Verde e vai ser responsável por executar nossos arquivos,
- * ela é o arquivo main do nosso programa.
+ * Classe Pousada Milho Verde e vai ser responsável por executar nossos
+ * arquivos, ela é o arquivo main do nosso programa.
+ *
  * @author rafar
  */
 public class PousadaMilhoVerde {
@@ -82,33 +80,36 @@ public class PousadaMilhoVerde {
 
         Quarto[] quartos = Sistema.quartos;
         List<Reserva> listaReserva = new ArrayList<>();
-        List<Cliente> listaClientes = new ArrayList<>();
-        
-        Cliente cliente1 = new Cliente("Getulio Santos","123.456.789-10","Diamantina","3899910234","getulio.santos@email");
+
+        Cliente cliente1 = new Cliente("Getulio Santos", "123.456.789-10", "Diamantina", "3899910234", "getulio.santos@email");
         Cliente cliente3 = new Cliente("Dudu", "123.456.789-57", "Diamantina", "389982356", "Duduvisitante@");
-        listaClientes.add(cliente1);
-        listaClientes.add(cliente3);
-        LocalDate data = LocalDate.of(2023, 7, 20);
-         LocalDate datafim = LocalDate.of(2023, 7, 22);
-        criarReserva(listaReserva,cliente1,"002",data,datafim);
-        System.out.println(listaReserva);
-        criarReserva(listaReserva,cliente3,"002",data,datafim);
-        criarReserva(listaReserva,cliente1,"009",data,datafim);
-        
-        //cancelarReserva(listaReserva,cliente1, "002");
-        
-        System.out.println(listaReserva);
+
+        LocalDate data1 = LocalDate.of(2023, 7, 20);
+        LocalDate data2 = LocalDate.of(2023, 7, 22);
+        LocalDate data3 = LocalDate.of(2023, 8, 5);
+        LocalDate data4 = LocalDate.of(2023, 8, 15);
+
+        criarReserva(listaReserva, cliente1, "002", data1, data2);
+        criarReserva(listaReserva, cliente3, "002", data1, data4);
+        criarReserva(listaReserva, cliente1, "009", data3, data4);
+
+        System.out.println(listaReserva.get(0).Extrato());
+        System.out.println("\n"+listaReserva.get(1).Extrato());
+
+         cancelarReserva(listaReserva,cliente1, "002");
+        Sistema.numInstancias();
+        //System.out.println(listaReserva);
 //        salvarDados(listaClientes,"Clientes.json");
 //        salvarDados(listaReserva,"Reserva.json");
         //QUESTÃO 15
         //ESTOU FAZENDO TESTES AINDA, DEPOIS DEVO APAGAR ALGUMAS LINHAS 
 
-        clienteComparator compareCliente = new clienteComparator();
-        compareCliente.compare(cliente1, cliente3);
-        
-        Iterator<Cliente> iterator1 = listaClientes.iterator();
-        
-        Collections.sort(listaClientes, compareCliente);
+//        clienteComparator compareCliente = new clienteComparator();
+//        compareCliente.compare(cliente1, cliente3);
+//        
+//        Iterator<Cliente> iterator1 = listaClientes.iterator();
+//        
+//        Collections.sort(listaClientes, compareCliente);
         
 //        while(iterator1.hasNext()){
 //            Cliente usuario = iterator1.next();
@@ -141,4 +142,3 @@ public class PousadaMilhoVerde {
 
     }
 }
-    

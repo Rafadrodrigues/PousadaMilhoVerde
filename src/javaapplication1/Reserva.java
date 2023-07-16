@@ -1,5 +1,6 @@
 package javaapplication1;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,8 @@ public class Reserva {
     //Atributos da classe agenda, alguns podem ser retirados posteriormente.
     //Occupation inicialmente recebe false para sinalizar que o quarto não esta ocupado
     //Data,quarto e cliente vão ser armazenados no calendario
-    private List<LocalDate> periodo;
+    //   private List<LocalDate> periodo;
+    private double valor;
     private LocalDate dataInicio;
     private LocalDate dataFim;
     private Quarto quarto;
@@ -30,22 +32,39 @@ public class Reserva {
      * @param dataFim
      * @param quarto
      */
-    public Reserva(LocalDate dataInicio, LocalDate dataFim, Quarto quarto) {
+    public Reserva(LocalDate dataInicio, LocalDate dataFim, Quarto quarto) throws IllegalArgumentException {
+        if (dataInicio == null || dataFim == null || !verificarDatas(dataInicio, dataFim)) {
+            throw new IllegalArgumentException("Data inválida");
+        }
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.quarto = quarto;
-        this.periodo = Sistema.gerarPeriodo(dataInicio, dataFim);
+        this.valor = gerarValor();
         Reserva.totalReservas = Reserva.totalReservas + 1;
     }
-     public Reserva(LocalDate dataInicio, LocalDate dataFim){
-         this.dataInicio = dataInicio;
+
+    public Reserva(LocalDate dataInicio, LocalDate dataFim) throws IllegalArgumentException {
+        if (dataInicio == null || dataFim == null || !verificarDatas(dataInicio, dataFim)) {
+            throw new IllegalArgumentException("Data inválida");
+        }
+        this.dataInicio = dataInicio;
         this.dataFim = dataFim;
-     }
+        Reserva.totalReservas = Reserva.totalReservas + 1;
+    }
+
     public Reserva() {
         Reserva.totalReservas = Reserva.totalReservas + 1;
     }
 
     //Getters e setters correspondente aos atributos criados nessa classe.
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
     public LocalDate getDataInicio() {
         return dataInicio;
     }
@@ -56,14 +75,6 @@ public class Reserva {
 
     public LocalDate getDataFim() {
         return dataFim;
-    }
-
-    public List<LocalDate> getPeriodo() {
-        return periodo;
-    }
-
-    public void setPeriodo(List<LocalDate> periodo) {
-        this.periodo = periodo;
     }
 
     public void setDataFim(LocalDate dataFim) {
@@ -99,6 +110,38 @@ public class Reserva {
         //Sera passado como paramentro o método do sistema que realizaReserva
         List diasReserva = new ArrayList<>();
 
+    }
+
+    public int diasPeriodo(LocalDate dataInicial, LocalDate dataFinal) {
+        int numDias = 0;
+        LocalDate dataAtual = dataInicial;
+        while (!dataAtual.isAfter(dataFinal)) {
+            numDias++;
+            dataAtual = dataAtual.plusDays(1);
+        }
+
+        return numDias;
+    }
+
+    public double gerarValor() {
+        //retorna o numero dos dias das reserva multiplicado pelo preco dos quartos
+        return (diasPeriodo(dataInicio, dataFim) * quarto.getPreco());
+    }
+
+    public String Extrato() {
+        DecimalFormat df = new DecimalFormat("#.00");
+        return "Hospede: " + cliente.getNome() + " .\nQuarto: " + quarto.getId() + ".\nChekin: " + dataInicio
+                + ".\tChekout: " + dataFim + ". \nValor: R$" + df.format(valor);
+    }
+
+    //funçao para verificar se as datas podem ser usada
+    public boolean verificarDatas(LocalDate dataInicial, LocalDate dataFinal) {
+        //se as datas são iguais podem ser usada
+        if (dataInicial.equals(dataFinal)) {
+            return true;
+        }
+        //verifica se a data final e depois da inicial
+        return dataFinal.isAfter(dataInicial);
     }
 
     @Override
