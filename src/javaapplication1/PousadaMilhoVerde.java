@@ -83,20 +83,23 @@ public class PousadaMilhoVerde {
 
         Cliente cliente1 = new Cliente("Getulio Santos", "123.456.789-10", "Diamantina", "3899910234", "getulio.santos@email");
         Cliente cliente3 = new Cliente("Dudu", "123.456.789-57", "Diamantina", "389982356", "Duduvisitante@");
-
+        
         LocalDate data1 = LocalDate.of(2023, 7, 20);
         LocalDate data2 = LocalDate.of(2023, 7, 22);
         LocalDate data3 = LocalDate.of(2023, 8, 5);
         LocalDate data4 = LocalDate.of(2023, 8, 15);
-
+        
+        Reserva reserva = new Reserva(data1,data2);
+        
         criarReserva(listaReserva, cliente1, "002", data1, data2);
         criarReserva(listaReserva, cliente3, "002", data1, data4);
         criarReserva(listaReserva, cliente1, "009", data3, data4);
-
+        
         System.out.println(listaReserva.get(0).Extrato());
         System.out.println("\n"+listaReserva.get(1).Extrato());
 
-         cancelarReserva(listaReserva,cliente1, "002");
+        //MÉTODO NÃO ESTA FUNCIONANDO CORRETO, PRECISO ALTERAR
+        cancelarReserva(listaReserva,reserva,"002");
         Sistema.numInstancias();
         //System.out.println(listaReserva);
 //        salvarDados(listaClientes,"Clientes.json");

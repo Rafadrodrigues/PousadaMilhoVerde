@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Classe Reserva, nela estão contidas informações sobre a reservas da Pousada
@@ -51,7 +52,7 @@ public class Reserva {
         this.dataFim = dataFim;
         Reserva.totalReservas = Reserva.totalReservas + 1;
     }
-
+   
     public Reserva() {
         Reserva.totalReservas = Reserva.totalReservas + 1;
     }
@@ -130,8 +131,8 @@ public class Reserva {
 
     public String Extrato() {
         DecimalFormat df = new DecimalFormat("#.00");
-        return "Hospede: " + cliente.getNome() + " .\nQuarto: " + quarto.getId() + ".\nChekin: " + dataInicio
-                + ".\tChekout: " + dataFim + ". \nValor: R$" + df.format(valor);
+        return "Hospede: " + cliente.getNome() + " .\nQuarto: " + quarto.getId() + ".\nCheckin: " + dataInicio
+                + ".\tCheckout: " + dataFim + ". \nValor: R$" + df.format(valor);
     }
 
     //funçao para verificar se as datas podem ser usada

@@ -157,9 +157,33 @@ public class Sistema {
         }
         return lista;
     }
-
     /**
-     * Esse método inseri funcionários na base de dados
+     * Esse método verifica disponibilidade de reserva na base de dados
+     *
+     * @param listaReserva
+     * @param dataInicio
+     * @param dataFim
+     * @param idQuarto
+     */
+    //Método que faz a verificação se na data selecionada o quarto esta disponível, apresentando apenas uma mensagem
+    public static void verificarReserva(List<Reserva> listaReserva, String idQuarto, LocalDate dataInicio, LocalDate dataFim){
+        //Caso a lista não contenha nada, tem disponibilidade em todos os quartos
+        if (listaReserva.isEmpty()) {
+            System.out.println("\nExiste disponibilidade em todos os quartos.");
+        }else{
+            //Loop que percorre a lista 
+            for (Reserva reserva : listaReserva) {
+                //Verificando na lista de reserva se o quarto está disponível naquela data. As condicoes devem ser satisfeitas
+                if (reserva.getDataInicio().equals(dataInicio) && reserva.getDataFim().equals(dataFim) && reserva.getQuarto().getId().equals(idQuarto)) {
+                    System.out.println("\nNão possível realizar reserva, data indisponível.");
+                } else {
+                    System.out.println("\nReserva realizada com sucesso.");
+                }
+            }
+        } 
+    }
+    /**
+     * Esse método cria uma reserva na base de dados
      *
      * @param listaReserva
      * @param cliente
@@ -168,15 +192,11 @@ public class Sistema {
      * @param idQuarto
      * @return
      */
-    //Método responsável por verificar reserva e entregar quais quartos estão disponiveis
+    //Método responsável por realizar reserva 
     public static List criarReserva(List<Reserva> listaReserva, Cliente cliente, String idQuarto, LocalDate dataInicio, LocalDate dataFim) {
-        //Fazer verificacao da data e quarto na reserva.Para verificar a data é preciso da classe reserva
-        if (listaReserva.isEmpty()) {
-            System.out.println("\nExiste disponibilidade em todos os quartos.");
-            //Como a lista está vazia todos os quartos estao livres
+        
             Reserva reserva = new Reserva(dataInicio, dataFim);
             Quarto quarto = new Quarto();
-            //String idSelecionado = sc.nextLine(); // ID a ser procurado
             //Preenchendo os campos da reserva e do quarto
             quarto.setId(idQuarto);
             reserva.setCliente(cliente);
@@ -193,62 +213,29 @@ public class Sistema {
             listaReserva.add(reserva);
             System.out.println("Reserva realizada com sucesso.");
             return listaReserva;
-        } else {
-            //Loop que percorre a lista 
-            for (Reserva reserva : listaReserva) {
-                Reserva reserva1 = new Reserva(dataInicio, dataFim);
-
-                //Verificando na lista de reserva se o quarto está disponível naquela data. As duas condicoes devem ser satisfeitas
-                if (verificarPeriodo(reserva, reserva1) && reserva.getQuarto().getId().equals(idQuarto)) {
-                    System.out.println("\nNão possível realizar reserva, data indisponível.");
-                    return listaReserva;
-                } else {
-                    Quarto quarto = new Quarto();
-                    //String idSelecionado = sc.nextLine(); // ID a ser procurado
-                    //Preenchendo os campos da reserva e do quarto
-                    quarto.setId(idQuarto);
-                    reserva1.setCliente(cliente);
-                    //Essa estrutura é para identificar qual quarto que foi selecionado
-                    for (Quarto quarto1 : quartos) {
-                        if (quarto1.getId().equals(idQuarto)) {
-                            reserva1.setQuarto(quarto1);
-                            // Sai do loop após encontrar o quarto desejado
-                            break;
-                        }
-                    }
-                    reserva1.setValor(reserva1.gerarValor());
-                    //Agora acrescentamos tudo da lista de reserva
-                    listaReserva.add(reserva1);
-                    System.out.println("\nReserva realizada com sucesso.");
-                    return listaReserva;
-                }
-            }
-            return listaReserva;
-        }
     }
-
     /**
      * Método que inclui alguma reserva realizada na base de dados, para que
      * seja realizada corretamente, é preciso que seja feita alguma verificação
      * de disponibilidade.
      *
      * @param listaReserva
-     * @param cliente
+     * @param reserva
      * @param idQuarto
      * @return
      */
     //Método responsável por realizar o cancelamento de Reserva
-    public static List cancelarReserva(List<Reserva> listaReserva, Cliente cliente, String idQuarto) {
-        //Verificar se esta correto
+    public static List cancelarReserva(List<Reserva> listaReserva, Reserva reserva,String idQuarto) {
+        //Loop que verifica a lista de reserva
         for (Reserva item : listaReserva) {
-            if (item.getQuarto().getId().equals(idQuarto) && (item.getCliente().equals(cliente))) {
-                //Considerando que já tenha um quarto na base de dados.
+            if (item.equals(reserva) && item.getQuarto().getId().equals(idQuarto)) {
                 //Para reposicionar itens, é preciso que o indice seja inteiro
                 System.out.println("Reserva cancelada.\nValor da multa: R$" + Sistema.calcularMulta(item.getDataInicio(), item.getQuarto().getPreco()));
                 listaReserva.remove(item);
                 return listaReserva;
             }
         }
+        //Caso a reserva não seja encontra na base de dados.
         System.out.println("Reserva não encontrada.");
         return listaReserva;
     }
@@ -343,29 +330,12 @@ public class Sistema {
     /**
      * Método que vai carregar dados dos clientes da base de dados(arquivo JSON)
      *
+     * @param <T>
      * @param nomeArquivo
+     * @param tipoClasse
      * @return
      */
-    //FUNÇÃO RESPONSAVEL POR LER O ARQUIVO JSON E RETORNA UMA LISTA COM OS VALORES CONTIDOS NELE
-    // OS DADOS QUE VAO SER COLETADOS SERÃO OS DO FUNCIONARIO, CLIENTE E RESERVA
-//    public static <T> List<T> carregarDados(String nomeArquivo, List<T> lista) {
-//        ObjectMapper objectMapper = new ObjectMapper();
-//
-//        try {
-//            // Ler o arquivo JSON e converter para uma lista de objetos da classe Cliente
-//            //List<Cliente> listaClientes = objectMapper.readValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
-//             lista= (List<T>) objectMapper.readValue(new File("C:\\Users\\Getúlio\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo),
-//                    new TypeReference<List<T>>() {
-//            });
-//
-//            // Retorna a lista com os dados do arquivo
-//            return lista;
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        // Caso não consiga ler, retorna null
-//        return null;
-//    }
+
     public static <T> List<T> carregarDados(String nomeArquivo, Class<T> tipoClasse) {
         ObjectMapper objectMapper = new ObjectMapper();
 
