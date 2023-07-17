@@ -82,6 +82,9 @@ public class Cliente extends Pessoa {
     public String toString() {
         return "Cliente{" + super.toString() + "Data desejada=" + dataDesejada + ", Cartão de Crédito=" + cartaoCredito +'}';
     }
+    
+ 
+
     //Método que fornece os dados do cliente
     //Método responsável por solicitar reserva
     /**
@@ -89,7 +92,7 @@ public class Cliente extends Pessoa {
      * @param dataDesejada
      * @return 
      */
-    public LocalDate solicitarReserva(LocalDate dataDesejada){
+    public LocalDate solicitarReserva(LocalDate dataDesejada) {
         System.out.print("Olá,gostaria solicitar uma reserva no dia " + this.dataDesejada);
         return dataDesejada = this.dataDesejada;
     }

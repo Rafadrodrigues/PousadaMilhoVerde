@@ -7,6 +7,14 @@
   "dataDesejada" : null,
   "cartaoCredito" : null
 }, {
+  "nome" : "Rafel Dias",
+  "cpf" : "123.456.789-10",
+  "endereco" : "Diamantina",
+  "email" : "rafel.dias@email",
+  "telefone" : "3899574628",
+  "dataDesejada" : null,
+  "cartaoCredito" : null
+}, {
   "nome" : "Dudu",
   "cpf" : "123.456.789-57",
   "endereco" : "Diamantina",

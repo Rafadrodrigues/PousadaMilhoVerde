@@ -17,13 +17,14 @@ public class EstadoPreliminar implements EstadoReserva {
         if( 30 >= ChronoUnit.DAYS.between(reserva.getDataPedido(), LocalDate.now())){
             System.out.print("Reserva Confirmada");
             reserva.setEstado(new EstadoDefinitivo());
+        }else{
+            System.out.print("Passou do prazo");
         }
     }
 
     @Override
     public void cancelar(ReservaS reserva) {
-         System.out.print("Reserva Cancelada");
-         reserva=null;
+         System.out.print("Reserva Cancelada ");
     }
     
 }

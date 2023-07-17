@@ -82,8 +82,9 @@ public class PousadaMilhoVerde {
         List<Reserva> listaReserva = new ArrayList<>();
 
         Cliente cliente1 = new Cliente("Getulio Santos", "123.456.789-10", "Diamantina", "3899910234", "getulio.santos@email");
+        Cliente cliente2 = new Cliente("Rafel Dias", "123.456.789-10", "Diamantina", "3899574628", "rafel.dias@email");
         Cliente cliente3 = new Cliente("Dudu", "123.456.789-57", "Diamantina", "389982356", "Duduvisitante@");
-        
+//        
         LocalDate data1 = LocalDate.of(2023, 7, 20);
         LocalDate data2 = LocalDate.of(2023, 7, 22);
         LocalDate data3 = LocalDate.of(2023, 8, 5);
@@ -92,16 +93,30 @@ public class PousadaMilhoVerde {
         Reserva reserva = new Reserva(data1,data2);
         
         criarReserva(listaReserva, cliente1, "002", data1, data2);
-        criarReserva(listaReserva, cliente3, "002", data3, data4);
-        criarReserva(listaReserva, cliente1, "009", data3, data4);
+        criarReserva(listaReserva, cliente3, "006", data3, data4);
+        criarReserva(listaReserva, cliente1, "002", data3, data4);
         
         System.out.println(listaReserva.get(0).Extrato());
         System.out.println("\n"+listaReserva.get(1).Extrato());
+//
+//        //MÉTODO NÃO ESTA FUNCIONANDO CORRETO, PRECISO ALTERAR
+//        listaReserva= Sistema.cancelarReserva(listaReserva,"2023-07-20","002");
+//        Sistema.numInstancias();
+           
+           
+//            List<Funcionario> listaFunc = carregarDados("Funcionarios.json", Funcionario.class);
+           List<Cliente> listaClientes = new ArrayList<>();
+           incluir(listaClientes,cliente1);
+           incluir(listaClientes,cliente2);
+           incluir(listaClientes,cliente3);
+           
+           salvarDados(listaReserva,"Reserva.json");
 
-        //MÉTODO NÃO ESTA FUNCIONANDO CORRETO, PRECISO ALTERAR
-        cancelarReserva(listaReserva,reserva,"002");
-        Sistema.numInstancias();
-        //System.out.println(listaReserva);
+                   //carregarDados("Clientes.json", Cliente.class);
+//        System.out.println(listaFunc);
+        System.out.println(listaClientes);
+//        List<Reserva> listaReserva = carregarDados("Reserva.json", Reserva.class);
+//        System.out.println(listaReserva);
 //        salvarDados(listaClientes,"Clientes.json");
 //        salvarDados(listaReserva,"Reserva.json");
         //QUESTÃO 15

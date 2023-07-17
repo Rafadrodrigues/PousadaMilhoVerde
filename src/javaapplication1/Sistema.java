@@ -20,6 +20,32 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Comparator;
+import java.util.TreeSet;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.TreeSet;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -180,11 +206,11 @@ public class Sistema {
             }
         } 
     }
-    public static boolean verificarReserva(List<Reserva> listaReserva, Reserva reserva) {
+    public static boolean verificarReserva(List<Reserva> listaReserva, Reserva reserva,String idQuarto) {
             //Loop que percorre a lista 
             for (Reserva item : listaReserva) {
                
-                if(Sistema.verificarPeriodo(item,reserva)){
+                if(Sistema.verificarPeriodo(item,reserva) && idQuarto.equals(item.getQuarto().getId())){
                     System.out.println("\nNão possível realizar reserva, data "+reserva.getDataInicio()+" esta indisponível.");
                     return false;
                 }
@@ -219,7 +245,7 @@ public class Sistema {
                 }
             }
             reserva.setValor(reserva.gerarValor());
-            if(!Sistema.verificarReserva(listaReserva, reserva))
+            if(!Sistema.verificarReserva(listaReserva, reserva,reserva.getQuarto().getId()))
                 return listaReserva;
             //Agora acrescentamos tudo da lista de reserva
             listaReserva.add(reserva);
@@ -237,12 +263,15 @@ public class Sistema {
      * @return
      */
     //Método responsável por realizar o cancelamento de Reserva
-    public static List cancelarReserva(List<Reserva> listaReserva, Reserva reserva,String idQuarto) {
+    public static List cancelarReserva(List<Reserva> listaReserva, String dataInicial,String idQuarto) {
         //Loop que verifica a lista de reserva
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        LocalDate data = LocalDate.parse(dataInicial, formato);
         for (Reserva item : listaReserva) {
-            if (item.equals(reserva) && item.getQuarto().getId().equals(idQuarto)) {
+            if (item.getDataInicio().equals(data) && item.getQuarto().getId().equals(idQuarto)) {
                 //Para reposicionar itens, é preciso que o indice seja inteiro
-                System.out.println("Reserva cancelada.\nValor da multa: R$" + Sistema.calcularMulta(item.getDataInicio(), item.getQuarto().getPreco()));
+                System.out.println("Reserva cancelada"+item.Extrato()+".\nValor da multa: R$" + Sistema.calcularMulta(item.getDataInicio(), item.getQuarto().getPreco()));
                 listaReserva.remove(item);
                 return listaReserva;
             }
@@ -260,14 +289,13 @@ public class Sistema {
         LocalDate dataAtual = LocalDate.now();
         //Calcula a diferença entre as datas 
         long diferenca = ChronoUnit.DAYS.between(dataAtual, data);
-        double multa = 0;
         //se a diferença for mais do que uma semana 
         if (diferenca >= 7) {
             //Retorna o valor de medade de uma diaria pra multa
-            return multa = diaria * 0.5;
+            return diaria * 0.5;
         } else {
             //Caso contrario retorna o preço de uma diaria completa 
-            return multa = diaria;
+            return diaria;
         }
 
     }
