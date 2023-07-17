@@ -108,8 +108,6 @@ public class Sistema {
      * @param <T>
      * @param lista
      * @param usuario
-     * @param listaCliente
-     * @param cliente
      * @return
      */
     //IMPORTANTE OLHAR 
@@ -182,6 +180,18 @@ public class Sistema {
             }
         } 
     }
+    public static boolean verificarReserva(List<Reserva> listaReserva, Reserva reserva) {
+            //Loop que percorre a lista 
+            for (Reserva item : listaReserva) {
+               
+                if(Sistema.verificarPeriodo(item,reserva)){
+                    System.out.println("\nNão possível realizar reserva, data "+reserva.getDataInicio()+" esta indisponível.");
+                    return false;
+                }
+            }
+        System.out.println("\nData "+reserva.getDataInicio()+" esta disponivel.");
+        return true;
+    }
     /**
      * Esse método cria uma reserva na base de dados
      *
@@ -209,6 +219,8 @@ public class Sistema {
                 }
             }
             reserva.setValor(reserva.gerarValor());
+            if(!Sistema.verificarReserva(listaReserva, reserva))
+                return listaReserva;
             //Agora acrescentamos tudo da lista de reserva
             listaReserva.add(reserva);
             System.out.println("Reserva realizada com sucesso.");

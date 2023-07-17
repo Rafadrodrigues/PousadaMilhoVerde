@@ -92,7 +92,7 @@ public class PousadaMilhoVerde {
         Reserva reserva = new Reserva(data1,data2);
         
         criarReserva(listaReserva, cliente1, "002", data1, data2);
-        criarReserva(listaReserva, cliente3, "002", data1, data4);
+        criarReserva(listaReserva, cliente3, "002", data3, data4);
         criarReserva(listaReserva, cliente1, "009", data3, data4);
         
         System.out.println(listaReserva.get(0).Extrato());

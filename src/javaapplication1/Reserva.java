@@ -131,12 +131,12 @@ public class Reserva {
 
     public String Extrato() {
         DecimalFormat df = new DecimalFormat("#.00");
-        return "Hospede: " + cliente.getNome() + " .\nQuarto: " + quarto.getId() + ".\nCheckin: " + dataInicio
-                + ".\tCheckout: " + dataFim + ". \nValor: R$" + df.format(valor);
+        return "Hospede: " + cliente.getNome() + "\nQuarto: " + quarto.getId() + "\nCheckin: " + dataInicio
+                + "\tCheckout: " + dataFim + "\nValor: R$" + df.format(valor);
     }
 
     //funçao para verificar se as datas podem ser usada
-    public boolean verificarDatas(LocalDate dataInicial, LocalDate dataFinal) {
+    public static boolean verificarDatas(LocalDate dataInicial, LocalDate dataFinal) {
         //se as datas são iguais podem ser usada
         if (dataInicial.equals(dataFinal)) {
             return true;
