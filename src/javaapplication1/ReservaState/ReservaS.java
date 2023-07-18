@@ -6,10 +6,12 @@ package javaapplication1.ReservaState;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javaapplication1.Cliente;
 import javaapplication1.Quarto;
+import static javaapplication1.Reserva.verificarFormato;
 
 /**
  *
@@ -19,8 +21,8 @@ public class ReservaS {
 
     private EstadoReserva estado;
     private double valor;
-    private LocalDate dataPedido;
-    private List<LocalDate> periodo;
+    private String dataPedido;
+    private List<String> periodo;
     private Quarto quarto;
     private Cliente cliente;
 
@@ -30,29 +32,31 @@ public class ReservaS {
     //Construtor para iniciar todos os estados da classe 
     public ReservaS() {
         this.estado = new EstadoPreliminar();
-        this.dataPedido = LocalDate.now();
+        this.dataPedido = LocalDate.now().toString();
         ReservaS.totalReservas = ReservaS.totalReservas + 1;
     }
 
-    public ReservaS(LocalDate dataInicio, LocalDate dataFim, Quarto quarto) throws IllegalArgumentException {
-        if (dataInicio == null || dataFim == null || !verificarDatas(dataInicio, dataFim)) {
-            throw new IllegalArgumentException("Data inválida");
-        }
-        this.estado = new EstadoPreliminar();
-        this.dataPedido = LocalDate.now();
-        this.periodo = ReservaS.gerarPeriodo(dataInicio, dataFim);
+    public ReservaS(String dataInicio, String dataFim, Quarto quarto) throws IllegalArgumentException {
+
+        this(dataInicio,dataFim);
         this.quarto = quarto;
         this.valor = gerarValor(this.periodo);
         ReservaS.totalReservas = ReservaS.totalReservas + 1;
     }
 
-    public ReservaS(LocalDate dataInicio, LocalDate dataFim) throws IllegalArgumentException {
-        if (dataInicio == null || dataFim == null || !verificarDatas(dataInicio, dataFim)) {
+    public ReservaS(String dataInicio, String dataFim) throws IllegalArgumentException {
+        
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        dataInicio= verificarFormato(dataInicio);
+        dataFim= verificarFormato(dataFim);    
+        LocalDate dataInicial = LocalDate.parse(dataInicio, formato);
+        LocalDate dataFinal = LocalDate.parse(dataFim, formato);
+        if (dataInicial == null || dataFinal == null || !verificarDatas(dataInicial, dataFinal)) {
             throw new IllegalArgumentException("Data inválida");
         }
         this.estado = new EstadoPreliminar();
-        this.dataPedido = LocalDate.now();
-        this.periodo = ReservaS.gerarPeriodo(dataInicio, dataFim);
+        this.dataPedido = LocalDate.now().toString();
+        this.periodo = ReservaS.gerarPeriodo(dataInicial, dataFinal);
         ReservaS.totalReservas = ReservaS.totalReservas + 1;
     }
 
@@ -89,19 +93,19 @@ public class ReservaS {
         ReservaS.totalReservas = totalReservas;
     }
 
-    public LocalDate getDataPedido() {
+    public String getDataPedido() {
         return dataPedido;
     }
 
-    public void setDataPedido(LocalDate dataPedido) {
+    public void setDataPedido(String dataPedido) {
         this.dataPedido = dataPedido;
     }
 
-    public List<LocalDate> getPeriodo() {
+    public List<String> getPeriodo() {
         return periodo;
     }
 
-    public void setPeriodo(List<LocalDate> periodo) {
+    public void setPeriodo(List<String> periodo) {
         this.periodo = periodo;
     }
 
@@ -117,7 +121,7 @@ public class ReservaS {
         estado.cancelar(reserva);
     }
 
-    public double gerarValor(List<LocalDate> periodo) {
+    public double gerarValor(List<String> periodo) {
         //retorna o numero dos dias das reserva multiplicado pelo preco dos quartos
         return ((periodo.size()) * quarto.getPreco());
     }
@@ -138,12 +142,12 @@ public class ReservaS {
         return dataFinal.isAfter(dataInicial);
     }
 
-    public static List<LocalDate> gerarPeriodo(LocalDate dataInicio, LocalDate dataFim) {
-        List<LocalDate> periodo = new ArrayList<>();
+    public static List<String> gerarPeriodo(LocalDate dataInicio, LocalDate dataFim) {
+        List<String> periodo = new ArrayList<>();
         LocalDate dataAtual = dataInicio;
 
         while (!dataAtual.isAfter(dataFim)) {
-            periodo.add(dataAtual);
+            periodo.add(dataAtual.toString());
             dataAtual = dataAtual.plusDays(1);
         }
 
@@ -152,6 +156,6 @@ public class ReservaS {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Reserva{" + "data do pedido =" + dataPedido + ", periodo=" + periodo + ", quarto=" + quarto + ", cliente=" + cliente + '}';
     }
 }

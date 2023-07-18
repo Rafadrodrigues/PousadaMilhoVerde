@@ -1,46 +1,8 @@
 package javaapplication1;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.TreeSet;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDate;
+
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Comparator;
-import java.util.TreeSet;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Comparator;
 import java.util.Iterator;
-import java.util.TreeSet;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
@@ -48,11 +10,12 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Comparator;
 import java.util.TreeSet;
+import javaapplication1.ReservaState.ReservaS;
 
 /**
  * Clase Sistema, classe responsável por gerenciar as informações entre o Banco
@@ -229,7 +192,7 @@ public class Sistema {
      * @return
      */
     //Método responsável por realizar reserva 
-    public static List criarReserva(List<Reserva> listaReserva, Cliente cliente, String idQuarto, LocalDate dataInicio, LocalDate dataFim) {
+    public static List criarReserva(List<Reserva> listaReserva, Cliente cliente, String idQuarto, String dataInicio, String dataFim) {
         
             Reserva reserva = new Reserva(dataInicio, dataFim);
             Quarto quarto = new Quarto();
@@ -258,7 +221,7 @@ public class Sistema {
      * de disponibilidade.
      *
      * @param listaReserva
-     * @param reserva
+     * @param dataInicial
      * @param idQuarto
      * @return
      */
@@ -266,12 +229,29 @@ public class Sistema {
     public static List cancelarReserva(List<Reserva> listaReserva, String dataInicial,String idQuarto) {
         //Loop que verifica a lista de reserva
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-        LocalDate data = LocalDate.parse(dataInicial, formato);
+        
         for (Reserva item : listaReserva) {
-            if (item.getDataInicio().equals(data) && item.getQuarto().getId().equals(idQuarto)) {
+            if (item.getDataInicio().equals(dataInicial) && item.getQuarto().getId().equals(idQuarto)) {
                 //Para reposicionar itens, é preciso que o indice seja inteiro
-                System.out.println("Reserva cancelada"+item.Extrato()+".\nValor da multa: R$" + Sistema.calcularMulta(item.getDataInicio(), item.getQuarto().getPreco()));
+                LocalDate data = LocalDate.parse(item.getDataInicio(), formato);
+                System.out.println("Reserva cancelada"+item.Extrato()+".\nValor da multa: R$" + Sistema.calcularMulta(data, item.getQuarto().getPreco()));
+                listaReserva.remove(item);
+                return listaReserva;
+            }
+        }
+        //Caso a reserva não seja encontra na base de dados.
+        System.out.println("Reserva não encontrada.");
+        return listaReserva;
+    }
+    public static List cancelarReservaS(List<ReservaS> listaReserva, List<String> periodo,String idQuarto) {
+        //Loop que verifica a lista de reserva
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        
+        for (ReservaS item : listaReserva) {
+            if (item.getPeriodo().equals(periodo) && item.getQuarto().getId().equals(idQuarto)) {
+                //Para reposicionar itens, é preciso que o indice seja inteiro
+                LocalDate data = LocalDate.parse(item.getPeriodo().get(0), formato);
+                System.out.println("Reserva cancelada.\nValor da multa: R$" + Sistema.calcularMulta(data, item.getQuarto().getPreco()));
                 listaReserva.remove(item);
                 return listaReserva;
             }
@@ -366,6 +346,29 @@ public class Sistema {
             e.printStackTrace();
         }
     }
+//    public static <T> void salvar(T dados, String nomeArquivo, Class<T> tipoClasse) {
+//        List<T> listaDadosExistentes = carregarDados(nomeArquivo, tipoClasse);
+//        if (listaDadosExistentes == null) {
+//            listaDadosExistentes = new ArrayList<>();
+//        }
+//
+//        // Verificar se o objeto já não está presente na lista
+//        if (!listaDadosExistentes.contains(dados)) {
+//            listaDadosExistentes.add(dados);
+//        }
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+//
+//        try {
+//            // Serializar a lista de objetos em um arquivo JSON
+//            objectMapper.writeValue(new File(nomeArquivo), listaDadosExistentes);
+//
+//            System.out.println("Arquivo JSON criado/sobrescrito com sucesso.");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * Método que vai carregar dados dos clientes da base de dados(arquivo JSON)
@@ -435,8 +438,15 @@ public class Sistema {
     }
 
     public static boolean verificarPeriodo(Reserva reserva1, Reserva reserva2) {
-        List<LocalDate> periodo1 = gerarPeriodo(reserva1.getDataInicio(), reserva1.getDataFim());
-        List<LocalDate> periodo2 = gerarPeriodo(reserva2.getDataInicio(), reserva2.getDataFim());
+        
+         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+          LocalDate dataInicio1 = LocalDate.parse(reserva1.getDataInicio(), formato);
+          LocalDate dataFim1 = LocalDate.parse(reserva1.getDataFim(), formato);
+          LocalDate dataInicio2 = LocalDate.parse(reserva2.getDataInicio(), formato);
+          LocalDate dataFim2 = LocalDate.parse(reserva2.getDataFim(), formato);
+          
+        List<LocalDate> periodo1 = gerarPeriodo(dataInicio1,dataFim1);
+        List<LocalDate> periodo2 = gerarPeriodo(dataInicio2, dataFim2);
         for (LocalDate data : periodo1) {
             if (periodo2.contains(data)) {
                 return true; // Encontrou uma data coincidente

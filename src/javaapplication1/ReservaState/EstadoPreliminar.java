@@ -5,26 +5,38 @@
 package javaapplication1.ReservaState;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+
+import java.util.List;
+import javaapplication1.Sistema;
 
 /**
  *
  * @author Getúlio
  */
 public class EstadoPreliminar implements EstadoReserva {
+
     @Override
     public void confirma(ReservaS reserva) {
-        if( 30 >= ChronoUnit.DAYS.between(reserva.getDataPedido(), LocalDate.now())){
-            System.out.print("Reserva Confirmada");
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dataPedido = LocalDate.parse(reserva.getDataPedido(), formato);
+        if (30 >= ChronoUnit.DAYS.between(dataPedido, LocalDate.now())) {
+            System.out.print("Reserva Confirmada\n");
             reserva.setEstado(new EstadoDefinitivo());
-        }else{
+            List<ReservaS> listaReserva = Sistema.carregarDados("ReservaState.json", ReservaS.class);
+            listaReserva.add(reserva);
+            Sistema.salvarDados(listaReserva, "ReservaState.json");
+        } else {
             System.out.print("Passou do prazo");
         }
     }
 
     @Override
     public void cancelar(ReservaS reserva) {
-         System.out.print("Reserva Cancelada ");
+        List<ReservaS> listaReserva = Sistema.carregarDados("ReservaState.json", ReservaS.class);
+        listaReserva = Sistema.cancelarReservaS(listaReserva, reserva.getPeriodo(), reserva.getQuarto().getId());
+        Sistema.salvarDados(listaReserva, "ReservaState.json");
     }
-    
+
 }

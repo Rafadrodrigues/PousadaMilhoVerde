@@ -4,7 +4,10 @@
  */
 package javaapplication1;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
+import static javaapplication1.Reserva.verificarFormato;
 
 /**
  * Essa classe vai realizar comparações entre as reservas da pousada, comparando o data inicial de cada uma.
@@ -21,19 +24,22 @@ public class ReservaComparator implements Comparator<Reserva> {
      */
     @Override
     public int compare(Reserva reserva1, Reserva reserva2) {
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
+        LocalDate dataInicial1 = LocalDate.parse(reserva1.getDataInicio(), formato);
+        LocalDate dataInicial2 = LocalDate.parse(reserva2.getDataInicio(), formato);
         //Variavel que compara o Ano da data
-        int yearCompare = (reserva1.getDataInicio().getYear()) - (reserva2.getDataInicio().getYear());
+        int yearCompare = (dataInicial1.getYear()) - (dataInicial2.getYear());
         //Se a diferença entre os anos for negativo ou positivo quer dizer que as datas são diferentes
         if (yearCompare != 0) {
             return yearCompare;
         }
         //Caso o ano seja igual, ou seja zero, ele compara os meses
-        int monthCompare = (reserva1.getDataInicio().getMonthValue()) - reserva2.getDataInicio().getMonthValue();
+        int monthCompare = (dataInicial1.getMonthValue()) - dataInicial2.getMonthValue();
         if (monthCompare != 0) {
             return monthCompare;
         }
         //Caso os meses também sejam iguais
-        int dayCompare = reserva1.getDataInicio().getDayOfMonth() - reserva2.getDataInicio().getDayOfMonth();
+        int dayCompare = dataInicial1.getDayOfMonth() - dataInicial2.getDayOfMonth();
         if (dayCompare != 0) {
             return dayCompare;
         }

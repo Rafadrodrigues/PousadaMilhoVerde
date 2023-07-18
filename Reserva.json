@@ -1,3 +1,37 @@
 [ {
   "valor" : 150.0,
-  "dataInicio"
+  "dataInicio" : "2023-07-20",
+  "dataFim" : "2023-07-22",
+  "quarto" : {
+    "id" : "002",
+    "preco" : 50.0,
+    "categoria" : "Comun"
+  },
+  "cliente" : {
+    "nome" : "Getulio Santos",
+    "cpf" : "123.456.789-10",
+    "endereco" : "Diamantina",
+    "email" : "getulio.santos@email",
+    "telefone" : "3899910234",
+    "dataDesejada" : null,
+    "cartaoCredito" : null
+  }
+}, {
+  "valor" : 1106.6,
+  "dataInicio" : "2023-08-05",
+  "dataFim" : "2023-08-15",
+  "quarto" : {
+    "id" : "009",
+    "preco" : 100.6,
+    "categoria" : "Luxo"
+  },
+  "cliente" : {
+    "nome" : "Getulio Santos",
+    "cpf" : "123.456.789-10",
+    "endereco" : "Diamantina",
+    "email" : "getulio.santos@email",
+    "telefone" : "3899910234",
+    "dataDesejada" : null,
+    "cartaoCredito" : null
+  }
+} ]

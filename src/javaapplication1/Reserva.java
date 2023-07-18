@@ -2,6 +2,8 @@ package javaapplication1;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,8 +21,10 @@ public class Reserva {
     //Data,quarto e cliente vão ser armazenados no calendario
     //   private List<LocalDate> periodo;
     private double valor;
-    private LocalDate dataInicio;
-    private LocalDate dataFim;
+    private String dataInicio;//tem que ser no formato AAAA-MM-DD
+    private String dataFim;
+//    private LocalDate dataInicio;
+//    private LocalDate dataFim;
     private Quarto quarto;
     private Cliente cliente;
     //QUESTÃO 11
@@ -33,26 +37,26 @@ public class Reserva {
      * @param dataFim
      * @param quarto
      */
-    public Reserva(LocalDate dataInicio, LocalDate dataFim, Quarto quarto) throws IllegalArgumentException {
-        if (dataInicio == null || dataFim == null || !verificarDatas(dataInicio, dataFim)) {
+    public Reserva(String dataInicio, String dataFim, Quarto quarto) throws IllegalArgumentException {
+        this(dataInicio,dataFim);
+        this.quarto = quarto;
+        this.valor = gerarValor();
+        //Reserva.totalReservas = Reserva.totalReservas + 1;
+    }
+
+    public Reserva(String dataInicio, String dataFim) throws IllegalArgumentException {
+        
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dataInicial = LocalDate.parse(dataInicio, formato);
+        LocalDate dataFinal = LocalDate.parse(dataFim, formato);
+        if (dataInicial == null || dataFinal == null || !verificarDatas(dataInicial, dataFinal)) {
             throw new IllegalArgumentException("Data inválida");
         }
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
-        this.quarto = quarto;
-        this.valor = gerarValor();
         Reserva.totalReservas = Reserva.totalReservas + 1;
     }
 
-    public Reserva(LocalDate dataInicio, LocalDate dataFim) throws IllegalArgumentException {
-        if (dataInicio == null || dataFim == null || !verificarDatas(dataInicio, dataFim)) {
-            throw new IllegalArgumentException("Data inválida");
-        }
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
-        Reserva.totalReservas = Reserva.totalReservas + 1;
-    }
-   
     public Reserva() {
         Reserva.totalReservas = Reserva.totalReservas + 1;
     }
@@ -66,19 +70,19 @@ public class Reserva {
         this.valor = valor;
     }
 
-    public LocalDate getDataInicio() {
+    public String getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(LocalDate dataInicio) {
+    public void setDataInicio(String dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public LocalDate getDataFim() {
+    public String getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(LocalDate dataFim) {
+    public void setDataFim(String dataFim) {
         this.dataFim = dataFim;
     }
 
@@ -126,7 +130,10 @@ public class Reserva {
 
     public double gerarValor() {
         //retorna o numero dos dias das reserva multiplicado pelo preco dos quartos
-        return (diasPeriodo(dataInicio, dataFim) * quarto.getPreco());
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dataInicial = LocalDate.parse(dataInicio, formato);
+        LocalDate dataFinal = LocalDate.parse(dataFim, formato);
+        return (diasPeriodo(dataInicial, dataFinal) * quarto.getPreco());
     }
 
     public String Extrato() {
@@ -143,6 +150,27 @@ public class Reserva {
         }
         //verifica se a data final e depois da inicial
         return dataFinal.isAfter(dataInicial);
+    }
+
+    public static String verificarFormato(String data) {
+        Scanner scanner = new Scanner(System.in);
+
+        boolean formatoValido = false;
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        while (!formatoValido) {
+
+            try {
+                LocalDate dataParse = LocalDate.parse(data, formato);
+                formatoValido = true;
+            } catch (DateTimeParseException e) {
+                System.out.println("Formato inválido! Digite novamente.");
+                System.out.print("Digite a data no formato yyyy-MM-dd: ");
+                data = scanner.nextLine();
+            }
+        }
+        scanner.close();
+        return data;
     }
 
     @Override

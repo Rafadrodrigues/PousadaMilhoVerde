@@ -4,6 +4,10 @@
  */
 package javaapplication1.ReservaState;
 
+import java.util.List;
+import javaapplication1.Sistema;
+
+
 /**
  *
  * @author Getúlio
@@ -12,12 +16,14 @@ public class EstadoDefinitivo implements EstadoReserva {
 
     @Override
     public void confirma(ReservaS reserva) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        System.out.print("Reserva já esta confirmada ");
     }
 
     @Override
     public void cancelar(ReservaS reserva) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
+        List<ReservaS> listaReserva = Sistema.carregarDados("ReservaState.json",ReservaS.class);
+        listaReserva=Sistema.cancelarReservaS(listaReserva, reserva.getPeriodo(),reserva.getQuarto().getId());
+        Sistema.salvarDados(listaReserva, "ReservaState.json");
 }
+}
+
