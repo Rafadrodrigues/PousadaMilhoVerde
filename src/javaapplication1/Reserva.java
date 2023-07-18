@@ -45,7 +45,8 @@ public class Reserva {
     }
 
     public Reserva(String dataInicio, String dataFim) throws IllegalArgumentException {
-        
+//        dataInicio= verificarFormato(dataInicio);
+//        dataFim= verificarFormato(dataFim);  
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dataInicial = LocalDate.parse(dataInicio, formato);
         LocalDate dataFinal = LocalDate.parse(dataFim, formato);
@@ -169,7 +170,6 @@ public class Reserva {
                 data = scanner.nextLine();
             }
         }
-        scanner.close();
         return data;
     }
 

@@ -113,12 +113,12 @@ public class ReservaS {
         this.estado = estado;
     }
 
-    public void confirmar(ReservaS reserva) {
-        estado.confirma(reserva);
+    public void confirmar() {
+        estado.confirma(this);
     }
 
-    public void cancelar(ReservaS reserva) {
-        estado.cancelar(reserva);
+    public void cancelar() {
+        estado.cancelar(this.periodo,this.quarto.getId());
     }
 
     public double gerarValor(List<String> periodo) {

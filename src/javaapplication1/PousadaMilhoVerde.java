@@ -167,15 +167,14 @@ public class PousadaMilhoVerde {
 //        System.out.println(item);}
 
 //TESTES DA RESERVA STATE
-Quarto[] quartos = Sistema.quartos;
- 
-    ReservaS reserva1= new ReservaS("2023-07-21","2023-07-25",quartos[3]);
-    ReservaS reserva2= new ReservaS("2023-07-20","2023-07-25",quartos[2]);
-    reserva1.confirmar(reserva1);
-    reserva2.confirmar(reserva2);
-//
-//    reserva1.cancelar(reserva1);
-//    reserva1.cancelar(reserva2);
-    System.out.println(reserva1);
+//Quarto[] quartos = Sistema.quartos;
+// 
+//    ReservaS reserva1= new ReservaS("2023-07-21","2023-07-25",quartos[3]);
+//    ReservaS reserva2= new ReservaS("2023-07-20","2023-07-25",quartos[2]);
+//    reserva1.confirmar();
+//    reserva2.confirmar();
+//   // reserva1.cancelar();
+//   //reserva1.cancelar();
+//    System.out.println(reserva1);
     }
 }

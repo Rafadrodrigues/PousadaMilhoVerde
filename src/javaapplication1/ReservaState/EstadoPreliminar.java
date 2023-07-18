@@ -33,9 +33,9 @@ public class EstadoPreliminar implements EstadoReserva {
     }
 
     @Override
-    public void cancelar(ReservaS reserva) {
+    public void cancelar(List<String> periodo, String IdQuarto) {
         List<ReservaS> listaReserva = Sistema.carregarDados("ReservaState.json", ReservaS.class);
-        listaReserva = Sistema.cancelarReservaS(listaReserva, reserva.getPeriodo(), reserva.getQuarto().getId());
+        listaReserva = Sistema.cancelarReservaS(listaReserva, periodo, IdQuarto);
         Sistema.salvarDados(listaReserva, "ReservaState.json");
     }
 
