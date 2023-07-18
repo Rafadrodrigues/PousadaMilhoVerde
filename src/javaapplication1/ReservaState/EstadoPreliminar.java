@@ -19,6 +19,7 @@ public class EstadoPreliminar implements EstadoReserva {
 
     @Override
     public void confirma(ReservaS reserva) {
+        if(ReservaS.verificarAgenda(reserva.getPeriodo(), reserva.getQuarto().getId())){
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dataPedido = LocalDate.parse(reserva.getDataPedido(), formato);
         if (30 >= ChronoUnit.DAYS.between(dataPedido, LocalDate.now())) {
@@ -30,6 +31,7 @@ public class EstadoPreliminar implements EstadoReserva {
         } else {
             System.out.print("Passou do prazo");
         }
+    }
     }
 
     @Override

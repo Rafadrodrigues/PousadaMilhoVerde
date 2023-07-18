@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javaapplication1.Cliente;
 import javaapplication1.Quarto;
+import javaapplication1.Reserva;
 import static javaapplication1.Reserva.verificarFormato;
+import javaapplication1.Sistema;
 
 /**
  *
@@ -36,27 +38,29 @@ public class ReservaS {
         ReservaS.totalReservas = ReservaS.totalReservas + 1;
     }
 
+    public ReservaS(String dataInicio, String dataFim, Quarto quarto, Cliente cliente) throws IllegalArgumentException {
+
+        this(dataInicio,dataFim,quarto);
+        this.cliente=cliente;
+    }
     public ReservaS(String dataInicio, String dataFim, Quarto quarto) throws IllegalArgumentException {
 
-        this(dataInicio,dataFim);
-        this.quarto = quarto;
-        this.valor = gerarValor(this.periodo);
-        ReservaS.totalReservas = ReservaS.totalReservas + 1;
-    }
-
-    public ReservaS(String dataInicio, String dataFim) throws IllegalArgumentException {
-        
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        dataInicio= verificarFormato(dataInicio);
-        dataFim= verificarFormato(dataFim);    
+        dataInicio = verificarFormato(dataInicio);
+        dataFim = verificarFormato(dataFim);
         LocalDate dataInicial = LocalDate.parse(dataInicio, formato);
         LocalDate dataFinal = LocalDate.parse(dataFim, formato);
+
         if (dataInicial == null || dataFinal == null || !verificarDatas(dataInicial, dataFinal)) {
             throw new IllegalArgumentException("Data inválida");
         }
+
         this.estado = new EstadoPreliminar();
         this.dataPedido = LocalDate.now().toString();
         this.periodo = ReservaS.gerarPeriodo(dataInicial, dataFinal);
+        this.quarto = quarto;
+        this.valor = gerarValor(this.periodo);
+        
         ReservaS.totalReservas = ReservaS.totalReservas + 1;
     }
 
@@ -118,7 +122,7 @@ public class ReservaS {
     }
 
     public void cancelar() {
-        estado.cancelar(this.periodo,this.quarto.getId());
+        estado.cancelar(this.periodo, this.quarto.getId());
     }
 
     public double gerarValor(List<String> periodo) {
@@ -152,6 +156,20 @@ public class ReservaS {
         }
 
         return periodo;
+    }
+
+    public static boolean verificarAgenda(List<String> periodo, String idQuarto) {
+        //Loop que percorre a lista 
+        List<ReservaS> listaReserva = Sistema.carregarDados("ReservaState.json", ReservaS.class);
+        for (ReservaS item : listaReserva) {
+
+            if (item.getPeriodo().equals(periodo) && item.getQuarto().getId().equals(idQuarto)) {
+                System.out.println("\nNão possível realizar reserva, data " + periodo.get(0) + " esta indisponível.");
+                return false;
+            }
+        }
+        System.out.println("\nData " + periodo.get(0) + " esta disponivel.");
+        return true;
     }
 
     @Override
