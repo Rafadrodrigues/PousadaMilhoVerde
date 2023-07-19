@@ -242,7 +242,7 @@ public class telaPrincipal extends javax.swing.JFrame {
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+                    System.exit(0);
     }//GEN-LAST:event_logoutActionPerformed
 
     private void gerenciarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenciarFuncionarioActionPerformed

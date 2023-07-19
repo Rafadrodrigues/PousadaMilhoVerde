@@ -1,4 +1,5 @@
-
+import javaapplication1.Sistema;
+import javaapplication1.Funcionario;
 import javax.swing.JOptionPane;
 
 /*
@@ -61,6 +62,12 @@ public class TelaLogin extends javax.swing.JFrame {
         });
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/Imagens/icons8-hotel-50.png"))); // NOI18N
+
+        Password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PasswordActionPerformed(evt);
+            }
+        });
 
         Username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,19 +184,35 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarjButton1ActionPerformed
-        if(Username.getText().equals("rafa")&&Password.getText().equals("1234")){
+
+        String usuario = Username.toString();
+        String senha = Password.toString();
+        
+        Sistema.FazerLogin(usuario, senha);
+        if(Sistema.FazerLogin(usuario, senha)){
             JOptionPane.showMessageDialog(null, "Seja Bem-Vindo");
             telaPrincipal telaprincipal = new telaPrincipal();
             telaprincipal.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(null, "Acesso negado");
         }
-        this.setDefaultCloseOperation(0);
+//        if(Username.getText().equals(func.getUsuario())&&Password.getText().equals(func.getSenha())){
+//            JOptionPane.showMessageDialog(null, "Seja Bem-Vindo");
+//            telaPrincipal telaprincipal = new telaPrincipal();
+//            telaprincipal.setVisible(true);
+//        }else{
+//            JOptionPane.showMessageDialog(null, "Acesso negado");
+//        }
     }//GEN-LAST:event_entrarjButton1ActionPerformed
 
     private void loginUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginUsernameActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_loginUsernameActionPerformed
+
+    private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PasswordActionPerformed
 
     /**
      * @param args the command line arguments
