@@ -28,6 +28,7 @@ public class Funcionario extends Cliente {
     }
     public Funcionario(String usuario, String senha, 
         String nome, String cpf, String endereco, String telefone,String email) {
+        //QUESTÃO 2 - 4
         super(nome, cpf, endereco, telefone,email);
         this.usuario = usuario;
         this.senha = senha;
@@ -65,6 +66,7 @@ public class Funcionario extends Cliente {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
+    //QUESTÃO 2-3
     @Override
     public String toString() {
         return super.toString() + "Funcionario{" + "usuario=" + usuario + ", senha=" + senha + ", cargo=" + cargo + ", salario=" + salario + '}';

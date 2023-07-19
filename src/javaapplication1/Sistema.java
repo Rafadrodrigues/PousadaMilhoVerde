@@ -34,7 +34,7 @@ public class Sistema {
 
     public Sistema() {
         this.listaCliente = carregarDados("Clientes.json");
-        this.listaFuncionario = carregarDados("Funcionarios.json",Funcionario.class);
+        this.listaFuncionario = carregarDados("Funcionarios.json", Funcionario.class);
         this.listaReserva = carregarDados("Reserva.json");
     }
 
@@ -104,6 +104,7 @@ public class Sistema {
         }
         return null; // Caso não encontre o quarto com o ID correspondente
     }
+
     private <T extends Pessoa> boolean verificar(List<T> lista, String cpf) {
         for (T pessoa : lista) {
             if (pessoa.getCpf().equals(cpf)) {
@@ -129,25 +130,29 @@ public class Sistema {
 
     public void criarCliente(String nome, String cpf, String endereco, String telefone, String email, String cartaoCredito) {
         Cliente cliente = new Cliente(nome, cpf, endereco, telefone, email, cartaoCredito);
-        if (verificar(this.listaCliente,cpf)) {
+        if (verificar(this.listaCliente, cpf)) {
             salvar(cliente, "Clientes.json");
-        } 
+        }
     }
 
     public void criarFuncionario(String usuario, String senha,
             String nome, String cpf, String endereco, String telefone, String email, float salario) {
-        Funcionario funcionario = new Funcionario(usuario, senha, nome, cpf, endereco, telefone, email, salario);
-        if (verificar(this.listaFuncionario,cpf)) {
-            salvar(funcionario, "Funcionarios.json");
-        } 
+        if (this.getFuncionarioAtual().getCargo().equals("ADMINISTRADOR")) {
+            Funcionario funcionario = new Funcionario(usuario, senha, nome, cpf, endereco, telefone, email, salario);
+            if (verificar(this.listaFuncionario, cpf)) {
+                salvar(funcionario, "Funcionarios.json");
+            }
+        }
     }
 
     public void criarAdministrador(String usuario, String senha,
             String nome, String cpf, String endereco, String telefone, String email, float salario) {
-        Administrador funcionario = new Administrador(usuario, senha, nome, cpf, endereco, telefone, email, salario);
-        if (verificar(this.listaFuncionario,cpf)) {
-            salvar(funcionario, "Funcionarios.json");
-        } 
+        if (this.getFuncionarioAtual().getCargo().equals("ADMINISTRADOR")) {
+            Administrador funcionario = new Administrador(usuario, senha, nome, cpf, endereco, telefone, email, salario);
+            if (verificar(this.listaFuncionario, cpf)) {
+                salvar(funcionario, "Funcionarios.json");
+            }
+        }
 
     }
 
@@ -222,24 +227,33 @@ public class Sistema {
      * @param pin a senha do usuario
      * @return
      */
-    public static boolean FazerLogin(String user, String pin) {
-        //Lista de funcionarios;
-        TreeSet<Funcionario> arvoreFuncionarios = listaFuncionario();
+    public void FazerLogin(String user, String pin) {
         //o for percorre a arvore dos funcionarios
-        for (Funcionario aux : arvoreFuncionarios) {
+        for (Funcionario aux : this.listaFuncionario) {
             if (user.equals(aux.getUsuario()) && pin.equals(aux.getSenha())) {
                 //se a senha e usuario bater com algum o login é feito
                 System.out.print("Sistema Liberado\n");
-                return true;
-            } else {
-                System.out.print("Sistema negado\n");
-                return false;
+                this.funcionarioAtual = aux;
+                break;
             }
+
         }
-        //Se ao percorrer o for e não encontrar quer dizer que algum dos campos esta incorreto
-        System.out.print("Seção incerrada\n");
-        return true;
     }
+//    public static boolean FazerLogin(String user, String pin) {
+//
+//        List<Funcionario> listaFUncionario = carregarDados("Funcionarios.json");
+//        for (Funcionario aux : arvoreFuncionarios) {
+//            if (user.equals(aux.getUsuario()) && pin.equals(aux.getSenha())) {
+//                //se a senha e usuario bater com algum o login é feito
+//                System.out.print("Sistema Liberado\n");
+//                return true;
+//            } else {
+//                System.out.print("Sistema negado\n");
+//                return false;
+//            }
+//        }
+//        return false;
+//    }
 
     /**
      * Esse método editar as informações contida dos clientes na base de dados
@@ -559,16 +573,16 @@ public class Sistema {
      * @return
      */
     public static <T> List<T> carregarDados(String nomeArquivo, Class<T> tipoClasse) {
-    ObjectMapper objectMapper = new ObjectMapper();
-    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-    try {
-        return objectMapper.readValue(new File(nomeArquivo), objectMapper.getTypeFactory().constructCollectionType(List.class, tipoClasse));
-    } catch (IOException e) {
-        e.printStackTrace();
+        try {
+            return objectMapper.readValue(new File(nomeArquivo), objectMapper.getTypeFactory().constructCollectionType(List.class, tipoClasse));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
-    return null;
-}
 
 //    public static <T> List<T> carregarDados(String nomeArquivo) {
 //        ObjectMapper objectMapper = new ObjectMapper();
