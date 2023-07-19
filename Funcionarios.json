@@ -31,17 +31,6 @@
   "cartaoCredito" : null,
   "usuario" : "getulio",
   "senha" : "123456",
-  "cargo" : "FUNCIONARIO",
-  "salario" : 1200.0
-}, {
-  "nome" : "getulio santos",
-  "cpf" : "14612312399",
-  "endereco" : "diamantina",
-  "email" : "getulio.santos@email",
-  "telefone" : "389980385",
-  "cartaoCredito" : null,
-  "usuario" : "getulio",
-  "senha" : "123456",
   "cargo" : "ADMINISTRADOR",
-  "salario" : 5000.0
+  "salario" : 1200.0
 } ]
