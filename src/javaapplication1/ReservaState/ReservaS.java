@@ -125,6 +125,10 @@ public class ReservaS {
         estado.cancelar(this.periodo, this.quarto.getId());
     }
 
+    public EstadoReserva getEstado() {
+        return estado;
+    }
+    
     public double gerarValor(List<String> periodo) {
         //retorna o numero dos dias das reserva multiplicado pelo preco dos quartos
         return ((periodo.size()) * quarto.getPreco());

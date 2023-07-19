@@ -29,7 +29,7 @@ import javaapplication1.ReservaState.ReservaS;
 public class Sistema {
 
     //QUESTAO 05
-    //Inicializando os 10 quaros da memória
+    //Inicializando os 10 quaros da memória que podem ser carregados pelas outras classes
     public static Quarto[] quartos = new Quarto[]{
         new Quarto("001", 50, "Comun"),
         new Quarto("002", 50, "Comun"),
@@ -42,7 +42,7 @@ public class Sistema {
         new Quarto("009", 100.60, "Luxo"),
         new Quarto("010", 100.60, "Luxo"),};
 
-    //Get e Set para manipular o atributo
+    //Get e Set para manipular e recuperar o valor do quarto
     public static Quarto[] getQuartos() {
         return quartos;
     }
@@ -72,7 +72,7 @@ public class Sistema {
     public static boolean FazerLogin(String user, String pin) {
         //Lista de funcionarios;
         TreeSet<Funcionario> arvoreFuncionarios = listaFuncionario();
-        //o for percorre a lista dos funcionarios
+        //o for percorre a arvore dos funcionarios
         for (Funcionario aux : arvoreFuncionarios) {
             if (user.equals(aux.getUsuario()) && pin.equals(aux.getSenha())) {
                 //se a senha e usuario bater com algum o login é feito

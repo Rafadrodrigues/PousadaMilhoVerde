@@ -20,11 +20,11 @@ public class Reserva {
     //Occupation inicialmente recebe false para sinalizar que o quarto não esta ocupado
     //Data,quarto e cliente vão ser armazenados no calendario
     //   private List<LocalDate> periodo;
+    private String estado;
+    private String dataPedido;
     private double valor;
     private String dataInicio;//tem que ser no formato AAAA-MM-DD
     private String dataFim;
-//    private LocalDate dataInicio;
-//    private LocalDate dataFim;
     private Quarto quarto;
     private Cliente cliente;
     //QUESTÃO 11
@@ -38,23 +38,26 @@ public class Reserva {
      * @param quarto
      */
     public Reserva(String dataInicio, String dataFim, Quarto quarto) throws IllegalArgumentException {
-        this(dataInicio,dataFim);
+        this(dataInicio, dataFim);
         this.quarto = quarto;
         this.valor = gerarValor();
         //Reserva.totalReservas = Reserva.totalReservas + 1;
     }
 
     public Reserva(String dataInicio, String dataFim) throws IllegalArgumentException {
-//        dataInicio= verificarFormato(dataInicio);
-//        dataFim= verificarFormato(dataFim);  
+        dataInicio = verificarFormato(dataInicio);
+        dataFim = verificarFormato(dataFim);
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dataInicial = LocalDate.parse(dataInicio, formato);
         LocalDate dataFinal = LocalDate.parse(dataFim, formato);
+
         if (dataInicial == null || dataFinal == null || !verificarDatas(dataInicial, dataFinal)) {
             throw new IllegalArgumentException("Data inválida");
         }
+        this.dataPedido = LocalDate.now().toString();
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
+        this.estado = EstadoReserva.PRELIMINAR.getValor();
         Reserva.totalReservas = Reserva.totalReservas + 1;
     }
 
@@ -62,9 +65,24 @@ public class Reserva {
         Reserva.totalReservas = Reserva.totalReservas + 1;
     }
 
-    //Getters e setters correspondente aos atributos criados nessa classe.
+    public void setEstado(EstadoReserva novoEstado) {
+        this.estado = novoEstado.getValor();
+    }
+
+    public String getEstado() {
+        return this.estado;
+    }
+
     public double getValor() {
         return valor;
+    }
+
+    public String getDataPedido() {
+        return dataPedido;
+    }
+
+    public void setDataPedido(String dataPedido) {
+        this.dataPedido = dataPedido;
     }
 
     public void setValor(double valor) {
@@ -175,7 +193,21 @@ public class Reserva {
 
     @Override
     public String toString() {
-        return "Reserva{" + "data inicio=" + dataInicio + ", data fim=" + dataFim + ", quarto=" + quarto + ", cliente=" + cliente + '}';
+        return "Reserva{" + "data inicio=" + dataInicio + ", data fim=" + dataFim + ", quarto=" + quarto + ", estado=" + estado + ", cliente=" + cliente + '}';
     }
 
+    public enum EstadoReserva {
+        PRELIMINAR("preliminar"), DEFINITIVA("definitiva");
+
+        private final String valor;
+
+        EstadoReserva(String valor) {
+            this.valor = valor;
+        }
+
+        public String getValor() {
+            return valor;
+        }
+
+    }
 }
