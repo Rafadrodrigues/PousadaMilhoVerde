@@ -60,10 +60,12 @@ public class CadastroFuncionario extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Cadastrar Funcionário");
 
+        jButton2.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jButton2.setText("Salvar");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Pessoais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto Slab Medium", 0, 12))); // NOI18N
 
+        jLabel1.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel1.setText("Nome");
 
         try {
@@ -72,6 +74,7 @@ public class CadastroFuncionario extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
 
+        jLabel2.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel2.setText("CPF");
 
         try {
@@ -80,6 +83,7 @@ public class CadastroFuncionario extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
 
+        jLabel7.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel7.setText("Cartão");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -122,10 +126,12 @@ public class CadastroFuncionario extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel4.setText("PREENCHA OS CAMPOS");
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Contato"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contato", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto Slab Medium", 0, 12))); // NOI18N
 
+        jLabel3.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel3.setText("Endereço");
 
+        jLabel8.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel8.setText("E-mail");
 
         try {
@@ -154,6 +160,7 @@ public class CadastroFuncionario extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
 
+        jLabel6.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel6.setText("Telefone");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -164,17 +171,17 @@ public class CadastroFuncionario extends javax.swing.JInternalFrame {
                 .addGap(61, 61, 61)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 7, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(277, 277, 277)
+                                .addGap(277, 333, Short.MAX_VALUE)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(280, 280, 280)
-                                .addComponent(jLabel8)))
+                                .addComponent(jLabel3)
+                                .addGap(283, 283, 283)
+                                .addComponent(jLabel8)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(68, 68, 68))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jTextField3)

@@ -35,15 +35,13 @@ public class GerenciarCliente extends javax.swing.JInternalFrame {
         cadastrarFuncionario = new javax.swing.JButton();
         editarFuncionario = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        removerFuncionario1 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        removerCliente = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        cadastrarFuncionario1 = new javax.swing.JButton();
-        editarFuncionario1 = new javax.swing.JButton();
+        cadastrarCliente = new javax.swing.JButton();
+        editarCliente = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -81,87 +79,74 @@ public class GerenciarCliente extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Gerenciar Cliente");
 
-        removerFuncionario1.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
-        removerFuncionario1.setText("Remover Funcionário");
-        removerFuncionario1.addActionListener(new java.awt.event.ActionListener() {
+        removerCliente.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
+        removerCliente.setText("Remover Cliente");
+        removerCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removerFuncionario1ActionPerformed(evt);
+                removerClienteActionPerformed(evt);
             }
         });
-
-        jLabel6.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
-        jLabel6.setText("Financeiro");
-
-        jButton2.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
-        jButton2.setText("Lançar Diária");
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel7.setText("SELECIONE A OPÇÃO DESEJADA");
 
         jLabel8.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
-        jLabel8.setText("Cadastrar Funcionário");
+        jLabel8.setText("Cadastrar Cliente");
 
         jLabel9.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
-        jLabel9.setText("Remover Funcionário");
+        jLabel9.setText("Remover Cliente");
 
         jLabel10.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
-        jLabel10.setText("Editar Funcionário");
+        jLabel10.setText("Editar Cliente");
 
-        cadastrarFuncionario1.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
-        cadastrarFuncionario1.setText("Cadastrar Funcionário");
-        cadastrarFuncionario1.addActionListener(new java.awt.event.ActionListener() {
+        cadastrarCliente.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
+        cadastrarCliente.setText("Cadastrar Cliente");
+        cadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastrarFuncionario1ActionPerformed(evt);
+                cadastrarClienteActionPerformed(evt);
             }
         });
 
-        editarFuncionario1.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
-        editarFuncionario1.setText("Editar Funcionário");
-        editarFuncionario1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        editarFuncionario1.addActionListener(new java.awt.event.ActionListener() {
+        editarCliente.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
+        editarCliente.setText("Editar Cliente");
+        editarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editarFuncionario1ActionPerformed(evt);
+                editarClienteActionPerformed(evt);
             }
         });
 
-        jDesktopPane1.setLayer(removerFuncionario1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(removerCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(cadastrarFuncionario1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(editarFuncionario1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(cadastrarCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(editarCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(jLabel9))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(cadastrarFuncionario1)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(removerFuncionario1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel6)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editarFuncionario1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(125, 125, 125))
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(138, 138, 138)
                 .addComponent(jLabel7)
                 .addContainerGap(185, Short.MAX_VALUE))
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(removerCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(cadastrarCliente)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(editarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(131, 131, 131))))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,17 +158,13 @@ public class GerenciarCliente extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cadastrarFuncionario1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editarFuncionario1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(126, 126, 126)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel6))
+                .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(removerFuncionario1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(removerCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(191, Short.MAX_VALUE))
         );
 
@@ -207,35 +188,34 @@ public class GerenciarCliente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void removerFuncionario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerFuncionario1ActionPerformed
+    private void removerClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerClienteActionPerformed
         // TODO add your handling code here:
-        RemoverFuncionario removerFunc = new RemoverFuncionario();
-        jDesktopPane1.add(removerFunc);
-        removerFunc.setVisible(true);
-    }//GEN-LAST:event_removerFuncionario1ActionPerformed
+        RemoverCliente removerCliente = new RemoverCliente();
+        jDesktopPane1.add(removerCliente);
+        removerCliente.setVisible(true);
+    }//GEN-LAST:event_removerClienteActionPerformed
 
-    private void cadastrarFuncionario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarFuncionario1ActionPerformed
+    private void cadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarClienteActionPerformed
         // TODO add your handling code here:
-        CadastroFuncionario cadastroFunc = new CadastroFuncionario();
-        jDesktopPane1.add(cadastroFunc);
-        cadastroFunc.setVisible(true);
-    }//GEN-LAST:event_cadastrarFuncionario1ActionPerformed
+        CadastroCliente cadastroCliente = new CadastroCliente();
+        jDesktopPane1.add(cadastroCliente);
+        cadastroCliente.setVisible(true);
+    }//GEN-LAST:event_cadastrarClienteActionPerformed
 
-    private void editarFuncionario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarFuncionario1ActionPerformed
+    private void editarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarClienteActionPerformed
         // TODO add your handling code here:
-        EditarFuncionario editarFunc = new EditarFuncionario();
-        jDesktopPane1.add(editarFunc);
-        editarFunc.setVisible(true);
-    }//GEN-LAST:event_editarFuncionario1ActionPerformed
+        EditarCliente editarCliente = new EditarCliente();
+        jDesktopPane1.add(editarCliente);
+        editarCliente.setVisible(true);
+    }//GEN-LAST:event_editarClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cadastrarCliente;
     private javax.swing.JButton cadastrarFuncionario;
-    private javax.swing.JButton cadastrarFuncionario1;
+    private javax.swing.JButton editarCliente;
     private javax.swing.JButton editarFuncionario;
-    private javax.swing.JButton editarFuncionario1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -243,13 +223,12 @@ public class GerenciarCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JButton removerCliente;
     private javax.swing.JButton removerFuncionario;
-    private javax.swing.JButton removerFuncionario1;
     // End of variables declaration//GEN-END:variables
 }

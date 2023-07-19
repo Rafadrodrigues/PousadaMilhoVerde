@@ -54,15 +54,18 @@ public class EditarCliente extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Editar Cliente");
 
+        jButton3.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jButton3.setText("Salvar");
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel4.setText("PREENCHA OS CAMPOS");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Contato"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contato", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto Slab Medium", 0, 12))); // NOI18N
 
+        jLabel3.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel3.setText("Endereço");
 
+        jLabel8.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel8.setText("E-mail");
 
         try {
@@ -73,6 +76,7 @@ public class EditarCliente extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Telefone");
 
+        jLabel6.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel6.setText("Telefone");
 
         try {

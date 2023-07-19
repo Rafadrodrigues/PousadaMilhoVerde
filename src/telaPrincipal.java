@@ -17,6 +17,7 @@ public class telaPrincipal extends javax.swing.JFrame {
      */
     public telaPrincipal() {
         initComponents();
+        
     }
 
     /**
@@ -40,8 +41,8 @@ public class telaPrincipal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         gerenciarCliente = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        gerenciarReserva = new javax.swing.JButton();
+        gerenciarFinanceiro = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -91,16 +92,21 @@ public class telaPrincipal extends javax.swing.JFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/Imagens/icons8-calendário-24.png"))); // NOI18N
 
-        jButton3.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
-        jButton3.setText("Reservas");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        gerenciarReserva.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
+        gerenciarReserva.setText("Reservas");
+        gerenciarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                gerenciarReservaActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
-        jButton5.setText("Financeiro");
+        gerenciarFinanceiro.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
+        gerenciarFinanceiro.setText("Financeiro");
+        gerenciarFinanceiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gerenciarFinanceiroActionPerformed(evt);
+            }
+        });
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/Imagens/icons8-verifique-o-dólar-24.png"))); // NOI18N
 
@@ -113,8 +119,8 @@ public class telaPrincipal extends javax.swing.JFrame {
         jDesktopPane2.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(gerenciarCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane2.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane2.setLayer(jButton5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane2.setLayer(gerenciarReserva, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane2.setLayer(gerenciarFinanceiro, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -137,7 +143,7 @@ public class telaPrincipal extends javax.swing.JFrame {
                         .addGap(106, 106, 106)
                         .addComponent(gerenciarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(gerenciarFinanceiro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jDesktopPane2Layout.createSequentialGroup()
                         .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDesktopPane2Layout.createSequentialGroup()
@@ -158,7 +164,7 @@ public class telaPrincipal extends javax.swing.JFrame {
                                 .addGap(61, 61, 61))
                             .addGroup(jDesktopPane2Layout.createSequentialGroup()
                                 .addGap(286, 286, 286)
-                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)))))
+                                .addComponent(gerenciarReserva, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)))))
                 .addGap(122, 122, 122))
         );
         jDesktopPane2Layout.setVerticalGroup(
@@ -177,7 +183,7 @@ public class telaPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(gerenciarReserva, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                     .addComponent(gerenciarFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jDesktopPane2Layout.createSequentialGroup()
@@ -189,7 +195,7 @@ public class telaPrincipal extends javax.swing.JFrame {
                         .addGap(63, 63, 63)
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(gerenciarFinanceiro, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(141, 141, 141))
         );
 
@@ -231,11 +237,12 @@ public class telaPrincipal extends javax.swing.JFrame {
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
         // TODO add your handling code here:
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_logoutActionPerformed
 
     private void gerenciarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenciarFuncionarioActionPerformed
@@ -256,9 +263,19 @@ public class telaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void gerenciarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenciarReservaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        GerenciarReserva teleGerenciarReserva = new GerenciarReserva();
+        jDesktopPane2.add(teleGerenciarReserva);
+        teleGerenciarReserva.setVisible(true);
+    }//GEN-LAST:event_gerenciarReservaActionPerformed
+
+    private void gerenciarFinanceiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenciarFinanceiroActionPerformed
+        // TODO add your handling code here:
+        GerenciarFinanceiro teleGerenciarFinanceiro = new GerenciarFinanceiro();
+        jDesktopPane2.add(teleGerenciarFinanceiro);
+        teleGerenciarFinanceiro.setVisible(true);
+    }//GEN-LAST:event_gerenciarFinanceiroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -297,11 +314,11 @@ public class telaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton gerenciarCliente;
+    private javax.swing.JButton gerenciarFinanceiro;
     private javax.swing.JButton gerenciarFuncionario;
+    private javax.swing.JButton gerenciarReserva;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

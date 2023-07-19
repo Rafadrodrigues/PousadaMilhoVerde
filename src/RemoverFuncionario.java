@@ -41,13 +41,15 @@ public class RemoverFuncionario extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Remover Funcionário");
 
+        jButton3.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jButton3.setText("Salvar");
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel4.setText("PREENCHA OS CAMPOS");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Pessoais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto Slab Medium", 0, 12))); // NOI18N
 
+        jLabel1.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel1.setText("Nome");
 
         try {
@@ -56,6 +58,7 @@ public class RemoverFuncionario extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
 
+        jLabel2.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel2.setText("CPF");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -119,7 +122,7 @@ public class RemoverFuncionario extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         pack();

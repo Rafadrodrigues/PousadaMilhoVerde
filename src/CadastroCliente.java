@@ -73,8 +73,9 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Cadastrar Cliente");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Pessoais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto Slab Medium", 0, 12))); // NOI18N
 
+        jLabel1.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel1.setText("Nome");
 
         try {
@@ -83,6 +84,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
 
+        jLabel2.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel2.setText("CPF");
 
         try {
@@ -91,6 +93,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
 
+        jLabel7.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel7.setText("Cartão");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -133,10 +136,12 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel4.setText("PREENCHA OS CAMPOS");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Contato"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contato", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto Slab Medium", 0, 12))); // NOI18N
 
+        jLabel3.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel3.setText("Endereço");
 
+        jLabel8.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel8.setText("E-mail");
 
         try {
@@ -147,6 +152,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Telefone");
 
+        jLabel6.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel6.setText("Telefone");
 
         try {
@@ -210,6 +216,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
                 .addGap(118, 118, 118))
         );
 
+        jButton3.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jButton3.setText("Salvar");
 
         botaoVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/Imagens/icons8-voltar-24.png"))); // NOI18N
@@ -228,7 +235,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(195, Short.MAX_VALUE)
+                .addContainerGap(199, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton3)
@@ -251,7 +258,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 489, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 491, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(32, 32, 32))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
