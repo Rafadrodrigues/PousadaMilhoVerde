@@ -1,8 +1,5 @@
 package javaapplication1;
-
 import java.time.LocalDate;
-import java.util.Scanner;
-import java.util.logging.Logger;
 
 /**
  * Classe Funcionário é uma subclasse da Classe Cliente. Ela é responsável por 
@@ -18,14 +15,40 @@ public class Funcionario extends Cliente {
     private float salario;
     
     //Construtor da classe Funcionario
+    /**
+     * Construtor padrão para caso seja necessário utilizar
+     */
     public Funcionario(){
         super();
     }
+    
+    /**
+     * Construtor complementar da classe que preenhcer outras novas informações
+     * @param usuario - Nome do usuário
+     * @param senha - Senha do usuário
+     * @param nome - Nome do usuário
+     * @param cpf - Cpf do usuário
+     * @param endereco - Endereco do usuário
+     * @param telefone - Telefone do usuário
+     * @param email - Email do usuário
+     * @param salario - Salario do usuário
+     */
     public Funcionario(String usuario, String senha, 
         String nome, String cpf, String endereco, String telefone,String email, float salario) {
         this( usuario,  senha, nome,  cpf,  endereco,  telefone, email);
         this.salario=salario;
     }
+    
+    /**
+     * Construtor complementar para ser caso seja utilizado de alguma outra forma dentro do código
+     * @param usuario - Nome do usuário
+     * @param senha - Senha do usuário
+     * @param nome - Nome do usuário
+     * @param cpf  - Cpf do usuário
+     * @param endereco - Endereco do usuário
+     * @param telefone - Telefone do usuário
+     * @param email - Salario do usuário
+     */
     public Funcionario(String usuario, String senha, 
         String nome, String cpf, String endereco, String telefone,String email) {
         //QUESTÃO 2 - 4
@@ -85,14 +108,33 @@ public class Funcionario extends Cliente {
 
     }*/
     //Métodos que constituem um funcionário da pousada e serão incremetandos na segunda parte do TP
-    public void solicitarCancelamento(LocalDate data, String idQuarto){
+    /**
+     * Método que solicita o cancelamento da reserva
+     * @param data - Data da reserva
+     * @param idQuarto - Id do quarto
+     */
+    public void solicitarCancelamento(String data, String idQuarto){
     }
+    /**
+     * Método que realiza a reserva
+     * @param data - Data da reserva
+     * @param idQuarto  - Id do quarto
+     */
     public void realizarReserva(LocalDate data, String idQuarto){
     }
+    /**
+     * Método que lança a diária
+     */
     public void lancarDiaria(){
     }
+    /**
+     * Método CRUD Cliente
+     */
     public void crudCliente(){
     }
+    /**
+     * Método que atribui o cargo ao funcionário, depende do entendimento
+     */
     public enum Cargo {
         FUNCIONARIO("FUNCIONARIO"),
         ADMINISTRADOR("ADMINISTRADOR");

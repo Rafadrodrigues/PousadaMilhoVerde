@@ -7,7 +7,6 @@ package javaapplication1;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
-import static javaapplication1.Reserva.verificarFormato;
 
 /**
  * Essa classe vai realizar comparações entre as reservas da pousada, comparando o data inicial de cada uma.
@@ -17,9 +16,10 @@ import static javaapplication1.Reserva.verificarFormato;
 public class ReservaComparator implements Comparator<Reserva> {
 
     /**
-     *
-     * @param reserva1
-     * @param reserva2
+     * Método que compara duas classes que vão ser passadas como parametro, os resultados 
+     * vão ser passado como int
+     * @param reserva1 - Primeira reserva a ser comparada
+     * @param reserva2 - Segunda reserva a ser comparada
      * @return
      */
     @Override

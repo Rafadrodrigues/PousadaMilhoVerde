@@ -2,7 +2,7 @@ package javaapplication1;
 
 /**
  * Classe abstrata e super classe da classe Cliente,Funcionário e Administrador
- * @author rafar
+ * @author Rafael e Getúlio
  */
 public abstract class Pessoa {
 
@@ -16,6 +16,14 @@ public abstract class Pessoa {
     public Pessoa(){
         
     }
+    /**
+     * Construtor da classe pessoa que vai preencher as informações da classe
+     * @param nome - Nome da pessoa
+     * @param cpf - Cpf da pessoa
+     * @param endereco - Endereco da pessoa
+     * @param telefone - Telefone da pessoa
+     * @param email - E-mail da pessoa
+     */
     public Pessoa(String nome, String cpf, String endereco, String telefone,String email) {
         this.nome = nome;
         this.cpf = cpf;

@@ -4,7 +4,6 @@
   "endereco" : "Diamantina",
   "email" : "getulio.santos@email",
   "telefone" : "3899910234",
-  "dataDesejada" : null,
   "cartaoCredito" : null
 }, {
   "nome" : "Rafel Dias",
@@ -12,7 +11,6 @@
   "endereco" : "Diamantina",
   "email" : "rafel.dias@email",
   "telefone" : "3899574628",
-  "dataDesejada" : null,
   "cartaoCredito" : null
 }, {
   "nome" : "Dudu",
@@ -20,7 +18,6 @@
   "endereco" : "Diamantina",
   "email" : "Duduvisitante@",
   "telefone" : "389982356",
-  "dataDesejada" : null,
   "cartaoCredito" : null
 }, {
   "nome" : "Getulio jose",
@@ -28,6 +25,12 @@
   "endereco" : "Diamantina",
   "email" : "getulio.jose@email",
   "telefone" : "38998034567",
-  "dataDesejada" : null,
   "cartaoCredito" : null
+}, {
+  "nome" : "Getulio",
+  "cpf" : "134567890",
+  "endereco" : "Diamantina",
+  "email" : "getulio@email",
+  "telefone" : "389980181",
+  "cartaoCredito" : "256512537"
 } ]

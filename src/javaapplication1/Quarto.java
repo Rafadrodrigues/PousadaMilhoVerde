@@ -12,14 +12,22 @@ public class Quarto {
     private String categoria;//podendo ser luxo ou comun
     
     //Construtor da classe
+    /**
+     * Construtor completo da classe
+     * @param id - Identificador do quarto
+     * @param preco - Preco do quarto
+     * @param categoria  - Categoria do quarto
+     */
     public Quarto(String id, double preco, String categoria) {
         this.id = id;
         this.preco = preco;
         this.categoria = categoria;
     }
-
-    public Quarto() {
-        
+    
+    /**
+     * Construtor padrão
+     */
+    public Quarto() {  
     }
    
     //Getters e setters correspondente aos atributos criados nessa classe.

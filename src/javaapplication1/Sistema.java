@@ -11,12 +11,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Comparator;
-import java.util.TreeSet;
-import javaapplication1.ReservaState.ReservaS;
 
 /**
  * Clase Sistema, classe responsável por gerenciar as informações entre o Banco
@@ -32,10 +28,13 @@ public class Sistema {
     private List<Funcionario> listaFuncionario;
     private List<Reserva> listaReserva;
 
+    /**
+     * Construtor padrão da classe Sistema
+     */
     public Sistema() {
-        this.listaCliente = carregarDados("Clientes.json");
+        this.listaCliente = carregarDados("Clientes.json", Cliente.class);
         this.listaFuncionario = carregarDados("Funcionarios.json", Funcionario.class);
-        this.listaReserva = carregarDados("Reserva.json");
+        this.listaReserva = carregarDados("Reserva.json", Reserva.class);
     }
 
     public Funcionario getFuncionarioAtual() {
@@ -70,7 +69,7 @@ public class Sistema {
         this.listaReserva = listaReserva;
     }
 
-    //QUESTAO 05
+    //QUESTAO 2-5
     /**
      * Inicializando os 10 quaros da memória que podem ser carregados pelas
      * outras classes
@@ -104,7 +103,10 @@ public class Sistema {
         }
         return null; // Caso não encontre o quarto com o ID correspondente
     }
-
+    
+    /**
+     * Construtor padrão da classe Sistema
+     */
     private <T extends Pessoa> boolean verificar(List<T> lista, String cpf) {
         for (T pessoa : lista) {
             if (pessoa.getCpf().equals(cpf)) {
@@ -115,60 +117,104 @@ public class Sistema {
     }
 
     /**
-     * Lê a lista de funcionarios do Json para pegar as senhas que serao usada
-     * no Login
+     * Método que criar o clientes 
+     * @param nome - Nome do cliente
+     * @param cpf - cpf do cliente
+     * @param endereco - endereco do cliente
+     * @param telefone - telefone do cliente
+     * @param email - email do cliente
+     * @param cartaoCredito - cartao de credito do cliente
      */
-    private static TreeSet listaFuncionario() {
-        TreeSet<Funcionario> arvoreFuncionarios = new TreeSet<>(Comparator.comparing(Funcionario::getNome));
-        List<Funcionario> Colaboradores = new ArrayList<>();
-        Colaboradores = Sistema.carregarDados("Funcionarios.json", Funcionario.class);
-        for (Funcionario elemento : Colaboradores) {
-            arvoreFuncionarios.add(elemento);
-        }
-        return arvoreFuncionarios;
-    }
-
     public void criarCliente(String nome, String cpf, String endereco, String telefone, String email, String cartaoCredito) {
         Cliente cliente = new Cliente(nome, cpf, endereco, telefone, email, cartaoCredito);
         if (verificar(this.listaCliente, cpf)) {
-            salvar(cliente, "Clientes.json");
+            this.listaCliente.add(cliente);
+            System.out.print("\nCliente: " + cliente.toString() + "\n foi adicionado com suscesso");
+            salvar(cliente, "Clientes.json", Cliente.class);
+        } else {
+            System.out.print("\nCliente: " + cliente.toString() + "\n ja existe");
         }
     }
 
+    /**
+     * Método que criar funcionario
+     * @param usuario - usuario do Funcionario
+     * @param senha - Senha do Funcionario
+     * @param nome - Nome do Funcionario
+     * @param cpf - cpf do Funcionario
+     * @param endereco - endereco do Funcionario
+     * @param telefone - telefone do Funcionario
+     * @param email - email do Funcionario
+     * @param salario  - Salario do Funcionario
+     */
     public void criarFuncionario(String usuario, String senha,
             String nome, String cpf, String endereco, String telefone, String email, float salario) {
         if (this.getFuncionarioAtual().getCargo().equals("ADMINISTRADOR")) {
             Funcionario funcionario = new Funcionario(usuario, senha, nome, cpf, endereco, telefone, email, salario);
             if (verificar(this.listaFuncionario, cpf)) {
-                salvar(funcionario, "Funcionarios.json");
+                this.listaFuncionario.add(funcionario);
+                System.out.print("\nFuncionario: " + funcionario.toString() + "\n foi adicionado com suscesso");
+                salvar(funcionario, "Funcionarios.json", Funcionario.class);
+            } else {
+                System.out.print("\nFuncionario: " + funcionario.toString() + "\n ja existe");
             }
+        } else {
+            System.out.print("\nvoce não tem acesso");
         }
     }
 
+    /**
+     * Método que criar Administrador
+     * @param usuario - usuario do Administrador
+     * @param senha - Senha do Administrador
+     * @param nome - Nome do Administrador
+     * @param cpf - cpf do Administrador
+     * @param endereco - endereco do Administrador
+     * @param telefone - telefone do Administrador
+     * @param email - email do Administrador
+     * @param salario  - Salario do Administrador
+     */
     public void criarAdministrador(String usuario, String senha,
             String nome, String cpf, String endereco, String telefone, String email, float salario) {
         if (this.getFuncionarioAtual().getCargo().equals("ADMINISTRADOR")) {
             Administrador funcionario = new Administrador(usuario, senha, nome, cpf, endereco, telefone, email, salario);
             if (verificar(this.listaFuncionario, cpf)) {
-                salvar(funcionario, "Funcionarios.json");
+                System.out.print("\nFuncionario: " + funcionario.toString() + "\n foi adicionado com suscesso");
+                this.listaFuncionario.add(funcionario);
+                salvar(funcionario, "Funcionarios.json", Funcionario.class);
+            } else {
+                System.out.print("\nFuncionario: " + funcionario.toString() + "\n ja existe");
             }
+        } else {
+            System.out.print("\nvoce não tem acesso");
         }
 
     }
 
+    /** 
+     * Método que cria a reserva
+     * @param cpf passa o CPF do cliente que já esta no arquivo Json
+     * @param dataInicio a data do chekin
+     * @param dataFim a data do chekout
+     * @param idQuarto e o quarto desejado
+     */
     public void criarReserva(String cpf, String dataInicio, String dataFim, String idQuarto) {
-        if (!Sistema.verificarReserva(this.listaReserva, dataInicio, dataFim, idQuarto)) {
+        if (Sistema.verificarReserva(this.listaReserva, dataInicio, dataFim, idQuarto)) {
             for (Cliente aux : this.listaCliente) {
                 if (aux.getCpf().equals(cpf)) {
                     Reserva reserva = new Reserva(aux, dataInicio, dataFim, encontrarQuarto(idQuarto));
-                    salvar(reserva, "Reserva.json");
+                    System.out.print("\nReserva: " + reserva.toString() + "\n foi adicionado com suscesso");
+                    this.listaReserva.add(reserva);
+                    salvar(reserva, "Reserva.json", Reserva.class);
                 }
             }
+        } else {
+            System.out.print("\nReserva ja existe");
         }
     }
 
     /**
-     *
+     * Método que confirma a reserva
      * @param chekin
      * @param chekaut
      * @param idQuarto
@@ -188,7 +234,7 @@ public class Sistema {
     }
 
     /**
-     *
+     * Método que cancela a reserva
      * @param chekin
      * @param chekaut
      * @param idQuarto
@@ -208,16 +254,56 @@ public class Sistema {
         }
 
     }
-//     public void confirmarReserva(String chekin, String chekaut, String idQuarto) {
-//        this.listaReserva.stream().filter((Reserva aux) -> aux.getDataInicio().equals(chekin)
-//                && aux.getDataFim().equals(chekaut)
-//                && aux.getQuarto().getId().equals(idQuarto)).map(aux -> {
-//                    aux.confirma();
-//            return aux;
-//        }).forEachOrdered(_item -> {
-//            salvarDados(this.listaReserva, "Reserva.json");
-//        });
-//    }
+
+    /**
+     * Método que edita Funcionario
+     * @param Func - Objeto Funcionario
+     */
+    public void editarFuncionario(Funcionario Func) {
+        if (this.getFuncionarioAtual().getCargo().equals("ADMINISTRADOR")) {
+            this.listaFuncionario = editar(this.listaFuncionario, Func);
+            salvarDados(this.listaFuncionario, "Funcionarios.json");
+
+        } else {
+            System.out.print("\nvoce não tem acesso");
+        }
+    }
+    /**
+     * Método que remove Funcionario
+     * @param func - Objeto Funcionario
+     */
+    public void removerFuncionario(Funcionario func) {
+        if (this.getFuncionarioAtual().getCargo().equals("ADMINISTRADOR")) {
+            // Remove o funcionário da lista de funcionários com base na igualdade de CPF
+            this.listaFuncionario.removeIf(f -> f.getCpf().equals(func.getCpf()));
+            salvarDados(this.listaFuncionario, "Funcionarios.json");
+        } else {
+            System.out.print("\nVocê não tem acesso para remover funcionários.");
+        }
+    }
+    /**
+     * Método que edita apenas o cliente
+     * @param cliente - Cliente passado como parametro
+     */
+    public void editarCliente(Cliente cliente) {
+        if (this.getFuncionarioAtual().getCargo().equals("ADMINISTRADOR")) {
+            this.listaCliente = editar(this.listaCliente, cliente);
+            salvarDados(this.listaCliente, "Clientes.json");
+
+        } else {
+            System.out.print("\nvoce não tem acesso");
+        }
+    }
+
+    public void removerCliente(Cliente cliente) {
+        if (this.getFuncionarioAtual().getCargo().equals("ADMINISTRADOR")) {
+            // Remove o funcionário da lista de funcionários com base na igualdade de CPF
+            this.listaCliente.removeIf(f -> f.getCpf().equals(cliente.getCpf()));
+            salvarDados(this.listaCliente, "Clientes.json");
+        } else {
+            System.out.print("\nVocê não tem acesso para remover funcionários.");
+        }
+    }
 
     /**
      * Este método realiza o login do usuário no Sistema, ele valida e libera o
@@ -239,28 +325,13 @@ public class Sistema {
 
         }
     }
-//    public static boolean FazerLogin(String user, String pin) {
-//
-//        List<Funcionario> listaFUncionario = carregarDados("Funcionarios.json");
-//        for (Funcionario aux : arvoreFuncionarios) {
-//            if (user.equals(aux.getUsuario()) && pin.equals(aux.getSenha())) {
-//                //se a senha e usuario bater com algum o login é feito
-//                System.out.print("Sistema Liberado\n");
-//                return true;
-//            } else {
-//                System.out.print("Sistema negado\n");
-//                return false;
-//            }
-//        }
-//        return false;
-//    }
 
     /**
      * Esse método editar as informações contida dos clientes na base de dados
      *
-     * @param <T>
-     * @param lista
-     * @param usuario
+     * @param <T> - Tipo da lista e de usuario
+     * @param lista - Lista passadd
+     * @param usuario - Usuario que vai ser incluida
      * @return
      */
     //IMPORTANTE OLHAR 
@@ -281,9 +352,9 @@ public class Sistema {
     /**
      * Método responsável por editar Cliente,Funcionario ou Administrado na BD
      *
-     * @param <T> qualquer tipo de objeto ou lista
-     * @param lista informa uma lista contendo os dados que serão editados
-     * @param usuario o dado que quer editar
+     * @param <T> - Tipo da lista e de usuario
+     * @param lista - Lista passada
+     * @param usuario - Usuario que vai ser editada
      * @return
      */
     public static <T> List<T> editar(List<T> lista, T usuario) {
@@ -301,6 +372,13 @@ public class Sistema {
         return lista;
     }
 
+    /**
+     * Método que remove algum argumento da lista
+     * @param <T> - Tipo da lista e de usuario
+     * @param lista - Lista passadd
+     * @param usuario - Usuario que vai ser removida
+     * @return 
+     */
     //Esse método vai remover Cliente,Funcionário e Administrador em uma lista
     public static <T> List<T> remover(List<T> lista, T usuario) {
         if (lista.contains(usuario)) {
@@ -312,30 +390,13 @@ public class Sistema {
         return lista;
     }
 
-//    //Método que faz a verificação se na data selecionada o quarto esta disponível, apresentando apenas uma mensagem
-//    public static void verificarReserva(List<Reserva> listaReserva, String idQuarto, LocalDate dataInicio, LocalDate dataFim){
-//        //Caso a lista não contenha nada, tem disponibilidade em todos os quartos
-//        if (listaReserva.isEmpty()) {
-//            System.out.println("\nExiste disponibilidade em todos os quartos.");
-//        }else{
-//            //Loop que percorre a lista 
-//            for (Reserva reserva : listaReserva) {
-//                //Verificando na lista de reserva se o quarto está disponível naquela data. As condicoes devem ser satisfeitas
-//                if (reserva.getDataInicio().equals(dataInicio) && reserva.getDataFim().equals(dataFim) && reserva.getQuarto().getId().equals(idQuarto)) {
-//                    System.out.println("\nNão possível realizar reserva, data indisponível.");
-//                } else {
-//                    System.out.println("\nReserva realizada com sucesso.");
-//                }
-//            }
-//        } 
-//    }
     /**
      * Esse método verifica disponibilidade de reserva na base de dados
      *
      * @param listaReserva a base de dados para verificar a disponibilidade
-     * @param dataInicio
-     * @param dataFim
-     * @param idQuarto
+     * @param dataInicio - Data de inicio 
+     * @param dataFim - data de fim 
+     * @param idQuarto - quarto selecionado 
      * @return
      */
     public static boolean verificarReserva(List<Reserva> listaReserva, String dataInicio, String dataFim, String idQuarto) {
@@ -345,22 +406,22 @@ public class Sistema {
             List<LocalDate> periodoAux = gerarPeriodo(item.getDataInicio(), item.getDataFim());
 
             if (Sistema.verificarPeriodo(periodoAux, periodo) && idQuarto.equals(item.getQuarto().getId())) {
-                // System.out.println("\nNão possível realizar reserva, data "+dataInicio+" esta indisponível.");
+                System.out.println("\nNão possível realizar reserva, data "+dataInicio+" esta indisponível.");
                 return false;
             }
         }
-        //  System.out.println("\nData "+dataInicio+" esta disponivel.");
+          System.out.println("\nData "+dataInicio+" esta disponivel.");
         return true;
     }
 
     /**
      * Esse método cria uma reserva na base de dados
      *
-     * @param listaReserva
-     * @param cliente
-     * @param dataInicio
-     * @param dataFim
-     * @param idQuarto
+     * @param listaReserva - Lista que vai ser percorrida
+     * @param cliente - Cliente que ser utilizado na reserva
+     * @param dataInicio - data de inicio da reserva
+     * @param dataFim - data final da reserva
+     * @param idQuarto - quarto selecionado
      * @return
      */
     //Método responsável por realizar reserva 
@@ -394,9 +455,9 @@ public class Sistema {
      * seja realizada corretamente, é preciso que seja feita alguma verificação
      * de disponibilidade.
      *
-     * @param listaReserva
-     * @param dataInicial
-     * @param idQuarto
+     * @param listaReserva - Lista que vai ser percorrida
+     * @param dataInicial - Data que começa 
+     * @param idQuarto - Quarto selecionado
      * @return
      */
     //Método responsável por realizar o cancelamento de Reserva
@@ -418,25 +479,13 @@ public class Sistema {
         return listaReserva;
     }
 
-    public static List cancelarReservaS(List<ReservaS> listaReserva, List<String> periodo, String idQuarto) {
-        //Loop que verifica a lista de reserva
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-        for (ReservaS item : listaReserva) {
-            if (item.getPeriodo().equals(periodo) && item.getQuarto().getId().equals(idQuarto)) {
-                //Para reposicionar itens, é preciso que o indice seja inteiro
-                LocalDate data = LocalDate.parse(item.getPeriodo().get(0), formato);
-                System.out.println("Reserva cancelada.\nValor da multa: R$" + Sistema.calcularMulta(data, item.getQuarto().getPreco()));
-                listaReserva.remove(item);
-                return listaReserva;
-            }
-        }
-        //Caso a reserva não seja encontra na base de dados.
-        System.out.println("Reserva não encontrada.");
-        return listaReserva;
-    }
-
-    //metodo responsalvel por calular o valor da multa ao cancelar uma reserva
+    /**
+     * Métodoq que calcula a multa caso ocorra cancelamento de reserva
+     * @param data - data da reserva
+     * @param diaria - diaria
+     * @return 
+     */
+    //Metodo responsalvel por calular o valor da multa ao cancelar uma reserva
     //entre como paramentro a data para poder comparar com a atual e também o valor de uma diraria 
     public static double calcularMulta(LocalDate data, double diaria) {
 
@@ -455,26 +504,13 @@ public class Sistema {
 
     }
 
-    /**
-     * Método que será utilizada para fornecer informações do extrato após a
-     * realização da reserva
-     *
-     * @param reserva
-     */
-    //Após a reserva acontecer, esse método vai gerar um extrato.
-    //Método está errado ou incompleto
-//    public static void gerarExtrato(Reserva reserva) {
-//        //Nome do cliente, preco do quarto * quantidade de dias da reserva.
-//        //Uma data final e uma data inicial.
-//        System.out.println("Reserva realizada com sucesso. ");
-//        System.out.println(reserva.toString());
-//    }
+
     /**
      * Esse método vai buscar informações na base de dados de alguma reserva
      * realizada e apresentada ao usuário
      *
-     * @param reserva
-     * @param cliente
+     * @param reserva - Reserva que vai ser lida
+     * @param cliente - Cliente que vai ser verificado na reserva
      * @return
      */
     //Método responsável por ler dados da(s) reserva(s) de determinado cliente 
@@ -502,9 +538,8 @@ public class Sistema {
 
     /**
      * Esse método salva informações da reserva na base de dados(arquivo JSON)
-     *
-     * @param dados
-     * @param nomeArquivo
+     * @param dados - Dados que va ser salvo
+     * @param nomeArquivo - nome do arquivo que vai salvar os dados
      */
     //FUNÇÃO QUE SALVA OS DADOS DE UMA LISTA EM ARQUIVO JSON
     public static void salvarDados(List<?> dados, String nomeArquivo) {
@@ -520,8 +555,15 @@ public class Sistema {
         }
     }
 
-    public static <T> void salvar(T dados, String nomeArquivo) {
-        List<T> listaDadosExistentes = carregarDados(nomeArquivo);
+    /**
+     * Metodo que realiza o salvamento de informações
+     * @param <T> - Tipo generico de dados
+     * @param dados - Dados que va ser salvo
+     * @param nomeArquivo - nome do arquivo que vai salvar os dados
+     * @param tipoClasse - Tipo da classe
+     */
+    public static <T> void salvar(T dados, String nomeArquivo, Class<T> tipoClasse) {
+        List<T> listaDadosExistentes = carregarDados(nomeArquivo, tipoClasse);
         if (listaDadosExistentes == null) {
             listaDadosExistentes = new ArrayList<>();
         }
@@ -546,30 +588,12 @@ public class Sistema {
         }
     }
 
-    public static <T> List<T> carregarDados(String nomeArquivo) {
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        try {
-            // Criar um TypeReference para inferir o tipo de lista dinamicamente
-            TypeReference<List<T>> typeReference = new TypeReference<>() {
-            };
-
-            // Ler o arquivo JSON e converter para uma lista de objetos da classe
-            // E retorna a lista com os dados do arquivo
-            return objectMapper.readValue(new File(nomeArquivo), typeReference);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // Caso não consiga ler, retorna null
-        return null;
-    }
-
     /**
      * Método que vai carregar dados dos clientes da base de dados(arquivo JSON)
      *
-     * @param <T>
-     * @param nomeArquivo
-     * @param tipoClasse
+     * @param <T> - Tipo generico de dado
+     * @param nomeArquivo - Nome do arquivo passado como parametro
+     * @param tipoClasse  Tipo da classe passada como parametro
      * @return
      */
     public static <T> List<T> carregarDados(String nomeArquivo, Class<T> tipoClasse) {
@@ -584,23 +608,6 @@ public class Sistema {
         return null;
     }
 
-//    public static <T> List<T> carregarDados(String nomeArquivo) {
-//        ObjectMapper objectMapper = new ObjectMapper();
-//
-//        try {
-//            // Criar um TypeReference para inferir o tipo de classe dinamicamente
-//            TypeReference<List<T>> typeReference = new TypeReference<>() {
-//            };
-//
-//            // Ler o arquivo JSON e converter para uma lista de objetos da classe
-//            // E retorna a lista com os dados do arquivo
-//            return objectMapper.readValue(new File(nomeArquivo), typeReference);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        // Caso não consiga ler, retorna null
-//        return null;
-//    }
     /**
      * Esse métoddo vai servir como um contador para saber quantas vezes as
      * classe Reserva e a classe Cliente foram instanciadas em nosso código.
@@ -613,8 +620,11 @@ public class Sistema {
         System.out.print("Numeros de instancias da classe pessoa " + numClientePrivate + " ,e da classe reserva sao " + numReserva + "\n");
     }
 
+    /**
+     * Método que calcula o faturamento da empresa 
+     * @return 
+     */
     public static double calcularFaturamento() {
-        //essa função ainda não esta funcionado pq não é possivel carregar os dados do json
         double faturamento = 0, receita = 0, despesa = 0;
         List<Reserva> listaReserva = new ArrayList<>();
         listaReserva = Sistema.carregarDados("Reserva.json", Reserva.class);
@@ -628,33 +638,16 @@ public class Sistema {
             //despesa recebe o gasto com os salarios do funcionarios
             despesa += aux.getSalario();
         }
-// A IDEIA E BUSCAR AS RESERVAS DAQUELE MÊS QUE SERIA A RECEITA E O CUSTO COM OS FUNCIONARIOS SERIA A DESPESA, AI FAXER R-D PRA ACHAR O FATURAMENTO
-
         return faturamento = receita - despesa;
     }
 
-    public static <T> List<T> find(List<T> lista, T usuario) {
-
-        ReservaComparator reserva = new ReservaComparator();
-        Iterator<T> iterator = lista.iterator();
-
-        while (iterator.hasNext()) {
-            usuario = iterator.next();
-            System.out.println(usuario);
-        }
-        return null;
-    }
-
+    /**
+     * Data que verifica o periodo gerado, ou seja, diferença entre as datas
+     * @param periodo1 - data inicial
+     * @param periodo2 - data final
+     * @return 
+     */
     public static boolean verificarPeriodo(List<LocalDate> periodo1, List<LocalDate> periodo2) {
-
-//         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//          LocalDate dataInicio1 = LocalDate.parse(reserva1.getDataInicio(), formato);
-//          LocalDate dataFim1 = LocalDate.parse(reserva1.getDataFim(), formato);
-//          LocalDate dataInicio2 = LocalDate.parse(reserva2.getDataInicio(), formato);
-//          LocalDate dataFim2 = LocalDate.parse(reserva2.getDataFim(), formato);
-//          
-//        List<LocalDate> periodo1 = gerarPeriodo(dataInicio1,dataFim1);
-//        List<LocalDate> periodo2 = gerarPeriodo(dataInicio2, dataFim2);
         for (LocalDate data : periodo1) {
             if (periodo2.contains(data)) {
                 return true; // Encontrou uma data coincidente
@@ -663,6 +656,13 @@ public class Sistema {
         return false; // Não encontrou datas coincidentes
     }
 
+    /**
+     * Metodo que gerar um periodo, ou seja, a diferenca entre a data inicial e a 
+     * data final
+     * @param dataInicio - Data inicial
+     * @param dataFim - Data final 
+     * @return 
+     */
     public static List<LocalDate> gerarPeriodo(String dataInicio, String dataFim) {
         List<LocalDate> periodo = new ArrayList<>();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -676,5 +676,26 @@ public class Sistema {
         }
 
         return periodo;
+    }
+    
+    /**
+     * Método find que vai fazer uma procura utilizando comparator e iteretor
+     * @param <T> - Tipo generico de dado
+     * @param iterator - Iterator
+     * @param comparator - comparator
+     * @return 
+     */
+    public static <T> T find(Iterator<T> iterator, Comparator<T> comparator) {
+        if (iterator.hasNext()) {
+            T smallest = iterator.next();
+            while (iterator.hasNext()) {
+                T current = iterator.next();
+                if (comparator.compare(current, smallest) < 0) {
+                    smallest = current;
+                }
+            }
+            return smallest;
+        }
+        return null;
     }
 }

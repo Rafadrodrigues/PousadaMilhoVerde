@@ -4,7 +4,6 @@
   "endereco" : "Diamantina",
   "email" : "getuliosantos@email",
   "telefone" : "389985756",
-  "dataDesejada" : null,
   "cartaoCredito" : null,
   "usuario" : "Getulio",
   "senha" : "123456",
@@ -16,7 +15,6 @@
   "endereco" : "Belo Horizonte",
   "email" : "rafadias@email.com",
   "telefone" : "339986743",
-  "dataDesejada" : null,
   "cartaoCredito" : null,
   "usuario" : "@rafa919",
   "senha" : "123023",
@@ -32,5 +30,16 @@
   "usuario" : "getulio",
   "senha" : "123456",
   "cargo" : "ADMINISTRADOR",
+  "salario" : 1200.0
+}, {
+  "nome" : "Rafael Dias",
+  "cpf" : "14612313341",
+  "endereco" : "diamantina",
+  "email" : "rafael.dias@email",
+  "telefone" : "389980385",
+  "cartaoCredito" : null,
+  "usuario" : "Rafael",
+  "senha" : "123231",
+  "cargo" : "FUNCIONARIO",
   "salario" : 1200.0
 } ]

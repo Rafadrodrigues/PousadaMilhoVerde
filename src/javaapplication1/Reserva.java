@@ -8,8 +8,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import javaapplication1.ReservaState.EstadoDefinitivo;
-import javaapplication1.ReservaState.ReservaS;
+
 
 /**
  * Classe Reserva, nela estão contidas informações sobre a reservas da Pousada
@@ -20,9 +19,6 @@ import javaapplication1.ReservaState.ReservaS;
 public class Reserva {
 
     //Atributos da classe agenda, alguns podem ser retirados posteriormente.
-    //Occupation inicialmente recebe false para sinalizar que o quarto não esta ocupado
-    //Data,quarto e cliente vão ser armazenados no calendario
-    //   private List<LocalDate> periodo;
     private String estado;
     private String dataPedido;
     private double valor;
@@ -32,15 +28,17 @@ public class Reserva {
     private Cliente cliente;
     //QUESTÃO 11
     private static int totalReservas = 0;
-    //Construtor para iniciar todos os estados da classe 
-
+    
     /**
-     *
-     * @param cliente
-     * @param dataInicio
-     * @param dataFim
-     * @param quarto
+     * Construtor que vai coletar algumas informações da classe e lanca uma excessão
+     * caso tem algum erro
+     * @param cliente - Objeto cliente que vai ser passado como parametro
+     * @param dataInicio - Data inicial da reserva
+     * @param dataFim - Data final da reserva
+     * @param quarto - Quarto que vai ser utilizado na reserva
+     * @throws IllegalArgumentException 
      */
+    //Construtor para iniciar todos os estados da classe 
     public Reserva(Cliente cliente,String dataInicio, String dataFim, Quarto quarto) throws IllegalArgumentException {
         this(dataInicio, dataFim);
         this.cliente=cliente;
@@ -48,7 +46,14 @@ public class Reserva {
         this.valor = gerarValor();
         //Reserva.totalReservas = Reserva.totalReservas + 1;
     }
-
+    
+    /**
+     * Construtor que vai coletar algumas informações da classe e lanca uma excessão
+     * caso tem algum erro
+     * @param dataInicio - Data inicial da reserva
+     * @param dataFim - Data final da reserva
+     * @throws IllegalArgumentException 
+     */
     public Reserva(String dataInicio, String dataFim) throws IllegalArgumentException {
         dataInicio = verificarFormato(dataInicio);
         dataFim = verificarFormato(dataFim);
@@ -65,7 +70,9 @@ public class Reserva {
         this.estado = EstadoReserva.PRELIMINAR.getValor();
         Reserva.totalReservas = Reserva.totalReservas + 1;
     }
-
+    /**
+     * Construtor padrão da classe
+     */
     public Reserva() {
         Reserva.totalReservas = Reserva.totalReservas + 1;
     }
@@ -133,14 +140,21 @@ public class Reserva {
     public static void setTotalReservas(int totalReservas) {
         Reserva.totalReservas = totalReservas;
     }
-
+    /**
+     * Método que armazena a reserva
+     * @param listaReserva - Lista que armazena as reserva
+     */
     //Método que salva a data no calendario
     public void armazenaReserva(List listaReserva) {
         //Sera passado como paramentro o método do sistema que realizaReserva
         List diasReserva = new ArrayList<>();
-
     }
-
+    /**
+     * Método que calcula a diferença entre a datainicial e datafinal
+     * @param dataInicial - Data inicial da reserva
+     * @param dataFinal - Data final da reserva
+     * @return - Numero de dias
+     */
     public int diasPeriodo(LocalDate dataInicial, LocalDate dataFinal) {
         int numDias = 0;
         LocalDate dataAtual = dataInicial;
@@ -151,7 +165,10 @@ public class Reserva {
 
         return numDias;
     }
-
+    /**
+     * Método que gerar o valor total da reserva
+     * @return 
+     */
     public double gerarValor() {
         //retorna o numero dos dias das reserva multiplicado pelo preco dos quartos
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -159,13 +176,21 @@ public class Reserva {
         LocalDate dataFinal = LocalDate.parse(dataFim, formato);
         return (diasPeriodo(dataInicial, dataFinal) * quarto.getPreco());
     }
-
+    /**
+     * Gera extrato da reserva
+     * @return 
+     */
     public String Extrato() {
         DecimalFormat df = new DecimalFormat("#.00");
         return "Hospede: " + cliente.getNome() + "\nQuarto: " + quarto.getId() + "\nCheckin: " + dataInicio
                 + "\tCheckout: " + dataFim + "\nValor: R$" + df.format(valor);
     }
-
+    /**
+     * Método que verifica as datas e tem certeza que não são iguais
+     * @param dataInicial - Data inicial da reserva
+     * @param dataFinal - Data final da reserva
+     * @return 
+     */
     //funçao para verificar se as datas podem ser usada
     public static boolean verificarDatas(LocalDate dataInicial, LocalDate dataFinal) {
         //se as datas são iguais podem ser usada
@@ -175,7 +200,12 @@ public class Reserva {
         //verifica se a data final e depois da inicial
         return dataFinal.isAfter(dataInicial);
     }
-
+    /**
+     * 
+     * @param data - Verificar o formato da data que foi passada como parametro
+     * Ex.yyyy/mm/dd
+     * @return 
+     */
     public static String verificarFormato(String data) {
         Scanner scanner = new Scanner(System.in);
 
@@ -195,11 +225,17 @@ public class Reserva {
         }
         return data;
     }
-
+    /**
+     * ToString da classe
+     * @return 
+     */
     @Override
     public String toString() {
         return "Reserva{" + "data inicio=" + dataInicio + ", data fim=" + dataFim + ", quarto=" + quarto + ", estado=" + estado + ", cliente=" + cliente + '}';
     }
+    /**
+     * Método que confirma a reserva
+     */
     public void confirma(){
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate data = LocalDate.parse(this.dataPedido, formato);
@@ -209,6 +245,9 @@ public class Reserva {
             System.out.print("Passou do prazo");
         }
     }
+        /**
+     * Método que cancela a reserva
+     */
     public void cancelar(){
         if(this.getEstado().equals("PRELIMINAR")){
             System.out.print("Reserva cancelada");
@@ -218,7 +257,10 @@ public class Reserva {
             System.out.println("Reserva cancelada\nValor da multa: R$" + Sistema.calcularMulta(data, this.getQuarto().getPreco()));
         }
     }
-
+    /**
+     * Método que seria utilizado para o padrão de Projeto state e definiria o estado 
+     * da reserva
+     */
     public enum EstadoReserva {
         PRELIMINAR("PRELIMINAR"), DEFINITIVA("DEFINITIVA");
 

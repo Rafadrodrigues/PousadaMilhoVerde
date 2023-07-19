@@ -12,11 +12,12 @@ import java.util.Comparator;
  */
 public class clienteComparator implements Comparator<Cliente>{
 
-    /**
-     *
-     * @param cliente1
-     * @param cliente2
-     * @return
+       /**
+     * Método que compara duas classes que vão ser passadas como parametro, os resultados 
+     * vão ser passado como int
+     * @param cliente1 - Primeiro cliente a ser comparada
+     * @param cliente2 - Segunda cliente a ser comparada
+     * @return - cpfCompare
      */
     @Override
     public int compare(Cliente cliente1,Cliente cliente2){

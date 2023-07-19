@@ -1,19 +1,14 @@
 package javaapplication1;
-
-import java.util.ArrayList;
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Scanner;
-import javaapplication1.Pessoa;
+
 
 /**
  * Classe Cliente é uma subclasse da superclasse Pessoa.Tem o papel de representar
  * um cliente da Pousada Milho verde.
- * @author rafar
+ * @author Rafael e Getúlio
  */
 public class Cliente extends Pessoa {
 
-    //Atributos da classe Cliente
     private String cartaoCredito;
     //QUESTÃO 11
     protected static int totalClienteProtec = 0;
@@ -22,13 +17,21 @@ public class Cliente extends Pessoa {
     public Cliente(){
         super ();
     }
-    //Construtor da classe Cliente
+    /**
+     * 
+     * @param nome - Nome do cliente
+     * @param cpf - Cpf do cliente
+     * @param endereco - Endereco do cliente
+     * @param telefone - Telefone do cliente
+     * @param email - E-mail do cliente
+     * @param cartaoCredito - Cartão de Crédito do cliente
+     */
     public Cliente(String nome, String cpf, String endereco, String telefone, 
         String email,String cartaoCredito) {
         //Questao 04
         super(nome, cpf, endereco, telefone, email);
         this.cartaoCredito = cartaoCredito;
-        //variáveis de classe (static) que irão armazenar quantas instâncias foram criadas dos tipos Cliente
+        //Variáveis de classe (static) que irão armazenar quantas instâncias foram criadas dos tipos Cliente
         Cliente.totalClienteProtec = Cliente.totalClienteProtec + 1;
         Cliente.totalClientePrivate = Cliente.totalClientePrivate + 1;
     }
@@ -36,11 +39,11 @@ public class Cliente extends Pessoa {
     /**
      * Esse construtor foi criado com o intuito de fornecer apenas alguns atributos 
      * específicos para a classe
-     * @param nome
-     * @param cpf
-     * @param endereco
-     * @param telefone
-     * @param email 
+     * @param nome - Nome do cliente
+     * @param cpf - Cpf do cliente
+     * @param endereco - Endereco do cliente
+     * @param telefone - Telefone do cliente
+     * @param email - E-mail do cliente
      */
     public Cliente(String nome, String cpf, String endereco, String telefone,String email) {
         super(nome, cpf, endereco, telefone,email);
@@ -74,6 +77,7 @@ public class Cliente extends Pessoa {
 
     /**
      * Esse método preenche as informções solicitadas do cliente e retorna 
+     * @param proposta - Retorna a proposta pelo cancelamento
      * @return 
      */
   
@@ -86,6 +90,11 @@ public class Cliente extends Pessoa {
        return proposta; 
     }
 
+    /**
+     * Método que vai comparar os clientes por meio da classe comparator
+     * @param cliente - Cliente que vai ser verificado 
+     * @return 
+     */
     int compareTo(Cliente cliente) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
