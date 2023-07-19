@@ -34,8 +34,6 @@ public class GerenciarFuncionario extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         cadastrarFuncionario = new javax.swing.JButton();
         removerFuncionario = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         editarFuncionario = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -72,25 +70,22 @@ public class GerenciarFuncionario extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
-        jLabel4.setText("Financeiro");
-
-        jButton1.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
-        jButton1.setText("Lançar Diária");
-
         jLabel5.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel5.setText("SELECIONE A OPÇÃO DESEJADA");
 
         editarFuncionario.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         editarFuncionario.setText("Editar Funcionário");
+        editarFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarFuncionarioActionPerformed(evt);
+            }
+        });
 
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(cadastrarFuncionario, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(removerFuncionario, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(editarFuncionario, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -111,24 +106,22 @@ public class GerenciarFuncionario extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(removerFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(111, 111, 111))
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(138, 138, 138)
+                .addGap(119, 119, 119)
                 .addComponent(jLabel5)
-                .addContainerGap(185, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(80, 80, 80)
+                .addGap(96, 96, 96)
                 .addComponent(jLabel5)
-                .addGap(102, 102, 102)
+                .addGap(86, 86, 86)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel3))
@@ -137,14 +130,10 @@ public class GerenciarFuncionario extends javax.swing.JInternalFrame {
                     .addComponent(cadastrarFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
                     .addComponent(editarFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(126, 126, 126)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4))
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(removerFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addComponent(removerFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(173, Short.MAX_VALUE))
         );
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/Imagens/icons8-voltar-24.png"))); // NOI18N
@@ -181,6 +170,13 @@ public class GerenciarFuncionario extends javax.swing.JInternalFrame {
         cadastroFunc.setVisible(true);
     }//GEN-LAST:event_cadastrarFuncionarioActionPerformed
 
+    private void editarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarFuncionarioActionPerformed
+        // TODO add your handling code here:
+        EditarFuncionario editarfunc = new EditarFuncionario();
+        jDesktopPane1.add(editarfunc);
+        editarfunc.setVisible(true);
+    }//GEN-LAST:event_editarFuncionarioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -188,12 +184,10 @@ public class GerenciarFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JButton cadastrarFuncionario;
     private javax.swing.JButton editarFuncionario;
-    private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;

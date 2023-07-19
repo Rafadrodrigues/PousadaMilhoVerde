@@ -1,4 +1,5 @@
 import javaapplication1.Sistema;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -298,14 +299,17 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        String nome = nome.toString();
-        String cpf = cpf.toString();
-        String endereco = endereco.toString();
-        String telefone = telefone.toString();
-        String email = email.toString();
+        Sistema sis = new Sistema();
+        String nome1 = nome.toString();
+        String cpf1 = cpf.toString();
+        String endereco1 = endereco.toString();
+        String telefone1 = telefone.toString();
+        String email1 = email.toString();
         String cartaoCredito = cartao.toString();
         
-        Sistema.cr
+        sis.criarCliente(nome1, cpf1, endereco1, telefone1, email1, cartaoCredito);
+        JOptionPane.showMessageDialog(null, "Cliene Criado com Sucesso");
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

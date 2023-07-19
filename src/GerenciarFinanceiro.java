@@ -43,7 +43,7 @@ public class GerenciarFinanceiro extends javax.swing.JInternalFrame {
         setTitle("Gerenciar Financeiro");
 
         jLabel8.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
-        jLabel8.setText("Realizar Reserva");
+        jLabel8.setText("Lançar Diária");
 
         jLabel9.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel9.setText("Balanço Mensal");
@@ -90,37 +90,29 @@ public class GerenciarFinanceiro extends javax.swing.JInternalFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(134, 134, 134)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel7)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(230, 230, 230)
-                                .addComponent(jLabel10))
-                            .addComponent(jLabel9))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(lancarDiaria, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                        .addGap(178, 178, 178)
-                        .addComponent(PrecoQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(107, 107, 107))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(balancoMensal, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(432, 432, 432))
+                .addComponent(jLabel7)
+                .addGap(73, 73, 73))
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(balancoMensal, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel8)
+                    .addComponent(lancarDiaria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PrecoQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(107, 107, 107))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addGap(101, 101, 101)
+                .addContainerGap(103, Short.MAX_VALUE)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addGap(52, 52, 52)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel10))
@@ -130,9 +122,9 @@ public class GerenciarFinanceiro extends javax.swing.JInternalFrame {
                     .addComponent(lancarDiaria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(90, 90, 90)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(balancoMensal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(188, 188, 188))
+                .addGap(194, 194, 194))
         );
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/Imagens/icons8-voltar-24.png"))); // NOI18N
@@ -157,7 +149,7 @@ public class GerenciarFinanceiro extends javax.swing.JInternalFrame {
 
     private void lancarDiariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lancarDiariaActionPerformed
         // TODO add your handling code here:
-        RealizarReserva realizarRes = new RealizarReserva();
+        LancarDiaria realizarRes = new LancarDiaria();
         jDesktopPane1.add(realizarRes);
         realizarRes.setVisible(true);
 
@@ -165,14 +157,14 @@ public class GerenciarFinanceiro extends javax.swing.JInternalFrame {
 
     private void PrecoQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrecoQuartoActionPerformed
         // TODO add your handling code here:
-        EditarReserva editarRes = new EditarReserva();
+        ValorQuarto editarRes = new ValorQuarto();
         jDesktopPane1.add(editarRes);
         editarRes.setVisible(true);
     }//GEN-LAST:event_PrecoQuartoActionPerformed
 
     private void balancoMensalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_balancoMensalActionPerformed
         // TODO add your handling code here:
-        CancelarReserva cancelarRes = new CancelarReserva();
+        BalancoMensal cancelarRes = new BalancoMensal();
         jDesktopPane1.add(cancelarRes);
         cancelarRes.setVisible(true);
     }//GEN-LAST:event_balancoMensalActionPerformed

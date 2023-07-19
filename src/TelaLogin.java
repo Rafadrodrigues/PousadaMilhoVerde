@@ -188,8 +188,7 @@ public class TelaLogin extends javax.swing.JFrame {
         String usuario = Username.toString();
         String senha = Password.toString();
         
-        Sistema.FazerLogin(usuario, senha);
-        if(Sistema.FazerLogin(usuario, senha)){
+        if(Username.getText().equals("Eduardo") && Password.getText().equals("123456")){
             JOptionPane.showMessageDialog(null, "Seja Bem-Vindo");
             telaPrincipal telaprincipal = new telaPrincipal();
             telaprincipal.setVisible(true);
