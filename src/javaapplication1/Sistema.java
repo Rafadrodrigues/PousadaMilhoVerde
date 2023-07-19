@@ -1,6 +1,6 @@
 package javaapplication1;
 
-
+import com.fasterxml.jackson.core.type.TypeReference;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -24,12 +24,56 @@ import javaapplication1.ReservaState.ReservaS;
  *
  * @author rafar
  */
-
-
 public class Sistema {
 
+//    private Funcionario funcionarioAtual;
+//    private List<Cliente> listaCliente;
+//    private List<Funcionario> listaFuncionario;
+//    private List<Reserva> listaReserva;
+//    
+//    public Sistema(){
+//        this.listaCliente= carregarDados("Clientes.json");
+//        this.listaFuncionario= carregarDados("Funcionarios.json");
+//        this.listaReserva= carregarDados("Reserva.json");
+//    }
+//    public Funcionario getFuncionarioAtual() {
+//        return funcionarioAtual;
+//    }
+//
+//    public void setFuncionarioAtual(Funcionario funcionarioAtual) {
+//        this.funcionarioAtual = funcionarioAtual;
+//    }
+//
+//    public List<Cliente> getListaCliente() {
+//        return listaCliente;
+//    }
+//
+//    public void setListaCliente(List<Cliente> listaCliente) {
+//        this.listaCliente = listaCliente;
+//    }
+//
+//    public List<Funcionario> getListaFuncionario() {
+//        return listaFuncionario;
+//    }
+//
+//    public void setListaFuncionario(List<Funcionario> listaFuncionario) {
+//        this.listaFuncionario = listaFuncionario;
+//    }
+//
+//    public List<Reserva> getListaReserva() {
+//        return listaReserva;
+//    }
+//
+//    public void setListaReserva(List<Reserva> listaReserva) {
+//        this.listaReserva = listaReserva;
+//    }
+
+
     //QUESTAO 05
-    //Inicializando os 10 quaros da memória que podem ser carregados pelas outras classes
+    /**
+     * Inicializando os 10 quaros da memória que podem ser carregados pelas
+     * outras classes
+     */
     public static Quarto[] quartos = new Quarto[]{
         new Quarto("001", 50, "Comun"),
         new Quarto("002", 50, "Comun"),
@@ -51,7 +95,10 @@ public class Sistema {
         Sistema.quartos = quartos;
     }
 
-    //Lê a lista de funcionarios do Json para pegar as senhas
+    /**
+     * Lê a lista de funcionarios do Json para pegar as senhas que serao usada
+     * no Login
+     */
     private static TreeSet listaFuncionario() {
         TreeSet<Funcionario> arvoreFuncionarios = new TreeSet<>(Comparator.comparing(Funcionario::getNome));
         List<Funcionario> Colaboradores = new ArrayList<>();
@@ -61,13 +108,25 @@ public class Sistema {
         }
         return arvoreFuncionarios;
     }
+    
+    private void criarCliente(String nome, String cpf, String endereco, String telefone,String email,String cartaoCredito){
+        Cliente cliente= new Cliente(nome,cpf,endereco,telefone,email,cartaoCredito);
+        salvar(cliente,"Clientes.json");
+    }
+    
+    private void criarFuncionario(String usuario, String senha, 
+        String nome, String cpf, String endereco, String telefone,String email, float salario){
+        Funcionario funcionario= new Funcionario(usuario,senha,nome,cpf,endereco,telefone,email,salario);
+        salvar(funcionario,"Funcionarios.json");
+    }
+    
 
     /**
      * Este método realiza o login do usuário no Sistema, ele valida e libera o
      * acesso
      *
-     * @param user
-     * @param pin
+     * @param user é o usuario do sistema
+     * @param pin a senha do usuario
      */
     public static boolean FazerLogin(String user, String pin) {
         //Lista de funcionarios;
@@ -77,10 +136,7 @@ public class Sistema {
             if (user.equals(aux.getUsuario()) && pin.equals(aux.getSenha())) {
                 //se a senha e usuario bater com algum o login é feito
                 System.out.print("Sistema Liberado\n");
-//                Sistema.executar(Colaboradores.get(i));
                 return true;
-                //TALVEZ MUDAR O TIPO DA FUNÇÃO E RETORNAR O FUNCIONARIO DAQUELA
-                //SENHA PARA OLHAR PELO CARGO, DEIXAR UMA  LISTA SALVA DOS POSSIVEIS CARGOS E AI LIBERAR DE ACORDO
             } else {
                 System.out.print("Sistema negado\n");
                 return false;
@@ -113,25 +169,28 @@ public class Sistema {
 
     //QUESTÃO 09
     //TUDO PARA ABAIXO TEM A 9
-    //Método responsável por editar Cliente,Funcionario ou Administrado na BD
+    //
+    /**
+     * Método responsável por editar Cliente,Funcionario ou Administrado na BD
+     *
+     * @param <T> qualquer tipo de objeto ou lista
+     * @param lista informa uma lista contendo os dados que serão editados
+     * @param usuario o dado que quer editar
+     * @return
+     */
     public static <T> List<T> editar(List<T> lista, T usuario) {
         //Recebendo lista de clientes
-        if (lista.isEmpty()) {
-            System.out.println("Usuario inexistente.");
-            return lista;
-        } else {
-            for (T item : lista) {
-                if (item.equals(usuario)) {
-                    //Considerando que já tenha o cliente na base de dados.
-                    //Para reposicionar itens, é preciso que o indice seja inteiro
-                    lista.set(lista.indexOf(item), usuario);
-                    System.out.println("Usuario editado.");
-                    return lista;
-                }
+        for (T item : lista) {
+            if (item.equals(usuario)) {
+                //Considerando que já tenha o cliente na base de dados.
+                //Para reposicionar itens, é preciso que o indice seja inteiro
+                lista.set(lista.indexOf(item), usuario);
+                System.out.println("Usuario editado.");
+                return lista;
             }
-            System.out.println("Usuario não encontrado.");
-            return lista;
         }
+        System.out.println("Usuario não encontrado.");
+        return lista;
     }
 
     //Esse método vai remover Cliente,Funcionário e Administrador em uma lista
@@ -144,43 +203,48 @@ public class Sistema {
         }
         return lista;
     }
+
+//    //Método que faz a verificação se na data selecionada o quarto esta disponível, apresentando apenas uma mensagem
+//    public static void verificarReserva(List<Reserva> listaReserva, String idQuarto, LocalDate dataInicio, LocalDate dataFim){
+//        //Caso a lista não contenha nada, tem disponibilidade em todos os quartos
+//        if (listaReserva.isEmpty()) {
+//            System.out.println("\nExiste disponibilidade em todos os quartos.");
+//        }else{
+//            //Loop que percorre a lista 
+//            for (Reserva reserva : listaReserva) {
+//                //Verificando na lista de reserva se o quarto está disponível naquela data. As condicoes devem ser satisfeitas
+//                if (reserva.getDataInicio().equals(dataInicio) && reserva.getDataFim().equals(dataFim) && reserva.getQuarto().getId().equals(idQuarto)) {
+//                    System.out.println("\nNão possível realizar reserva, data indisponível.");
+//                } else {
+//                    System.out.println("\nReserva realizada com sucesso.");
+//                }
+//            }
+//        } 
+//    }
     /**
      * Esse método verifica disponibilidade de reserva na base de dados
      *
-     * @param listaReserva
+     * @param listaReserva a base de dados para verificar a disponibilidade
      * @param dataInicio
      * @param dataFim
      * @param idQuarto
+     * @return
      */
-    //Método que faz a verificação se na data selecionada o quarto esta disponível, apresentando apenas uma mensagem
-    public static void verificarReserva(List<Reserva> listaReserva, String idQuarto, LocalDate dataInicio, LocalDate dataFim){
-        //Caso a lista não contenha nada, tem disponibilidade em todos os quartos
-        if (listaReserva.isEmpty()) {
-            System.out.println("\nExiste disponibilidade em todos os quartos.");
-        }else{
-            //Loop que percorre a lista 
-            for (Reserva reserva : listaReserva) {
-                //Verificando na lista de reserva se o quarto está disponível naquela data. As condicoes devem ser satisfeitas
-                if (reserva.getDataInicio().equals(dataInicio) && reserva.getDataFim().equals(dataFim) && reserva.getQuarto().getId().equals(idQuarto)) {
-                    System.out.println("\nNão possível realizar reserva, data indisponível.");
-                } else {
-                    System.out.println("\nReserva realizada com sucesso.");
-                }
+    public static boolean verificarReserva(List<Reserva> listaReserva, String dataInicio, String dataFim, String idQuarto) {
+        //Loop que percorre a lista 
+        List<LocalDate> periodo = gerarPeriodo(dataInicio, dataFim);
+        for (Reserva item : listaReserva) {
+            List<LocalDate> periodoAux = gerarPeriodo(item.getDataInicio(), item.getDataFim());
+
+            if (Sistema.verificarPeriodo(periodoAux, periodo) && idQuarto.equals(item.getQuarto().getId())) {
+                // System.out.println("\nNão possível realizar reserva, data "+dataInicio+" esta indisponível.");
+                return false;
             }
-        } 
-    }
-    public static boolean verificarReserva(List<Reserva> listaReserva, Reserva reserva,String idQuarto) {
-            //Loop que percorre a lista 
-            for (Reserva item : listaReserva) {
-               
-                if(Sistema.verificarPeriodo(item,reserva) && idQuarto.equals(item.getQuarto().getId())){
-                    System.out.println("\nNão possível realizar reserva, data "+reserva.getDataInicio()+" esta indisponível.");
-                    return false;
-                }
-            }
-        System.out.println("\nData "+reserva.getDataInicio()+" esta disponivel.");
+        }
+        //  System.out.println("\nData "+dataInicio+" esta disponivel.");
         return true;
     }
+
     /**
      * Esse método cria uma reserva na base de dados
      *
@@ -193,28 +257,30 @@ public class Sistema {
      */
     //Método responsável por realizar reserva 
     public static List criarReserva(List<Reserva> listaReserva, Cliente cliente, String idQuarto, String dataInicio, String dataFim) {
-        
-            Reserva reserva = new Reserva(dataInicio, dataFim);
-            Quarto quarto = new Quarto();
-            //Preenchendo os campos da reserva e do quarto
-            quarto.setId(idQuarto);
-            reserva.setCliente(cliente);
-            //Essa estrutura é para identificar qual quarto que foi selecionado
-            for (Quarto quarto1 : quartos) {
-                if (quarto1.getId().equals(idQuarto)) {
-                    reserva.setQuarto(quarto1);
-                    // Sai do loop após encontrar o quarto desejado
-                    break;
-                }
+
+        Reserva reserva = new Reserva(dataInicio, dataFim);
+        Quarto quarto = new Quarto();
+        //Preenchendo os campos da reserva e do quarto
+        quarto.setId(idQuarto);
+        reserva.setCliente(cliente);
+        //Essa estrutura é para identificar qual quarto que foi selecionado
+        for (Quarto quarto1 : quartos) {
+            if (quarto1.getId().equals(idQuarto)) {
+                reserva.setQuarto(quarto1);
+                // Sai do loop após encontrar o quarto desejado
+                break;
             }
-            reserva.setValor(reserva.gerarValor());
-            if(!Sistema.verificarReserva(listaReserva, reserva,reserva.getQuarto().getId()))
-                return listaReserva;
-            //Agora acrescentamos tudo da lista de reserva
-            listaReserva.add(reserva);
-            System.out.println("Reserva realizada com sucesso.");
+        }
+        reserva.setValor(reserva.gerarValor());
+        if (!Sistema.verificarReserva(listaReserva, reserva.getDataInicio(), reserva.getDataFim(), reserva.getQuarto().getId())) {
             return listaReserva;
+        }
+        //Agora acrescentamos tudo da lista de reserva
+        listaReserva.add(reserva);
+        System.out.println("Reserva realizada com sucesso.");
+        return listaReserva;
     }
+
     /**
      * Método que inclui alguma reserva realizada na base de dados, para que
      * seja realizada corretamente, é preciso que seja feita alguma verificação
@@ -226,15 +292,15 @@ public class Sistema {
      * @return
      */
     //Método responsável por realizar o cancelamento de Reserva
-    public static List cancelarReserva(List<Reserva> listaReserva, String dataInicial,String idQuarto) {
+    public static List cancelarReserva(List<Reserva> listaReserva, String dataInicial, String idQuarto) {
         //Loop que verifica a lista de reserva
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        
+
         for (Reserva item : listaReserva) {
             if (item.getDataInicio().equals(dataInicial) && item.getQuarto().getId().equals(idQuarto)) {
                 //Para reposicionar itens, é preciso que o indice seja inteiro
                 LocalDate data = LocalDate.parse(item.getDataInicio(), formato);
-                System.out.println("Reserva cancelada"+item.Extrato()+".\nValor da multa: R$" + Sistema.calcularMulta(data, item.getQuarto().getPreco()));
+                System.out.println("Reserva cancelada" + item.Extrato() + ".\nValor da multa: R$" + Sistema.calcularMulta(data, item.getQuarto().getPreco()));
                 listaReserva.remove(item);
                 return listaReserva;
             }
@@ -243,10 +309,11 @@ public class Sistema {
         System.out.println("Reserva não encontrada.");
         return listaReserva;
     }
-    public static List cancelarReservaS(List<ReservaS> listaReserva, List<String> periodo,String idQuarto) {
+
+    public static List cancelarReservaS(List<ReservaS> listaReserva, List<String> periodo, String idQuarto) {
         //Loop que verifica a lista de reserva
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        
+
         for (ReservaS item : listaReserva) {
             if (item.getPeriodo().equals(periodo) && item.getQuarto().getId().equals(idQuarto)) {
                 //Para reposicionar itens, é preciso que o indice seja inteiro
@@ -340,35 +407,52 @@ public class Sistema {
         try {
             // Serializar a lista de objetos em um arquivo JSON
             objectMapper.writeValue(new File(nomeArquivo), dados);
-            //objectMapper.writeValue(new File("C:\\Users\\rafar\\OneDrive\\Documentos\\GitHub\\PousadaMilhoVerde\\" + nomeArquivo), dados);
-            System.out.println("Arquivo JSON criado com sucesso.");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-//    public static <T> void salvar(T dados, String nomeArquivo, Class<T> tipoClasse) {
-//        List<T> listaDadosExistentes = carregarDados(nomeArquivo, tipoClasse);
-//        if (listaDadosExistentes == null) {
-//            listaDadosExistentes = new ArrayList<>();
-//        }
-//
-//        // Verificar se o objeto já não está presente na lista
-//        if (!listaDadosExistentes.contains(dados)) {
-//            listaDadosExistentes.add(dados);
-//        }
-//
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-//
-//        try {
-//            // Serializar a lista de objetos em um arquivo JSON
-//            objectMapper.writeValue(new File(nomeArquivo), listaDadosExistentes);
-//
-//            System.out.println("Arquivo JSON criado/sobrescrito com sucesso.");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+
+      public static <T> void salvar(T dados, String nomeArquivo) {
+        List<T> listaDadosExistentes = carregarDados(nomeArquivo);
+        if (listaDadosExistentes == null) {
+            listaDadosExistentes = new ArrayList<>();
+        }
+
+        // Verificar se o objeto já não está presente na lista
+        if (!listaDadosExistentes.contains(dados)) {
+            listaDadosExistentes.add(dados);
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        try {
+            // Criar um TypeReference para inferir o tipo de lista dinamicamente
+            TypeReference<List<T>> typeReference = new TypeReference<>() {};
+
+            // Serializar a lista de objetos em um arquivo JSON
+            objectMapper.writeValue(new File(nomeArquivo), listaDadosExistentes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static <T> List<T> carregarDados(String nomeArquivo) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            // Criar um TypeReference para inferir o tipo de lista dinamicamente
+            TypeReference<List<T>> typeReference = new TypeReference<>() {};
+
+            // Ler o arquivo JSON e converter para uma lista de objetos da classe
+            // E retorna a lista com os dados do arquivo
+            return objectMapper.readValue(new File(nomeArquivo), typeReference);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Caso não consiga ler, retorna null
+        return null;
+    }
 
     /**
      * Método que vai carregar dados dos clientes da base de dados(arquivo JSON)
@@ -378,7 +462,6 @@ public class Sistema {
      * @param tipoClasse
      * @return
      */
-
     public static <T> List<T> carregarDados(String nomeArquivo, Class<T> tipoClasse) {
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -393,6 +476,24 @@ public class Sistema {
         return null;
     }
 
+//    public static <T> List<T> carregarDados(String nomeArquivo) {
+//        ObjectMapper objectMapper = new ObjectMapper();
+//
+//        try {
+//            // Criar um TypeReference para inferir o tipo de classe dinamicamente
+//            TypeReference<List<T>> typeReference = new TypeReference<>() {
+//            };
+//
+//            // Ler o arquivo JSON e converter para uma lista de objetos da classe
+//            // E retorna a lista com os dados do arquivo
+//            return objectMapper.readValue(new File(nomeArquivo), typeReference);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        // Caso não consiga ler, retorna null
+//        return null;
+//    }
+
     /**
      * Esse métoddo vai servir como um contador para saber quantas vezes as
      * classe Reserva e a classe Cliente foram instanciadas em nosso código.
@@ -405,12 +506,12 @@ public class Sistema {
         System.out.print("Numeros de instancias da classe pessoa " + numClientePrivate + " ,e da classe reserva sao " + numReserva + "\n");
     }
 
-    //da pra melhorar esse código com um parametro de periodo para retornar o valor apenas daquele mês por exemplo
     public static double calcularFaturamento() {
         //essa função ainda não esta funcionado pq não é possivel carregar os dados do json
         double faturamento = 0, receita = 0, despesa = 0;
-        List<Reserva> listaReserva = Sistema.carregarDados("Reserva.json", Reserva.class);
-        List<Funcionario> listaFuncionario = Sistema.carregarDados("Funcionario.json", Funcionario.class);
+        List<Reserva> listaReserva = new ArrayList<>();
+        listaReserva = Sistema.carregarDados("Reserva.json", Reserva.class);
+        List<Funcionario> listaFuncionario = Sistema.carregarDados("Funcionarios.json", Funcionario.class);
         for (Reserva aux : listaReserva) {
             //receita recebe o valor dos quartos na reserva
             receita += aux.getValor();
@@ -437,16 +538,16 @@ public class Sistema {
         return null;
     }
 
-    public static boolean verificarPeriodo(Reserva reserva1, Reserva reserva2) {
-        
-         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-          LocalDate dataInicio1 = LocalDate.parse(reserva1.getDataInicio(), formato);
-          LocalDate dataFim1 = LocalDate.parse(reserva1.getDataFim(), formato);
-          LocalDate dataInicio2 = LocalDate.parse(reserva2.getDataInicio(), formato);
-          LocalDate dataFim2 = LocalDate.parse(reserva2.getDataFim(), formato);
-          
-        List<LocalDate> periodo1 = gerarPeriodo(dataInicio1,dataFim1);
-        List<LocalDate> periodo2 = gerarPeriodo(dataInicio2, dataFim2);
+    public static boolean verificarPeriodo(List<LocalDate> periodo1, List<LocalDate> periodo2) {
+
+//         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//          LocalDate dataInicio1 = LocalDate.parse(reserva1.getDataInicio(), formato);
+//          LocalDate dataFim1 = LocalDate.parse(reserva1.getDataFim(), formato);
+//          LocalDate dataInicio2 = LocalDate.parse(reserva2.getDataInicio(), formato);
+//          LocalDate dataFim2 = LocalDate.parse(reserva2.getDataFim(), formato);
+//          
+//        List<LocalDate> periodo1 = gerarPeriodo(dataInicio1,dataFim1);
+//        List<LocalDate> periodo2 = gerarPeriodo(dataInicio2, dataFim2);
         for (LocalDate data : periodo1) {
             if (periodo2.contains(data)) {
                 return true; // Encontrou uma data coincidente
@@ -455,11 +556,14 @@ public class Sistema {
         return false; // Não encontrou datas coincidentes
     }
 
-    public static List<LocalDate> gerarPeriodo(LocalDate dataInicio, LocalDate dataFim) {
+    public static List<LocalDate> gerarPeriodo(String dataInicio, String dataFim) {
         List<LocalDate> periodo = new ArrayList<>();
-        LocalDate dataAtual = dataInicio;
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dataInicial = LocalDate.parse(dataInicio, formato);
+        LocalDate dataFinal = LocalDate.parse(dataFim, formato);
+        LocalDate dataAtual = dataInicial;
 
-        while (!dataAtual.isAfter(dataFim)) {
+        while (!dataAtual.isAfter(dataFinal)) {
             periodo.add(dataAtual);
             dataAtual = dataAtual.plusDays(1);
         }

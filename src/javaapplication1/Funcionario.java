@@ -21,12 +21,17 @@ public class Funcionario extends Cliente {
     public Funcionario(){
         super();
     }
-    public Funcionario(String usuario, String senha, String cargo, 
+    public Funcionario(String usuario, String senha, 
+        String nome, String cpf, String endereco, String telefone,String email, float salario) {
+        this( usuario,  senha, nome,  cpf,  endereco,  telefone, email);
+        this.salario=salario;
+    }
+    public Funcionario(String usuario, String senha, 
         String nome, String cpf, String endereco, String telefone,String email) {
         super(nome, cpf, endereco, telefone,email);
         this.usuario = usuario;
         this.senha = senha;
-        this.cargo = cargo;
+        this.cargo = Cargo.FUNCIONARIO.getValor();
     }
     //Getters e setters correspondente aos atributos criados nessa classe.
     public String getUsuario() {
@@ -60,27 +65,6 @@ public class Funcionario extends Cliente {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
-    public static Funcionario criarFuncionario(){
-        Scanner cin = new Scanner(System.in);
-        Funcionario funcionario = new Funcionario();
-                System.out.println("Nome");
-                funcionario.setNome(cin.nextLine());
-                System.out.println("CPF");
-                funcionario.setCpf(cin.nextLine());
-                System.out.println("endereco");
-                funcionario.setEndereco(cin.nextLine());
-                System.out.println("Telefone");
-                funcionario.setTelefone(cin.nextLine());
-                System.out.println("E-mail");
-                funcionario.setEmail(cin.nextLine());
-                System.out.println("Usuario");
-                funcionario.setUsuario(cin.nextLine());
-                System.out.println("Senha");
-                funcionario.setSenha(cin.nextLine());
-                System.out.println("Cargo");
-                funcionario.setCargo(cin.nextLine());
-        return funcionario;
-    }
     @Override
     public String toString() {
         return super.toString() + "Funcionario{" + "usuario=" + usuario + ", senha=" + senha + ", cargo=" + cargo + ", salario=" + salario + '}';
@@ -106,6 +90,20 @@ public class Funcionario extends Cliente {
     public void lancarDiaria(){
     }
     public void crudCliente(){
+    }
+    public enum Cargo {
+        FUNCIONARIO("FUNCIONARIO"),
+        ADMINISTRADOR("ADMINISTRADOR");
+
+        private final String valor;
+
+        Cargo(String valor) {
+            this.valor = valor;
+        }
+
+        public String getValor() {
+            return valor;
+        }
     }
     
 

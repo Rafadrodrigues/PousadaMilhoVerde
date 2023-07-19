@@ -78,8 +78,8 @@ public class PousadaMilhoVerde {
 //    
 //       //QUESTÃO 14
 //       salvarDados(funcionarios,"Funcionarios.json");
-//       
-//
+       
+
 //        Quarto[] quartos = Sistema.quartos;
 //        List<Reserva> listaReserva = new ArrayList<>();
 //
@@ -102,10 +102,11 @@ public class PousadaMilhoVerde {
 //        criarReserva(listaReserva, cliente1, "002", data1, data2);
 //        criarReserva(listaReserva, cliente3, "002", data1, data2);
 //        criarReserva(listaReserva, cliente1, "009", data3, data4);
-//        
+//        System.out.println(listaReserva.get(0).toString());
 //        System.out.println(listaReserva.get(0).Extrato());
 //        System.out.println("\n"+listaReserva.get(1).Extrato());
-////
+//        Sistema.salvarDados(listaReserva,"Reserva.json");
+//
 ////        //MÉTODO NÃO ESTA FUNCIONANDO CORRETO, PRECISO ALTERAR
 ////        listaReserva= Sistema.cancelarReserva(listaReserva,"2023-07-20","002");
 ////        Sistema.numInstancias();
@@ -176,5 +177,6 @@ public class PousadaMilhoVerde {
 //   // reserva1.cancelar();
 //   //reserva1.cancelar();
 //    System.out.println(reserva1);
+System.out.println(Sistema.calcularFaturamento());
     }
 }

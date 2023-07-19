@@ -197,7 +197,7 @@ public class Reserva {
     }
 
     public enum EstadoReserva {
-        PRELIMINAR("preliminar"), DEFINITIVA("definitiva");
+        PRELIMINAR("PRELIMINAR"), DEFINITIVA("DEFINITIVA");
 
         private final String valor;
 
@@ -208,6 +208,7 @@ public class Reserva {
         public String getValor() {
             return valor;
         }
-
     }
+
 }
+

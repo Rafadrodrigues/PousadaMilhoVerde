@@ -14,7 +14,6 @@ import javaapplication1.Pessoa;
 public class Cliente extends Pessoa {
 
     //Atributos da classe Cliente
-    private LocalDate dataDesejada;
     private String cartaoCredito;
     //QUESTÃO 11
     protected static int totalClienteProtec = 0;
@@ -25,10 +24,9 @@ public class Cliente extends Pessoa {
     }
     //Construtor da classe Cliente
     public Cliente(String nome, String cpf, String endereco, String telefone, 
-        String email, LocalDate dataDesejada,String horarioDesejado,String cartaoCredito) {
+        String email,String cartaoCredito) {
         //Questao 04
         super(nome, cpf, endereco, telefone, email);
-        this.dataDesejada = dataDesejada;
         this.cartaoCredito = cartaoCredito;
         //variáveis de classe (static) que irão armazenar quantas instâncias foram criadas dos tipos Cliente
         Cliente.totalClienteProtec = Cliente.totalClienteProtec + 1;
@@ -51,16 +49,6 @@ public class Cliente extends Pessoa {
         Cliente.totalClientePrivate = Cliente.totalClientePrivate + 1;
     }
  
-    //Getters e setters correspondente aos atributos criados nessa classe.
-    public LocalDate getDataDesejada() {
-        return dataDesejada;
-    }
-
-    public void setDataDesejada(LocalDate dataDesejada) {
-        //Acho que vou utilizar o locale para pegar data formatada
-        this.dataDesejada = dataDesejada;
-    }
-
     public String getCartaoCredito() {
         return cartaoCredito;
     }
@@ -80,60 +68,15 @@ public class Cliente extends Pessoa {
     //Fornecendo informácões como String
     @Override
     public String toString() {
-        return "Cliente{" + super.toString() + "Data desejada=" + dataDesejada + ", Cartão de Crédito=" + cartaoCredito +'}';
+        return "Cliente{" + super.toString() +", Cartão de Crédito=" + cartaoCredito +'}';
     }
     
- 
 
-    //Método que fornece os dados do cliente
-    //Método responsável por solicitar reserva
-    /**
-     * Método representa o cliente solicitando uma reserva 
-     * @param dataDesejada
-     * @return 
-     */
-    public LocalDate solicitarReserva(LocalDate dataDesejada) {
-        System.out.print("Olá,gostaria solicitar uma reserva no dia " + this.dataDesejada);
-        return dataDesejada = this.dataDesejada;
-    }
-
-    public LocalDate solicitarOutraData(LocalDate dataDesejada){
-        //Vamos alterar a data
-        setDataDesejada(dataDesejada);
-        System.out.print("Veja se extiste disponibilidade em " + this.dataDesejada);
-        return this.dataDesejada;
-    }
-    //Esse método pode ser melhorado, questão de lógica, mas informa a resposta do cliente quanto ao cancelamento
-    public List<String> solicitarCancelamento(String cpf,LocalDate dataDesejada){
-        
-        System.out.print("Olá, gostaria de realizar o cancelamento no dia " + this.dataDesejada);
-        
-        //Criando uma lista do tipo string para armazenar os dados para o cancelamento
-        List<String> listaCancelamento = new ArrayList<String>();
-        listaCancelamento.add("CPF: " + super.getCpf());
-        listaCancelamento.add("Data: " + this.dataDesejada);
-        
-        return listaCancelamento;
-    }
     /**
      * Esse método preenche as informções solicitadas do cliente e retorna 
      * @return 
      */
-    public static Cliente criarCliente(){
-        Scanner cin = new Scanner(System.in);
-        Cliente cliente = new Cliente();
-                System.out.println("Nome");
-                cliente.setNome(cin.nextLine());
-                System.out.println("CPF");
-                cliente.setCpf(cin.nextLine());
-                System.out.println("endereco");
-                cliente.setEndereco(cin.nextLine());
-                System.out.println("Telefone");
-                cliente.setTelefone(cin.nextLine());
-                System.out.println("E-mail");
-                cliente.setEmail(cin.nextLine());
-        return cliente;
-    }
+  
     //Método responsável por confirmar o cancelamento, talvez, trocar o tipo
     public boolean aceitarCancelamento(boolean proposta){
        Scanner sc = new Scanner(System.in);
