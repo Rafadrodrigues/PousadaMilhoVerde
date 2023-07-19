@@ -1,6 +1,7 @@
 package javaapplication1;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -26,48 +27,48 @@ import javaapplication1.ReservaState.ReservaS;
  */
 public class Sistema {
 
-//    private Funcionario funcionarioAtual;
-//    private List<Cliente> listaCliente;
-//    private List<Funcionario> listaFuncionario;
-//    private List<Reserva> listaReserva;
-//    
-//    public Sistema(){
-//        this.listaCliente= carregarDados("Clientes.json");
-//        this.listaFuncionario= carregarDados("Funcionarios.json");
-//        this.listaReserva= carregarDados("Reserva.json");
-//    }
-//    public Funcionario getFuncionarioAtual() {
-//        return funcionarioAtual;
-//    }
-//
-//    public void setFuncionarioAtual(Funcionario funcionarioAtual) {
-//        this.funcionarioAtual = funcionarioAtual;
-//    }
-//
-//    public List<Cliente> getListaCliente() {
-//        return listaCliente;
-//    }
-//
-//    public void setListaCliente(List<Cliente> listaCliente) {
-//        this.listaCliente = listaCliente;
-//    }
-//
-//    public List<Funcionario> getListaFuncionario() {
-//        return listaFuncionario;
-//    }
-//
-//    public void setListaFuncionario(List<Funcionario> listaFuncionario) {
-//        this.listaFuncionario = listaFuncionario;
-//    }
-//
-//    public List<Reserva> getListaReserva() {
-//        return listaReserva;
-//    }
-//
-//    public void setListaReserva(List<Reserva> listaReserva) {
-//        this.listaReserva = listaReserva;
-//    }
+    private Funcionario funcionarioAtual;
+    private List<Cliente> listaCliente;
+    private List<Funcionario> listaFuncionario;
+    private List<Reserva> listaReserva;
 
+    public Sistema() {
+        this.listaCliente = carregarDados("Clientes.json");
+        this.listaFuncionario = carregarDados("Funcionarios.json",Funcionario.class);
+        this.listaReserva = carregarDados("Reserva.json");
+    }
+
+    public Funcionario getFuncionarioAtual() {
+        return funcionarioAtual;
+    }
+
+    public void setFuncionarioAtual(Funcionario funcionarioAtual) {
+        this.funcionarioAtual = funcionarioAtual;
+    }
+
+    public List<Cliente> getListaCliente() {
+        return listaCliente;
+    }
+
+    public void setListaCliente(List<Cliente> listaCliente) {
+        this.listaCliente = listaCliente;
+    }
+
+    public List<Funcionario> getListaFuncionario() {
+        return listaFuncionario;
+    }
+
+    public void setListaFuncionario(List<Funcionario> listaFuncionario) {
+        this.listaFuncionario = listaFuncionario;
+    }
+
+    public List<Reserva> getListaReserva() {
+        return listaReserva;
+    }
+
+    public void setListaReserva(List<Reserva> listaReserva) {
+        this.listaReserva = listaReserva;
+    }
 
     //QUESTAO 05
     /**
@@ -95,6 +96,23 @@ public class Sistema {
         Sistema.quartos = quartos;
     }
 
+    public static Quarto encontrarQuarto(String idQuarto) {
+        for (Quarto quarto : quartos) {
+            if (quarto.getId().equals(idQuarto)) {
+                return quarto; // Retorna o quarto encontrado
+            }
+        }
+        return null; // Caso não encontre o quarto com o ID correspondente
+    }
+    private <T extends Pessoa> boolean verificar(List<T> lista, String cpf) {
+        for (T pessoa : lista) {
+            if (pessoa.getCpf().equals(cpf)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * Lê a lista de funcionarios do Json para pegar as senhas que serao usada
      * no Login
@@ -108,18 +126,93 @@ public class Sistema {
         }
         return arvoreFuncionarios;
     }
-    
-    private void criarCliente(String nome, String cpf, String endereco, String telefone,String email,String cartaoCredito){
-        Cliente cliente= new Cliente(nome,cpf,endereco,telefone,email,cartaoCredito);
-        salvar(cliente,"Clientes.json");
+
+    public void criarCliente(String nome, String cpf, String endereco, String telefone, String email, String cartaoCredito) {
+        Cliente cliente = new Cliente(nome, cpf, endereco, telefone, email, cartaoCredito);
+        if (verificar(this.listaCliente,cpf)) {
+            salvar(cliente, "Clientes.json");
+        } 
     }
-    
-    private void criarFuncionario(String usuario, String senha, 
-        String nome, String cpf, String endereco, String telefone,String email, float salario){
-        Funcionario funcionario= new Funcionario(usuario,senha,nome,cpf,endereco,telefone,email,salario);
-        salvar(funcionario,"Funcionarios.json");
+
+    public void criarFuncionario(String usuario, String senha,
+            String nome, String cpf, String endereco, String telefone, String email, float salario) {
+        Funcionario funcionario = new Funcionario(usuario, senha, nome, cpf, endereco, telefone, email, salario);
+        if (verificar(this.listaFuncionario,cpf)) {
+            salvar(funcionario, "Funcionarios.json");
+        } 
     }
-    
+
+    public void criarAdministrador(String usuario, String senha,
+            String nome, String cpf, String endereco, String telefone, String email, float salario) {
+        Administrador funcionario = new Administrador(usuario, senha, nome, cpf, endereco, telefone, email, salario);
+        if (verificar(this.listaFuncionario,cpf)) {
+            salvar(funcionario, "Funcionarios.json");
+        } 
+
+    }
+
+    public void criarReserva(String cpf, String dataInicio, String dataFim, String idQuarto) {
+        if (!Sistema.verificarReserva(this.listaReserva, dataInicio, dataFim, idQuarto)) {
+            for (Cliente aux : this.listaCliente) {
+                if (aux.getCpf().equals(cpf)) {
+                    Reserva reserva = new Reserva(aux, dataInicio, dataFim, encontrarQuarto(idQuarto));
+                    salvar(reserva, "Reserva.json");
+                }
+            }
+        }
+    }
+
+    /**
+     *
+     * @param chekin
+     * @param chekaut
+     * @param idQuarto
+     */
+    public void confirmarReserva(String chekin, String chekaut, String idQuarto) {
+        Iterator<Reserva> iterator = this.listaReserva.iterator();
+
+        while (iterator.hasNext()) {
+            Reserva aux = iterator.next();
+            if (aux.getDataInicio().equals(chekin)
+                    && aux.getDataFim().equals(chekaut)
+                    && aux.getQuarto().getId().equals(idQuarto)) {
+                aux.confirma();
+                salvarDados(this.listaReserva, "Reserva.json");
+            }
+        }
+    }
+
+    /**
+     *
+     * @param chekin
+     * @param chekaut
+     * @param idQuarto
+     */
+    public void cancelarReserva(String chekin, String chekaut, String idQuarto) {
+        Iterator<Reserva> iterator = this.listaReserva.iterator();
+
+        while (iterator.hasNext()) {
+            Reserva aux = iterator.next();
+            if (aux.getDataInicio().equals(chekin)
+                    && aux.getDataFim().equals(chekaut)
+                    && aux.getQuarto().getId().equals(idQuarto)) {
+                aux.cancelar();
+                iterator.remove();
+                salvarDados(this.listaReserva, "Reserva.json");
+            }
+        }
+
+    }
+//     public void confirmarReserva(String chekin, String chekaut, String idQuarto) {
+//        this.listaReserva.stream().filter((Reserva aux) -> aux.getDataInicio().equals(chekin)
+//                && aux.getDataFim().equals(chekaut)
+//                && aux.getQuarto().getId().equals(idQuarto)).map(aux -> {
+//                    aux.confirma();
+//            return aux;
+//        }).forEachOrdered(_item -> {
+//            salvarDados(this.listaReserva, "Reserva.json");
+//        });
+//    }
 
     /**
      * Este método realiza o login do usuário no Sistema, ele valida e libera o
@@ -127,6 +220,7 @@ public class Sistema {
      *
      * @param user é o usuario do sistema
      * @param pin a senha do usuario
+     * @return
      */
     public static boolean FazerLogin(String user, String pin) {
         //Lista de funcionarios;
@@ -412,7 +506,7 @@ public class Sistema {
         }
     }
 
-      public static <T> void salvar(T dados, String nomeArquivo) {
+    public static <T> void salvar(T dados, String nomeArquivo) {
         List<T> listaDadosExistentes = carregarDados(nomeArquivo);
         if (listaDadosExistentes == null) {
             listaDadosExistentes = new ArrayList<>();
@@ -428,7 +522,8 @@ public class Sistema {
 
         try {
             // Criar um TypeReference para inferir o tipo de lista dinamicamente
-            TypeReference<List<T>> typeReference = new TypeReference<>() {};
+            TypeReference<List<T>> typeReference = new TypeReference<>() {
+            };
 
             // Serializar a lista de objetos em um arquivo JSON
             objectMapper.writeValue(new File(nomeArquivo), listaDadosExistentes);
@@ -442,7 +537,8 @@ public class Sistema {
 
         try {
             // Criar um TypeReference para inferir o tipo de lista dinamicamente
-            TypeReference<List<T>> typeReference = new TypeReference<>() {};
+            TypeReference<List<T>> typeReference = new TypeReference<>() {
+            };
 
             // Ler o arquivo JSON e converter para uma lista de objetos da classe
             // E retorna a lista com os dados do arquivo
@@ -463,18 +559,16 @@ public class Sistema {
      * @return
      */
     public static <T> List<T> carregarDados(String nomeArquivo, Class<T> tipoClasse) {
-        ObjectMapper objectMapper = new ObjectMapper();
+    ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-        try {
-            // Ler o arquivo JSON e converter para uma lista de objetos da classe
-            //E retorna a lista com os dados do arquivo
-            return objectMapper.readValue(new File(nomeArquivo), objectMapper.getTypeFactory().constructCollectionType(List.class, tipoClasse));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // Caso não consiga ler, retorna null
-        return null;
+    try {
+        return objectMapper.readValue(new File(nomeArquivo), objectMapper.getTypeFactory().constructCollectionType(List.class, tipoClasse));
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+    return null;
+}
 
 //    public static <T> List<T> carregarDados(String nomeArquivo) {
 //        ObjectMapper objectMapper = new ObjectMapper();
@@ -493,7 +587,6 @@ public class Sistema {
 //        // Caso não consiga ler, retorna null
 //        return null;
 //    }
-
     /**
      * Esse métoddo vai servir como um contador para saber quantas vezes as
      * classe Reserva e a classe Cliente foram instanciadas em nosso código.

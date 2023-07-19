@@ -4,9 +4,12 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import javaapplication1.ReservaState.EstadoDefinitivo;
+import javaapplication1.ReservaState.ReservaS;
 
 /**
  * Classe Reserva, nela estão contidas informações sobre a reservas da Pousada
@@ -33,12 +36,14 @@ public class Reserva {
 
     /**
      *
+     * @param cliente
      * @param dataInicio
      * @param dataFim
      * @param quarto
      */
-    public Reserva(String dataInicio, String dataFim, Quarto quarto) throws IllegalArgumentException {
+    public Reserva(Cliente cliente,String dataInicio, String dataFim, Quarto quarto) throws IllegalArgumentException {
         this(dataInicio, dataFim);
+        this.cliente=cliente;
         this.quarto = quarto;
         this.valor = gerarValor();
         //Reserva.totalReservas = Reserva.totalReservas + 1;
@@ -194,6 +199,24 @@ public class Reserva {
     @Override
     public String toString() {
         return "Reserva{" + "data inicio=" + dataInicio + ", data fim=" + dataFim + ", quarto=" + quarto + ", estado=" + estado + ", cliente=" + cliente + '}';
+    }
+    public void confirma(){
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate data = LocalDate.parse(this.dataPedido, formato);
+        if (30 >= ChronoUnit.DAYS.between(data, LocalDate.now())) {
+            this.setEstado(EstadoReserva.DEFINITIVA);
+        } else {
+            System.out.print("Passou do prazo");
+        }
+    }
+    public void cancelar(){
+        if(this.getEstado().equals("PRELIMINAR")){
+            System.out.print("Reserva cancelada");
+        }else{
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate data = LocalDate.parse(this.dataPedido, formato);
+            System.out.println("Reserva cancelada\nValor da multa: R$" + Sistema.calcularMulta(data, this.getQuarto().getPreco()));
+        }
     }
 
     public enum EstadoReserva {

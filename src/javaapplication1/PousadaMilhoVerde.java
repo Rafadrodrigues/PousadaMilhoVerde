@@ -2,181 +2,28 @@ package javaapplication1;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
-import javaapplication1.ReservaState.EstadoDefinitivo;
-import javaapplication1.ReservaState.ReservaS;
-import static javaapplication1.Sistema.cancelarReserva;
-import static javaapplication1.Sistema.carregarDados;
-import static javaapplication1.Sistema.editar;
-import static javaapplication1.Sistema.incluir;
-import static javaapplication1.Sistema.remover;
-import static javaapplication1.Sistema.salvarDados;
-import static javaapplication1.Sistema.criarReserva;
-//import org.json.simple.JSONArray;;
-//import org.json.simple.parser.ParseException;;
 
 /**
  * Classe Pousada Milho Verde e vai ser responsável por executar nossos
  * arquivos, ela é o arquivo main do nosso programa.
  *
- * @author rafar
+ * @author Rafael Dias Rodrigues
+ * @author Getulio José Lima dos Santos
  */
 public class PousadaMilhoVerde {
 
     public static void main(String[] args) throws IOException, ParseException {
-//        //Lista de clientes
-//        List<Cliente> listaClientes = new ArrayList<>();
-//        //Lista de funcionarios
-//        List<Funcionario> funcionarios = new ArrayList<>();
-//        //Lista de Reserva
-//        List<Reserva> reserva = new ArrayList<>();
-//        
-//        //Cliente cliente1 = new Cliente("Rafael", "9830123", "Belo Horizonte", "339989021", "rafar@");
-//        Cliente cliente2 = new Cliente("Getulio", "123.456.789-57", "Diamantina", "8021983", "getjose@");
-//        Cliente cliente3 = new Cliente("Dudu", "123.456.789-57", "Diamantina", "389982356", "Duduvisitante@");
-//        Funcionario func = new Funcionario("@rafa919", "123023","atendente","Rafael","123456789","Diamantina","3399833","RafaDias@");
-//        Reserva reserva1 = new Reserva();
-//        Reserva reserva2 = new Reserva();
-//        
-//        clienteComparator comparator = new clienteComparator();
-//        ReservaComparator comparatorReserva = new ReservaComparator();
-//        listaClientes.add(cliente2);
-//        listaClientes.add(cliente3);
-//        
-//        //QUESTÃO 06
-//        incluir(funcionarios,func);
-//        editar(funcionarios,func);
-//        remover(funcionarios,func);
-//        
-//        //QUESTÃO 07
-//        incluir(listaClientes,cliente2);
-//        editar(listaClientes,cliente3);
-//        remover(listaClientes,cliente2);
-//        
-//        //QUESTÃO 08
-//        reserva1.toString();
-//        
-//        realizarReserva(reserva,cliente2);
-//        
-//        System.out.println(reserva);
-//
-//        //QUESTÃO 10
-//        gerarExtrato(reserva1);
-//
-//        //QUESTÃO 12
-//        Sistema.numInstancias();
-//        
-//        //QUESTÃO 13
-//        comparator.compare(cliente2,cliente3);
-//        comparatorReserva.compare(reserva1, reserva2);
-//    
-//       //QUESTÃO 14
-//       salvarDados(funcionarios,"Funcionarios.json");
-       
-
-//        Quarto[] quartos = Sistema.quartos;
-//        List<Reserva> listaReserva = new ArrayList<>();
-//
-//        Cliente cliente1 = new Cliente("Getulio Santos", "123.456.789-10", "Diamantina", "3899910234", "getulio.santos@email");
-//        Cliente cliente2 = new Cliente("Rafel Dias", "123.456.789-12", "Diamantina", "3899574628", "rafel.dias@email");
-//        Cliente cliente3 = new Cliente("Dudu", "123.456.789-57", "Diamantina", "389982356", "Duduvisitante@");
-//        Cliente cliente4 = new Cliente("Getulio jose", "123.456.789-11", "Diamantina", "38998034567", "getulio.jose@email");
-////        
-////        LocalDate data1 = LocalDate.of(2023, 7, 20);
-////        LocalDate data2 = LocalDate.of(2023, 7, 22);
-////        LocalDate data3 = LocalDate.of(2023, 8, 5);
-////        LocalDate data4 = LocalDate.of(2023, 8, 15);
-//        String data1= "2023-07-20";
-//        String data2= "2023-07-22";
-//        String data3= "2023-08-05";
-//        String data4= "2023-08-15";
-//        
-//
-//        
-//        criarReserva(listaReserva, cliente1, "002", data1, data2);
-//        criarReserva(listaReserva, cliente3, "002", data1, data2);
-//        criarReserva(listaReserva, cliente1, "009", data3, data4);
-//        System.out.println(listaReserva.get(0).toString());
-//        System.out.println(listaReserva.get(0).Extrato());
-//        System.out.println("\n"+listaReserva.get(1).Extrato());
-//        Sistema.salvarDados(listaReserva,"Reserva.json");
-//
-////        //MÉTODO NÃO ESTA FUNCIONANDO CORRETO, PRECISO ALTERAR
-////        listaReserva= Sistema.cancelarReserva(listaReserva,"2023-07-20","002");
-////        Sistema.numInstancias();
-//           
-//           
-////            List<Funcionario> listaFunc = carregarDados("Funcionarios.json", Funcionario.class);
-//           List<Cliente> listaClientes = new ArrayList<>();
-//           incluir(listaClientes,cliente1);
-//           incluir(listaClientes,cliente2);
-//           incluir(listaClientes,cliente3);
-//           //salvarDados(listaClientes,"Clientes.json");
-//           salvar(cliente4,"Clientes.json",Cliente.class);
-//           salvarDados(listaReserva,"Reserva.json");
-
-                   //carregarDados("Clientes.json", Cliente.class);
-//        System.out.println(listaFunc);
-        //System.out.println(listaClientes);
-//        List<Reserva> listaReserva = carregarDados("Reserva.json", Reserva.class);
-//        System.out.println(listaReserva);
-//        salvarDados(listaClientes,"Clientes.json");
-//        salvarDados(listaReserva,"Reserva.json");
-        //QUESTÃO 15
-        //ESTOU FAZENDO TESTES AINDA, DEPOIS DEVO APAGAR ALGUMAS LINHAS 
-
-//        clienteComparator compareCliente = new clienteComparator();
-//        compareCliente.compare(cliente1, cliente3);
-//        
-//        Iterator<Cliente> iterator1 = listaClientes.iterator();
-//        
-//        Collections.sort(listaClientes, compareCliente);
-        
-//        while(iterator1.hasNext()){
-//            Cliente usuario = iterator1.next();
-//            System.out.println(usuario);
-//        }
-        
-        /*Ele se assemelha com um for-each na questão que ele percorre a
-        lista em busca de obejto do mesmo tipo enquanto houver um elemento após
-        o atual(acho que é isso)*/
-        
-        
-        // O HASNEXT VERIFICA SE TEM OUTROS ELEMENTOS APÓS O ATUAL
-//        listaClientes = incluir(listaClientes,cliente1);
-//        listaClientes = incluir(listaClientes,cliente3);
-//        List<Funcionario> funcionarios = new ArrayList<>();
-//        
-//        funcionarios=carregarDados("Funcionarios.json", Funcionario.class);
-//        LocalDate data = LocalDate.of(2023, 7, 13);
-//        LocalDate data2 = LocalDate.of(2023, 7, 22);
-//        
-//        Reserva reserva1= new Reserva(data,quartos[0]);
-//        Reserva reserva2= new Reserva(data2,quartos[1]);
-//        listaReserva.add(reserva2);
-//        listaReserva.add(reserva1);
-//        
-//        listaReserva=Sistema.excluirReserva(listaReserva,reserva1);
-//        listaReserva= Sistema.excluirReserva(listaReserva,reserva2);
-//        for (Reserva item : listaReserva) {
-//        System.out.println(item);}
-
-//TESTES DA RESERVA STATE
-//Quarto[] quartos = Sistema.quartos;
-// 
-//    ReservaS reserva1= new ReservaS("2023-07-21","2023-07-25",quartos[3]);
-//    ReservaS reserva2= new ReservaS("2023-07-20","2023-07-25",quartos[2]);
-//    reserva1.confirmar();
-//    reserva2.confirmar();
-//   // reserva1.cancelar();
-//   //reserva1.cancelar();
-//    System.out.println(reserva1);
-System.out.println(Sistema.calcularFaturamento());
+        Sistema sistema= new Sistema();
+        sistema.criarAdministrador("getulio", "123456", "getulio santos", "14612312399", "diamantina", "389980385", "getulio.santos@email", 5000);
+        //QUESTÃO 1
+        //IMPLEMENTAMOS TODOS AS CLASSES E METODOS QUE PLANEJAVAMOS
+        //REMODELAMOS DE ACORDO COM AS ALTERAÇÕES
+        //E CRIAMOS OS NOVOS FLUXOS
+        //E ATUALIZAMOS NOSSO DIAGRAMA DE CLASSE, TUDO ESTA PRESENTE NO LATEX
+        //QUESTÃO 2
+        //1- CRIAMOS NOSSSAS CLASSES DE ACORDO COM O LATEX MAS NOVAS ALTERAÇÕES FORAM NECESSÁRIAS
+        //2- POR MEIO DO MÉTODO LOGIN APENAS OS FUNCIONARIOS CADASTRADOS PODEM ACESSAR O SISTEMA
+        //QUESTÃO 3
+        //
     }
 }

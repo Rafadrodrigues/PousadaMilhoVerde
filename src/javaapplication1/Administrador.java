@@ -8,9 +8,9 @@ package javaapplication1;
  */
 public class Administrador extends Funcionario{
 
-    public Administrador(String usuario, String senha, String nome, String cpf, String endereco, String telefone, String email) {
+    public Administrador(String usuario, String senha, String nome, String cpf, String endereco, String telefone, String email, float salario) {
         
-        super(usuario, senha, nome, cpf, endereco, telefone, email);
+        super(usuario, senha, nome, cpf, endereco, telefone, email,salario);
         this.setCargo(Cargo.ADMINISTRADOR.getValor());
     }
     public void crudFuncionário(){

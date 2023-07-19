@@ -23,15 +23,25 @@
   "cargo" : "recepcionista",
   "salario" : 0.0
 }, {
-  "nome" : "lknkln",
-  "cpf" : "jklj",
-  "endereco" : "nlknl]",
-  "email" : "nklnkn",
-  "telefone" : "klnkln",
-  "dataDesejada" : null,
+  "nome" : "getulio santos",
+  "cpf" : "12345678912",
+  "endereco" : "diamantina",
+  "email" : "getulio.santos@email",
+  "telefone" : "389980385",
   "cartaoCredito" : null,
-  "usuario" : "knlnkl",
-  "senha" : "lknlknl",
-  "cargo" : "klnklnlk",
-  "salario" : 0.0
+  "usuario" : "getulio",
+  "senha" : "123456",
+  "cargo" : "FUNCIONARIO",
+  "salario" : 1200.0
+}, {
+  "nome" : "getulio santos",
+  "cpf" : "14612312399",
+  "endereco" : "diamantina",
+  "email" : "getulio.santos@email",
+  "telefone" : "389980385",
+  "cartaoCredito" : null,
+  "usuario" : "getulio",
+  "senha" : "123456",
+  "cargo" : "ADMINISTRADOR",
+  "salario" : 5000.0
 } ]
