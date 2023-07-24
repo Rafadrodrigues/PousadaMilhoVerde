@@ -38,6 +38,12 @@ public class BalancoMensal extends javax.swing.JInternalFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Balanço Mensal");
+
         jButton1.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jButton1.setText("Salvar");
 

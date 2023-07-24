@@ -572,20 +572,6 @@ public class Sistema {
         if (!listaDadosExistentes.contains(dados)) {
             listaDadosExistentes.add(dados);
         }
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-        try {
-            // Criar um TypeReference para inferir o tipo de lista dinamicamente
-            TypeReference<List<T>> typeReference = new TypeReference<>() {
-            };
-
-            // Serializar a lista de objetos em um arquivo JSON
-            objectMapper.writeValue(new File(nomeArquivo), listaDadosExistentes);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

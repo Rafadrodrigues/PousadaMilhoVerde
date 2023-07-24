@@ -73,7 +73,7 @@ public class telaPrincipal extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/Imagens/icons8-funcionário-homem-32.png"))); // NOI18N
 
         gerenciarFuncionario.setFont(new java.awt.Font("Roboto Slab Medium", 0, 14)); // NOI18N
-        gerenciarFuncionario.setText(" Funcionários");
+        gerenciarFuncionario.setText("Gerenciar Funcionários");
         gerenciarFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gerenciarFuncionarioActionPerformed(evt);
@@ -83,7 +83,7 @@ public class telaPrincipal extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/Imagens/icons8-chamada-em-conferência-50.png"))); // NOI18N
 
         gerenciarCliente.setFont(new java.awt.Font("Roboto Slab Medium", 0, 14)); // NOI18N
-        gerenciarCliente.setText("Clientes");
+        gerenciarCliente.setText("Gerenciar Clientes");
         gerenciarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gerenciarClienteActionPerformed(evt);
@@ -93,7 +93,7 @@ public class telaPrincipal extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/Imagens/icons8-calendário-24.png"))); // NOI18N
 
         gerenciarReserva.setFont(new java.awt.Font("Roboto Slab Medium", 0, 14)); // NOI18N
-        gerenciarReserva.setText("Reservas");
+        gerenciarReserva.setText("Gerenciar Reservas");
         gerenciarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gerenciarReservaActionPerformed(evt);
@@ -141,7 +141,7 @@ public class telaPrincipal extends javax.swing.JFrame {
                     .addGroup(jDesktopPane2Layout.createSequentialGroup()
                         .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(gerenciarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(gerenciarFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
+                            .addComponent(gerenciarFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDesktopPane2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -239,14 +239,14 @@ public class telaPrincipal extends javax.swing.JFrame {
 
     private void gerenciarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenciarFuncionarioActionPerformed
         // TODO add your handling code here:
-        GerenciarFuncionario teleGerenciarFunc = new GerenciarFuncionario();
+        CadastroFuncionario teleGerenciarFunc = new CadastroFuncionario();
         jDesktopPane2.add(teleGerenciarFunc);
         teleGerenciarFunc.setVisible(true);
     }//GEN-LAST:event_gerenciarFuncionarioActionPerformed
 
     private void gerenciarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenciarClienteActionPerformed
         // TODO add your handling code here:
-        GerenciarCliente teleGerenciarCliente = new GerenciarCliente();
+        CadastroCliente teleGerenciarCliente = new CadastroCliente();
         jDesktopPane2.add(teleGerenciarCliente);
         teleGerenciarCliente.setVisible(true);
     }//GEN-LAST:event_gerenciarClienteActionPerformed
@@ -257,14 +257,14 @@ public class telaPrincipal extends javax.swing.JFrame {
 
     private void gerenciarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenciarReservaActionPerformed
         // TODO add your handling code here:
-        GerenciarReserva teleGerenciarReserva = new GerenciarReserva();
+        RealizarReserva teleGerenciarReserva = new RealizarReserva();
         jDesktopPane2.add(teleGerenciarReserva);
         teleGerenciarReserva.setVisible(true);
     }//GEN-LAST:event_gerenciarReservaActionPerformed
 
     private void gerenciarFinanceiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenciarFinanceiroActionPerformed
         // TODO add your handling code here:
-        GerenciarFinanceiro teleGerenciarFinanceiro = new GerenciarFinanceiro();
+        LancarDiaria teleGerenciarFinanceiro = new LancarDiaria();
         jDesktopPane2.add(teleGerenciarFinanceiro);
         teleGerenciarFinanceiro.setVisible(true);
     }//GEN-LAST:event_gerenciarFinanceiroActionPerformed

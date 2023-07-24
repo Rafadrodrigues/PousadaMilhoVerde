@@ -118,7 +118,7 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="gerenciarCliente" max="32767" attributes="0"/>
-                              <Component id="gerenciarFuncionario" pref="176" max="32767" attributes="0"/>
+                              <Component id="gerenciarFuncionario" max="32767" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -208,7 +208,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto Slab Medium" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value=" Funcion&#xe1;rios"/>
+            <Property name="text" type="java.lang.String" value="Gerenciar Funcion&#xe1;rios"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gerenciarFuncionarioActionPerformed"/>
@@ -226,7 +226,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto Slab Medium" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Clientes"/>
+            <Property name="text" type="java.lang.String" value="Gerenciar Clientes"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gerenciarClienteActionPerformed"/>
@@ -244,7 +244,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto Slab Medium" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Reservas"/>
+            <Property name="text" type="java.lang.String" value="Gerenciar Reservas"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gerenciarReservaActionPerformed"/>

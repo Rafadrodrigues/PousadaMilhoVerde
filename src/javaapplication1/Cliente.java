@@ -73,8 +73,7 @@ public class Cliente extends Pessoa {
     public String toString() {
         return "Cliente{" + super.toString() +", Cartão de Crédito=" + cartaoCredito +'}';
     }
-    
-
+   
     /**
      * Esse método preenche as informções solicitadas do cliente e retorna 
      * @param proposta - Retorna a proposta pelo cancelamento
