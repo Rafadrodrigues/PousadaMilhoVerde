@@ -1,6 +1,9 @@
 <h1 align="center">🖥️ PROJETO - Desenvolvimento de um sistema 🖥️</h1>
- -------
-<img src="./Imagens/telalogin"/>
+
+<div align="center">
+<img src="https://github.com/Rafadrodrigues/PousadaMilhoVerde/assets/104935995/ba471057-dfe9-49ee-bd0e-d0459f519fd5.jpg" width="600px"/>
+
+</div>
 
 --------
  -------
@@ -26,11 +29,18 @@ Este projeto foi proposto na matéria de Programação Orientada a Objetos. Fora
 * ✔️ Json
 --------
 -------
- ### 🛣️ Como usar 🛣️
+ ### 🛣 Como usar 🛣
  ### Clone o repositorio
 git clone https://github.com/Rafadrodrigues/PousadaMilhoVerde.git
 
  ### Puxe o repositorio 
 $ cd Pizzaria-JS
+
+--------
+
+-------
+ ### 👨‍💻 Desenvolvedores 👨‍💻
+* <a>https://github.com/Rafadrodrigues</a>
+* <a>https://github.com/GetJose</a>
 
 --------
