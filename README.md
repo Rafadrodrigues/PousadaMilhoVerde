@@ -8,9 +8,7 @@
 --------
  -------
 ### 🎯 Contexto 🎯
-* No projeto final do curso de análise de dados foram utilizadas bases de dados pessoais de empresas que a Inajá Morais e Aline Santos utilizam como serviços.
-
-* As empresas que foram utilizadas como fonte da dados: Uber, Google Maps, Youtube, Spotify e Ifood.
+* Como projeto final, foi proposto a criação de um sistema gerenciador para pousada Milho Verde, desde que tenha algumas funcionalidades essenciais que foram proposta no decorrer da matéria.
 
 --------
 -------
