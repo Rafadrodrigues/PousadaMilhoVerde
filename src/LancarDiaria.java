@@ -35,9 +35,9 @@ public class LancarDiaria extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         quarto = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        preco = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
         valor = new javax.swing.JTextField();
+        preco = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         Resultado = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -59,16 +59,10 @@ public class LancarDiaria extends javax.swing.JInternalFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Diária", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto Slab Medium", 0, 12))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
-        jLabel1.setText("Quartos");
+        jLabel1.setText("Quarto");
 
         jLabel2.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel2.setText("Preço dos Quartos");
-
-        try {
-            preco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("R$")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         jLabel3.setFont(new java.awt.Font("Roboto Slab Medium", 0, 12)); // NOI18N
         jLabel3.setText("Quantidade de Diárias");
@@ -76,6 +70,12 @@ public class LancarDiaria extends javax.swing.JInternalFrame {
         valor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 valorActionPerformed(evt);
+            }
+        });
+
+        preco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                precoActionPerformed(evt);
             }
         });
 
@@ -96,8 +96,8 @@ public class LancarDiaria extends javax.swing.JInternalFrame {
                                 .addGap(203, 203, 203)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(preco, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(78, 78, 78))
+                            .addComponent(preco, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(70, 70, 70))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -111,11 +111,14 @@ public class LancarDiaria extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(quarto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(preco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(quarto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(preco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(23, 23, 23)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -124,10 +127,7 @@ public class LancarDiaria extends javax.swing.JInternalFrame {
 
         Resultado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Quartos", "Preço", "Quantidade de Diárias"
@@ -198,8 +198,8 @@ public class LancarDiaria extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(153, 153, 153)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
@@ -263,6 +263,10 @@ public class LancarDiaria extends javax.swing.JInternalFrame {
         cadastroCli.addRow(dados);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void precoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_precoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Resultado;
@@ -278,7 +282,7 @@ public class LancarDiaria extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JFormattedTextField preco;
+    private javax.swing.JTextField preco;
     private javax.swing.JTextField quarto;
     private javax.swing.JTextField valor;
     // End of variables declaration//GEN-END:variables
