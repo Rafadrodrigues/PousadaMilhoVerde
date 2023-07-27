@@ -1,7 +1,7 @@
 <h1 align="center">🖥️ PROJETO - Desenvolvimento de um sistema 🖥️</h1>
 
 <div align="center">
-<img src="https://github.com/Rafadrodrigues/PousadaMilhoVerde/assets/104935995/ba471057-dfe9-49ee-bd0e-d0459f519fd5.jpg" width="600px"/>
+<img src="https://user-images.githubusercontent.com/104935995/256580887-74d92fcd-1787-4b5e-8dac-f4d9c06f0df4.png" width="600px"/>
 
 </div>
 
