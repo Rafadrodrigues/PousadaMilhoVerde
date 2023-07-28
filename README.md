@@ -32,7 +32,7 @@ Este projeto foi proposto na matéria de Programação Orientada a Objetos. Fora
 git clone https://github.com/Rafadrodrigues/PousadaMilhoVerde.git
 
  ### Puxe o repositorio 
-$ cd Pizzaria-JS
+$ cd PousadaMilhoVerde
 
 --------
 
